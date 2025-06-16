@@ -1,5 +1,5 @@
 {
-  "name": "Chrome Extension Starter",
+  "name": "CraftTab",
   "description": "Chrome Extension Starter",
   "version": "1.0.0",
   "manifest_version": 3,
@@ -24,6 +24,7 @@
     "32": "images/icon-32x32.png",
     "48": "images/icon-48x48.png",
     "128": "images/icon-128x128.png"
+    "512": "images/icon-512x512.png"
   },
   "devtools_page": "devtools.html",
   "chrome_url_overrides": {
