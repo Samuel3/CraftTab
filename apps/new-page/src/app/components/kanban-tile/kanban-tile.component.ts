@@ -51,6 +51,7 @@ export class KanbanTileComponent implements OnInit {
 
   private readonly STORAGE_KEY = 'kanban_board_data';
   newColumnTitle = '';
+  addTicketDialogComponent: any = AddTicketDialogComponent;
 
   constructor(private dialog: MatDialog) {}
 
@@ -91,7 +92,7 @@ export class KanbanTileComponent implements OnInit {
   }
 
   openAddTicketDialog() {
-    const dialogRef = this.dialog.open(AddTicketDialogComponent, {
+    const dialogRef = this.dialog.open(this.addTicketDialogComponent, {
       width: '300px',
       disableClose: false
     });
