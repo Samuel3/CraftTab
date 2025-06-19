@@ -8,7 +8,12 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { AddTicketDialogComponent } from './add-ticket-dialog.component';
+// import { AddTicketDialogComponent } from './add-ticket-dialog.component';
+
+// Dummy-Komponente für Dialog
+import { Component } from '@angular/core';
+@Component({ template: '' })
+class DummyDialogComponent {}
 
 interface Ticket {
   id: number;
@@ -41,7 +46,8 @@ describe('KanbanTileComponent', () => {
         MatDialogModule,
         MatButtonModule,
         MatInputModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        DummyDialogComponent
       ],
       providers: [
         { provide: MatDialog, useValue: dialogSpy },
@@ -54,9 +60,11 @@ describe('KanbanTileComponent', () => {
   });
 
   beforeEach(() => {
+    localStorage.clear();
     fixture = TestBed.createComponent(KanbanTileComponent);
     component = fixture.componentInstance;
-    component.addTicketDialogComponent = TestBed.createComponent(AddTicketDialogComponent);
+    component.addTicketDialogComponent = DummyDialogComponent;
+    component['dialog'] = TestBed.inject(MatDialog);
     fixture.detectChanges();
   });
 

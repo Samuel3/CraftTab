@@ -51,7 +51,7 @@ export class KanbanTileComponent implements OnInit {
 
   private readonly STORAGE_KEY = 'kanban_board_data';
   newColumnTitle = '';
-  addTicketDialogComponent: any = AddTicketDialogComponent;
+  addTicketDialogComponent = AddTicketDialogComponent;
 
   constructor(private dialog: MatDialog) {}
 
@@ -67,6 +67,11 @@ export class KanbanTileComponent implements OnInit {
     const savedData = localStorage.getItem(this.STORAGE_KEY);
     if (savedData) {
       this.columns = JSON.parse(savedData);
+      this.columns.forEach(col => {
+        if (!Array.isArray(col.tickets)) {
+          col.tickets = [];
+        }
+      });
     }
   }
 
