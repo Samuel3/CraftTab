@@ -133,11 +133,11 @@ export class TilesContainerComponent implements OnInit {
   getTileName(type: TileType): string {
     switch (type) {
       case TileType.Bookmarks:
-        return 'Lesezeichen';
+        return 'Bookmarks';
       case TileType.Search:
-        return 'Suche';
+        return 'Search';
       case TileType.Calculator:
-        return 'Taschenrechner';
+        return 'Calculator';
       case TileType.Kanban:
         return 'Kanban Board';
       default:
