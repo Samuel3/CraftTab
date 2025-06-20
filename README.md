@@ -1,8 +1,4 @@
-# CraftTab
-
-![CraftTab Logo](./resources/Logo.png)
-
-This is a Chrome Extension that lets you customize your new tab and allows you to add bookmarks, calculator and a Kanban board.
+# CraftTab. Lets. Get. Productive
 
 ## 📖 Table of Contents
 
@@ -16,37 +12,10 @@ This is a Chrome Extension that lets you customize your new tab and allows you t
 
 ## ✨ Features
 
-✅ Nx Workspace
+- Kanban Board
+- Calculator
+- Bookmarks
 
-✅ Angular
-
-✅ Typescript
-
-✅ Chrome Types
-
-✅ Live Reload
-
-✅ Very Fast Build
-
-✅ All In One Command
-
-✅ Support Manifest V3
-
-✅ Popup Page
-
-✅ Options Page
-
-✅ Devtools Panel
-
-✅ Background Script
-
-✅ Content Script
-
-## 🎯 Prerequisites
-
-- [Node.js](https://nodejs.org) (>= 16 required)
-- npm package manager (>= 8 required)
-- [Chrome](https://www.google.com/chrome)
 
 ## 🚀 Getting Started
 
@@ -114,15 +83,6 @@ Build with production configuration.
 npm run build:prod
 ```
 
-## 📦 Release
-
-I recommend making the release automatic with GitHub actions or other ci service.
-
-- Bump the version number in `manifest.json`
-- Create a git tag containing the version you are releasing using `git tag -a <version>`
-- Run `npm run build:prod`
-- Create zip file from the extension directory
-- Upload the zip to the Chrome developer dashboard
 
 ## 📜 License
 
@@ -133,7 +93,11 @@ I recommend making the release automatic with GitHub actions or other ci service
 See https://coolors.co/202c39-283845-b8b08d-f2d492-f29559
 
 Primary: `#202C39`
+
 Secondary: `#283845`
+
 Tertiary: `#F5F5F5`
+
 Quaternary: `#F2D492`
+
 Contrast: `#FF29559`
