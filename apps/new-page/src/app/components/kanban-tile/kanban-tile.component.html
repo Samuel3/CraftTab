@@ -36,6 +36,7 @@
                [cdkDropListData]="column.tickets"
                [cdkDropListConnectedTo]="getConnectedDropLists()"
                (cdkDropListDropped)="drop($event)"
+               *ngIf="!editMode"
           >
             <div class="ticket" *ngFor="let ticket of column.tickets" cdkDrag>
               <div class="ticket-content">
