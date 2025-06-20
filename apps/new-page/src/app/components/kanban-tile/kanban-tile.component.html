@@ -24,10 +24,10 @@
             <div *ngIf="editMode" class="edit-column-header">
               <input [value]="column.title"
                      (change)="updateColumnTitle(column, $event)"
-                     placeholder="Spaltentitel">
+                     placeholder="Column Title">
               <button class="delete-column-btn"
                       (click)="deleteColumn(column)"
-                      aria-label="Spalte löschen">×</button>
+                      aria-label="Delete Column">x</button>
             </div>
           </div>
           <div class="tickets-container"
