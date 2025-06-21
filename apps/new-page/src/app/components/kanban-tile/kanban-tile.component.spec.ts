@@ -46,8 +46,7 @@ describe('KanbanTileComponent', () => {
         MatDialogModule,
         MatButtonModule,
         MatInputModule,
-        MatFormFieldModule,
-        DummyDialogComponent
+        MatFormFieldModule
       ],
       providers: [
         { provide: MatDialog, useValue: dialogSpy },
