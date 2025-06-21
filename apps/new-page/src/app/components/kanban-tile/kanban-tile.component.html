@@ -38,12 +38,23 @@
                (cdkDropListDropped)="drop($event)"
                *ngIf="!editMode"
           >
-            <div class="ticket" *ngFor="let ticket of column.tickets" cdkDrag>
+            <div class="ticket" *ngFor="let ticket of column.tickets" cdkDrag [cdkDragDisabled]="isEditingTicket(ticket)" (dblclick)="startEditingTicket(ticket)">
               <div class="ticket-content">
-                <span>{{ ticket.title }}</span>
+                <span *ngIf="!isEditingTicket(ticket)">
+                  {{ ticket.title }}
+                </span>
+                <input *ngIf="isEditingTicket(ticket)"
+                       [value]="editedTicketTitle"
+                       #editInput
+                       (blur)="finishEditingTicket(ticket, editInput.value)"
+                       (keyup.enter)="finishEditingTicket(ticket, editInput.value)"
+                       (keyup.escape)="cancelEditingTicket()"
+                       (click)="$event.stopPropagation()"
+                       autofocus
+                />
                 <button class="delete-btn"
                         (click)="deleteTicket(column, ticket)"
-                        aria-label="Ticket löschen">×</button>
+                        aria-label="Ticket löschen">x</button>
               </div>
             </div>
           </div>

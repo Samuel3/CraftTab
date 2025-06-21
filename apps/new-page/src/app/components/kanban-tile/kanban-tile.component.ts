@@ -53,6 +53,10 @@ export class KanbanTileComponent implements OnInit {
   newColumnTitle = '';
   addTicketDialogComponent = AddTicketDialogComponent;
 
+  // Editier-Logik für Tickets
+  editingTicket: Ticket | null = null;
+  editedTicketTitle: string = '';
+
   constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {
@@ -157,5 +161,30 @@ export class KanbanTileComponent implements OnInit {
 
   getConnectedDropLists(): string[] {
     return this.columns.map(column => 'dropList-' + column.id);
+  }
+
+  // --- Ticket-Titel bearbeiten ---
+  startEditingTicket(ticket: Ticket) {
+    this.editingTicket = ticket;
+    this.editedTicketTitle = ticket.title;
+  }
+
+  isEditingTicket(ticket: Ticket): boolean {
+    return this.editingTicket === ticket;
+  }
+
+  finishEditingTicket(ticket: Ticket, newTitle: string) {
+    const trimmed = newTitle.trim();
+    if (trimmed && ticket.title !== trimmed) {
+      ticket.title = trimmed;
+      this.saveBoard();
+    }
+    this.editingTicket = null;
+    this.editedTicketTitle = '';
+  }
+
+  cancelEditingTicket() {
+    this.editingTicket = null;
+    this.editedTicketTitle = '';
   }
 }
