@@ -8,10 +8,10 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-// import { AddTicketDialogComponent } from './add-ticket-dialog.component';
 
 // Dummy-Komponente für Dialog
 import { Component } from '@angular/core';
+
 @Component({ template: '' })
 class DummyDialogComponent {}
 
@@ -63,7 +63,7 @@ describe('KanbanTileComponent', () => {
     localStorage.clear();
     fixture = TestBed.createComponent(KanbanTileComponent);
     component = fixture.componentInstance;
-    component.addTicketDialogComponent = DummyDialogComponent;
+    component.addTicketDialogComponent = DummyDialogComponent as any;
     component['dialog'] = TestBed.inject(MatDialog);
     fixture.detectChanges();
   });
@@ -243,5 +243,83 @@ describe('KanbanTileComponent', () => {
 
     expect(component.columns[0]).toBe(firstColumn);
     expect(component.columns[1]).toBe(secondColumn);
+  });
+
+  // --- Tests für Ticket-Editing-Feature ---
+  describe('Ticket Editing', () => {
+    let ticket: Ticket;
+    let column: Column;
+
+    beforeEach(() => {
+      // Add a ticket first
+      component.openAddTicketDialog();
+      fixture.detectChanges();
+
+      column = component.columns[0]!;
+      ticket = column.tickets[0]!;
+    });
+
+    it('should start editing a ticket', () => {
+      component.startEditingTicket(ticket);
+
+      expect(component.editingTicket).toBe(ticket);
+      expect(component.editedTicketTitle).toBe(ticket.title);
+    });
+
+    it('should check if ticket is being edited', () => {
+      expect(component.isEditingTicket(ticket)).toBeFalsy();
+
+      component.startEditingTicket(ticket);
+
+      expect(component.isEditingTicket(ticket)).toBeTruthy();
+    });
+
+    it('should finish editing with new title', () => {
+      component.startEditingTicket(ticket);
+      const newTitle = 'Updated Ticket Title';
+
+      component.finishEditingTicket(ticket, newTitle);
+
+      expect(ticket.title).toBe(newTitle);
+      expect(component.editingTicket).toBeNull();
+      expect(component.editedTicketTitle).toBe('');
+    });
+
+    it('should not update title if new title is empty', () => {
+      component.startEditingTicket(ticket);
+      const originalTitle = ticket.title;
+
+      component.finishEditingTicket(ticket, '   ');
+
+      expect(ticket.title).toBe(originalTitle);
+      expect(component.editingTicket).toBeNull();
+    });
+
+    it('should not update title if new title is same as current', () => {
+      component.startEditingTicket(ticket);
+      const originalTitle = ticket.title;
+
+      component.finishEditingTicket(ticket, originalTitle);
+
+      expect(ticket.title).toBe(originalTitle);
+      expect(component.editingTicket).toBeNull();
+    });
+
+    it('should cancel editing', () => {
+      component.startEditingTicket(ticket);
+
+      component.cancelEditingTicket();
+
+      expect(component.editingTicket).toBeNull();
+      expect(component.editedTicketTitle).toBe('');
+    });
+
+    it('should disable drag when ticket is being edited', () => {
+      expect(component.isEditingTicket(ticket)).toBeFalsy();
+
+      component.startEditingTicket(ticket);
+
+      expect(component.isEditingTicket(ticket)).toBeTruthy();
+    });
   });
 });
