@@ -145,10 +145,10 @@ export class KanbanTileComponent implements OnInit {
     }
   }
 
-  updateColumnTitle(column: Column, newTitle: string | Event) {
-    const title = typeof newTitle === 'string' ? newTitle : (newTitle.target as HTMLInputElement).value;
-    if (title.trim()) {
-      column.title = title.trim();
+  updateColumnTitle(column: Column, newTitle: Event) {
+    const title = (newTitle.target as HTMLInputElement).value.trim();
+    if (title) {
+      column.title = title;
       this.saveBoard();
     }
   }
