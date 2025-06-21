@@ -1,0 +1,78 @@
+<div id="container" [class.edit-mode]="editMode">
+  <div class="header">
+    <h1>{{ this.name }}</h1>
+    <button class="edit-btn" (click)="editMode = !editMode">
+      {{ editMode ? 'Done' : 'Edit' }}
+    </button>
+  </div>
+
+  <div class="kanban-board">
+    <div class="kanban-columns"
+         cdkDropList
+         [cdkDropListData]="columns"
+         cdkDropListOrientation="horizontal"
+         (cdkDropListDropped)="dropColumn($event)">
+      <div class="kanban-column" *ngFor="let column of columns"
+           cdkDrag
+           [cdkDragDisabled]="!editMode">
+        <div class="column-content">
+          <div class="column-header" cdkDragHandle>
+            <div class="drag-handle" *ngIf="editMode">
+              <span>⋮⋮</span>
+            </div>
+            <h3 *ngIf="!editMode">{{ column.title }}</h3>
+            <div *ngIf="editMode" class="edit-column-header">
+              <input [value]="column.title"
+                     (change)="updateColumnTitle(column, $event)"
+                     placeholder="Column Title">
+              <button class="delete-column-btn"
+                      (click)="deleteColumn(column)"
+                      aria-label="Delete Column">x</button>
+            </div>
+          </div>
+          <div class="tickets-container"
+               cdkDropList
+               [id]="'dropList-' + column.id"
+               [cdkDropListData]="column.tickets"
+               [cdkDropListConnectedTo]="getConnectedDropLists()"
+               (cdkDropListDropped)="drop($event)"
+               *ngIf="!editMode"
+          >
+            <div class="ticket" *ngFor="let ticket of column.tickets" cdkDrag [cdkDragDisabled]="isEditingTicket(ticket)" (dblclick)="startEditingTicket(ticket)">
+              <div class="ticket-content">
+                <span *ngIf="!isEditingTicket(ticket)">
+                  {{ ticket.title }}
+                </span>
+                <input *ngIf="isEditingTicket(ticket)"
+                       [value]="editedTicketTitle"
+                       #editInput
+                       (blur)="finishEditingTicket(ticket, editInput.value)"
+                       (keyup.enter)="finishEditingTicket(ticket, editInput.value)"
+                       (keyup.escape)="cancelEditingTicket()"
+                       (click)="$event.stopPropagation()"
+                       autofocus
+                />
+                <button class="delete-btn"
+                        (click)="deleteTicket(column, ticket)"
+                        aria-label="Delete Ticket">x</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="add-ticket-btn"
+            (click)="openAddTicketDialog()"
+            *ngIf="!editMode">+ New Ticket</button>
+
+    <div class="add-column-form" *ngIf="editMode">
+      <input [(ngModel)]="newColumnTitle"
+             placeholder="New Column Title"
+             (keyup.enter)="addColumn()">
+      <button (click)="addColumn()">+ New Column</button>
+    </div>
+  </div>
+</div>
