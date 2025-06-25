@@ -8,4 +8,8 @@ describe('AppComponent', () => {
       imports: [AppComponent],
     }).compileComponents();
   });
+
+  it('should be a dummy test', () => {
+    expect(true).toBe(true);
+  });
 });
