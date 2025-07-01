@@ -1,0 +1,13 @@
+{
+  "app.title": "My start page",
+  "app.edit": "Change",
+  "app.save": "Save",
+  "tiles.addTile": "Add tile",
+  "tiles.selectTile": "Select tile",
+  "tiles.bookmarks": "Bookmarks",
+  "tiles.search": "Search",
+  "tiles.calculator": "Calculator",
+  "tiles.kanban": "Kanban Board",
+  "common.close": "Close",
+  "common.delete": "Delete"
+}

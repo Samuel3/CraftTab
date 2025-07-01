@@ -1,0 +1,13 @@
+{
+  "app.title": "Meine Startseite",
+  "app.edit": "Bearbeiten",
+  "app.save": "Speichern",
+  "tiles.addTile": "Kachel hinzufügen",
+  "tiles.selectTile": "Kachel auswählen",
+  "tiles.bookmarks": "Lesezeichen",
+  "tiles.search": "Suchen",
+  "tiles.calculator": "Rechner",
+  "tiles.kanban": "Kanban Board",
+  "common.close": "Schließen",
+  "common.delete": "Löschen"
+}

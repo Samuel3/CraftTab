@@ -1,10 +1,13 @@
 <div id="container">
   <div id="heading">
-    <h1>My start page</h1>
-    <button (click)="toggleEditMode()" style="width: 100px; height: 40px;">
-      <i [class]="editMode ? 'fas fa-save' : 'fas fa-cog'"></i>
-      {{ editMode ? 'Save' : 'Change' }}
-    </button>
+    <h1>{{ 'app.title' | translate }}</h1>
+    <div class="header-controls">
+      <app-language-switcher></app-language-switcher>
+      <button (click)="toggleEditMode()" style="width: 100px; height: 40px; margin-left: 10px;">
+        <i [class]="editMode ? 'fas fa-save' : 'fas fa-cog'"></i>
+        {{ editMode ? ('app.save' | translate) : ('app.edit' | translate) }}
+      </button>
+    </div>
   </div>
   <new-page-tiles-container [editMode]="editMode"></new-page-tiles-container>
 </div>

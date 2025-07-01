@@ -1709,6 +1709,15 @@
         "hash": "sha512-ZFH1sT9+P0FmOhuMGF3qywlDaV594sHoYMetmLAqq+l0a91hJ9qYWoc5lhiaQ1/+MdHXlns/67zGeEUeSP8ssQ=="
       }
     },
+    "npm:@angular/localize": {
+      "type": "npm",
+      "name": "npm:@angular/localize",
+      "data": {
+        "version": "20.0.5",
+        "packageName": "@angular/localize",
+        "hash": "sha512-3EpePYklIal1n948iAY04dUfwCKPyuvDriMBdwAzfY0Se9/wwUZrVA4R8e5kmqazfgtpAuGasgy6zoPWejzJbw=="
+      }
+    },
     "npm:@angular/material": {
       "type": "npm",
       "name": "npm:@angular/material",
@@ -15394,17 +15403,17 @@
       },
       {
         "source": "new-page",
+        "target": "npm:@angular/common",
+        "type": "static"
+      },
+      {
+        "source": "new-page",
         "target": "npm:@angular/platform-browser",
         "type": "static"
       },
       {
         "source": "new-page",
         "target": "npm:@angular/cdk",
-        "type": "static"
-      },
-      {
-        "source": "new-page",
-        "target": "npm:@angular/common",
         "type": "static"
       },
       {
@@ -15420,6 +15429,11 @@
       {
         "source": "new-page",
         "target": "npm:rxjs",
+        "type": "static"
+      },
+      {
+        "source": "new-page",
+        "target": "npm:@angular/localize",
         "type": "static"
       },
       {
@@ -15495,6 +15509,11 @@
       {
         "source": "npm:@angular-devkit/build-angular",
         "target": "npm:@angular/core",
+        "type": "static"
+      },
+      {
+        "source": "npm:@angular-devkit/build-angular",
+        "target": "npm:@angular/localize",
         "type": "static"
       },
       {
@@ -16060,6 +16079,11 @@
       {
         "source": "npm:@angular/build",
         "target": "npm:@angular/core",
+        "type": "static"
+      },
+      {
+        "source": "npm:@angular/build",
+        "target": "npm:@angular/localize",
         "type": "static"
       },
       {
@@ -16952,6 +16976,38 @@
       {
         "source": "npm:@angular/forms",
         "target": "npm:tslib",
+        "type": "static"
+      }
+    ],
+    "npm:@angular/localize": [
+      {
+        "source": "npm:@angular/localize",
+        "target": "npm:@angular/compiler",
+        "type": "static"
+      },
+      {
+        "source": "npm:@angular/localize",
+        "target": "npm:@angular/compiler-cli",
+        "type": "static"
+      },
+      {
+        "source": "npm:@angular/localize",
+        "target": "npm:@babel/core@7.27.4",
+        "type": "static"
+      },
+      {
+        "source": "npm:@angular/localize",
+        "target": "npm:@types/babel__core",
+        "type": "static"
+      },
+      {
+        "source": "npm:@angular/localize",
+        "target": "npm:tinyglobby",
+        "type": "static"
+      },
+      {
+        "source": "npm:@angular/localize",
+        "target": "npm:yargs@18.0.0",
         "type": "static"
       }
     ],
@@ -35928,5 +35984,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1751361118316
+  "computedAt": 1751361673669
 }

@@ -8,6 +8,8 @@ import { CalculatorTilesComponent } from '../calculator-tile/calculator-tiles.co
 import { SearchTilesComponent } from '../search-tile/search-tiles.component';
 import { KanbanTileComponent } from '../kanban-tile/kanban-tile.component';
 import { ConfigService } from '../../services/config.service';
+import { TranslationService } from '../../services/translation.service';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 @Component({
   selector: 'new-page-tiles-container',
@@ -22,6 +24,7 @@ import { ConfigService } from '../../services/config.service';
     KanbanTileComponent,
     NgIf,
     DragDropModule,
+    TranslatePipe,
   ],
 })
 export class TilesContainerComponent implements OnInit {
@@ -55,7 +58,10 @@ export class TilesContainerComponent implements OnInit {
   tileRows: tileConfig[][] = [[]];
   maxTilesPerRow = 3;
 
-  constructor(private configService: ConfigService) {}
+  constructor(
+    private configService: ConfigService,
+    private translationService: TranslationService
+  ) {}
 
   async ngOnInit() {
     const savedConfig = await this.configService.loadTilesConfig();
@@ -133,13 +139,13 @@ export class TilesContainerComponent implements OnInit {
   getTileName(type: TileType): string {
     switch (type) {
       case TileType.Bookmarks:
-        return 'Bookmarks';
+        return this.translationService.translate('tiles.bookmarks');
       case TileType.Search:
-        return 'Search';
+        return this.translationService.translate('tiles.search');
       case TileType.Calculator:
-        return 'Calculator';
+        return this.translationService.translate('tiles.calculator');
       case TileType.Kanban:
-        return 'Kanban Board';
+        return this.translationService.translate('tiles.kanban');
       default:
         return type;
     }
