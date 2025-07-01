@@ -39,7 +39,7 @@ testem.log
 Thumbs.db
 
 # Build artifacts and cache
-.nx/cache/
+.nx/
 extension/
 
 .angular
