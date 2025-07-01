@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { TilesContainerComponent } from './components/tiles-container/tiles-container.component';
 import { LanguageSwitcherComponent } from './components/language-switcher/language-switcher.component';
 import { TranslatePipe } from './pipes/translate.pipe';
+import { TranslationService } from './services/translation.service';
 
 @Component({
   selector: 'new-page-root',
@@ -15,10 +16,17 @@ export class AppComponent implements OnInit {
   
   @ViewChild(LanguageSwitcherComponent) languageSwitcher!: LanguageSwitcherComponent;
 
-  ngOnInit() {
+  constructor(
+    private translationService: TranslationService
+  ) {}
+
+  async ngOnInit() {
+    // Initialize translation service and wait for translations to load
+    await this.translationService.waitForTranslations();
+    
     // @ts-ignore
-    if (typeof chrome !== 'undefined' && chrome.bookmarks) {
-      chrome.bookmarks.getTree().then((result) => {
+    if (typeof window !== 'undefined' && (window as any).chrome?.bookmarks) {
+      (window as any).chrome.bookmarks.getTree().then((result: any) => {
         console.log('Bookmarks:', result);
       });
     }

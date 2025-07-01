@@ -1,10 +1,10 @@
 <div id="container" [class.edit-mode]="editMode">
-  <h1>{{ this.name }}</h1>
+  <h1>{{ this.name | translate }}</h1>
   <ng-container *ngIf="!editMode">
     <div class="search-container">
-      <input id="searchBox" type="text" placeholder="Search..." [(ngModel)]="searchQuery" (change)="valueUpdated()"
+      <input id="searchBox" type="text" [placeholder]="'search.placeholder' | translate" [(ngModel)]="searchQuery" (change)="valueUpdated()"
              autofocus #search />
-      <button class="search-button" (click)="valueUpdated()">Go</button>
+      <button class="search-button" (click)="valueUpdated()">{{ 'search.go' | translate }}</button>
     </div>
   </ng-container>
 </div>

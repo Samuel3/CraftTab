@@ -9,5 +9,17 @@
   "tiles.calculator": "Calculator",
   "tiles.kanban": "Kanban Board",
   "common.close": "Close",
-  "common.delete": "Delete"
+  "common.delete": "Delete",
+  "common.go": "Go",
+  "common.edit": "Edit",
+  "kanban.newTicket": "+ New Ticket",
+  "kanban.done": "Done",
+  "kanban.addTicket": "Add Ticket",
+  "kanban.columnTitle": "Column Title",
+  "kanban.deleteColumn": "Delete Column",
+  "kanban.deleteTicket": "Delete Ticket",
+  "search.placeholder": "Search...",
+  "search.go": "Go",
+  "Ticket Title": "Ticket Title",
+  "Title is required": "Title is required"
 }

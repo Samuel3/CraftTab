@@ -1,7 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { TilesContainerComponent } from './tiles-container.component';
 import { TileType } from '../../model/tiles';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TranslationService } from '../../services/translation.service';
+import { LanguageService } from '../../services/language.service';
 
 describe('SearchTilesComponent', () => {
   let component: TilesContainerComponent;
@@ -9,7 +11,8 @@ describe('SearchTilesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TilesContainerComponent],
+      imports: [TilesContainerComponent, HttpClientTestingModule],
+      providers: [TranslationService, LanguageService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TilesContainerComponent);

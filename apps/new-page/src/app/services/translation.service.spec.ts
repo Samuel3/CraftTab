@@ -86,18 +86,18 @@ describe('TranslationService', () => {
     expect(service.isLoaded()).toBe(true);
   });
 
-  it('should emit translations observable', () => {
+  it('should emit translations observable', (done) => {
     const mockTranslations = { 'app.title': 'My start page' };
-    let emittedTranslations: any;
     
     service.translations$.subscribe(translations => {
-      emittedTranslations = translations;
+      if (Object.keys(translations).length > 0) {
+        expect(translations).toEqual(mockTranslations);
+        done();
+      }
     });
 
     const req = httpMock.expectOne('assets/i18n/en.json');
     req.flush(mockTranslations);
-
-    expect(emittedTranslations).toEqual(mockTranslations);
   });
 
   it('should handle HTTP errors', () => {

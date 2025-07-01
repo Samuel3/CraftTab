@@ -5,25 +5,26 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 @Component({
   selector: 'app-add-ticket-dialog',
   template: `
-    <h2 mat-dialog-title>New Ticket</h2>
+    <h2 mat-dialog-title>{{ 'kanban.addTicket' | translate }}</h2>
     <mat-dialog-content>
       <mat-form-field class="full-width">
         <input matInput 
-               placeholder="Ticket Title" 
+               [placeholder]="'Ticket Title' | translate" 
                [formControl]="titleControl"
                (keyup.enter)="onSubmit()">
-        <mat-error *ngIf="titleControl.hasError('required')">Title is required</mat-error>
+        <mat-error *ngIf="titleControl.hasError('required')">{{ 'Title is required' | translate }}</mat-error>
       </mat-form-field>
     </mat-dialog-content>
     <mat-dialog-actions class="dialog-actions">
-      <button class="cancel-btn" (click)="onCancel()">Cancel</button>
+      <button class="cancel-btn" (click)="onCancel()">{{ 'common.close' | translate }}</button>
       <button class="submit-btn" 
               [disabled]="!titleControl.valid" 
-              (click)="onSubmit()">Add</button>
+              (click)="onSubmit()">{{ 'kanban.addTicket' | translate }}</button>
     </mat-dialog-actions>
   `,
   styles: [`
@@ -83,7 +84,8 @@ import { CommonModule } from '@angular/common';
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslatePipe
   ]
 })
 export class AddTicketDialogComponent {

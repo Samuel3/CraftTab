@@ -23,9 +23,9 @@ export class LanguageService {
   public currentLanguage$ = this.currentLanguageSubject.asObservable();
 
   constructor() {
-    // Set initial language
+    // Set initial language without calling setLanguage to avoid side effects during construction
     const storedLang = this.getStoredLanguage();
-    this.setLanguage(storedLang);
+    this.currentLanguageSubject.next(storedLang);
   }
 
   getAvailableLanguages(): Language[] {
@@ -43,12 +43,14 @@ export class LanguageService {
       
       // Reload the page to apply new language
       // This is necessary for Angular i18n to work properly
-      if (typeof chrome !== 'undefined' && chrome.storage) {
+      if (typeof window !== 'undefined' && (window as any).chrome?.storage) {
         // For Chrome extension environment
-        chrome.storage.local.set({ [this.STORAGE_KEY]: languageCode });
+        (window as any).chrome.storage.local.set({ [this.STORAGE_KEY]: languageCode });
       } else {
         // Fallback to localStorage
-        localStorage.setItem(this.STORAGE_KEY, languageCode);
+        if (typeof localStorage !== 'undefined') {
+          localStorage.setItem(this.STORAGE_KEY, languageCode);
+        }
       }
       
       // In a real i18n setup, you might want to dynamically load the locale
@@ -57,33 +59,41 @@ export class LanguageService {
   }
 
   private getStoredLanguage(): string {
-    if (typeof chrome !== 'undefined' && chrome.storage) {
+    if (typeof window !== 'undefined' && window.chrome?.storage) {
       // For Chrome extension environment, we'll use sync approach for initial load
       // In real implementation, you might want to use async storage
       return this.DEFAULT_LANGUAGE;
     } else {
-      return localStorage.getItem(this.STORAGE_KEY) || this.DEFAULT_LANGUAGE;
+      if (typeof localStorage !== 'undefined') {
+        return localStorage.getItem(this.STORAGE_KEY) || this.DEFAULT_LANGUAGE;
+      }
+      return this.DEFAULT_LANGUAGE;
     }
   }
 
   private saveLanguage(languageCode: string): void {
-    if (typeof chrome !== 'undefined' && chrome.storage) {
-      chrome.storage.local.set({ [this.STORAGE_KEY]: languageCode });
+    if (typeof window !== 'undefined' && (window as any).chrome?.storage) {
+      (window as any).chrome.storage.local.set({ [this.STORAGE_KEY]: languageCode });
     } else {
-      localStorage.setItem(this.STORAGE_KEY, languageCode);
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem(this.STORAGE_KEY, languageCode);
+      }
     }
   }
 
   // Method to get stored language asynchronously (for Chrome extension)
   async getStoredLanguageAsync(): Promise<string> {
-    if (typeof chrome !== 'undefined' && chrome.storage) {
+    if (typeof window !== 'undefined' && (window as any).chrome?.storage) {
       return new Promise((resolve) => {
-        chrome.storage.local.get([this.STORAGE_KEY], (result) => {
+        (window as any).chrome.storage.local.get([this.STORAGE_KEY], (result: any) => {
           resolve(result[this.STORAGE_KEY] || this.DEFAULT_LANGUAGE);
         });
       });
     } else {
-      return localStorage.getItem(this.STORAGE_KEY) || this.DEFAULT_LANGUAGE;
+      if (typeof localStorage !== 'undefined') {
+        return localStorage.getItem(this.STORAGE_KEY) || this.DEFAULT_LANGUAGE;
+      }
+      return this.DEFAULT_LANGUAGE;
     }
   }
 }

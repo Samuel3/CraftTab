@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 interface Bookmark {
   id: string;
@@ -15,7 +16,7 @@ interface Bookmark {
   templateUrl: './bookmark-tiles.component.html',
   styleUrls: ['./bookmark-tiles.component.scss'],
   standalone: true,
-  imports: [CommonModule, DragDropModule],
+  imports: [CommonModule, DragDropModule, TranslatePipe],
 })
 export class BookmarkTilesComponent implements OnInit {
   @Input() name = '';
@@ -48,10 +49,10 @@ export class BookmarkTilesComponent implements OnInit {
       order: index
     }));
     
-    if (typeof chrome !== 'undefined' && chrome.storage) {
-      chrome.storage.sync.set({ bookmarkOrder }, () => {
-        if (chrome.runtime.lastError) {
-          console.error('Failed to save bookmark order:', chrome.runtime.lastError.message);
+    if (typeof window !== 'undefined' && (window as any).chrome?.storage) {
+      (window as any).chrome.storage.sync.set({ bookmarkOrder }, () => {
+        if ((window as any).chrome.runtime.lastError) {
+          console.error('Failed to save bookmark order:', (window as any).chrome.runtime.lastError.message);
         } else {
           console.log('Bookmark order saved successfully.');
         }
@@ -61,8 +62,8 @@ export class BookmarkTilesComponent implements OnInit {
 
   private async loadBookmarkOrder(): Promise<{ [key: string]: number }> {
     return new Promise((resolve) => {
-      if (typeof chrome !== 'undefined' && chrome.storage) {
-        chrome.storage.sync.get('bookmarkOrder', (result) => {
+      if (typeof window !== 'undefined' && (window as any).chrome?.storage) {
+        (window as any).chrome.storage.sync.get('bookmarkOrder', (result: any) => {
           const orderMap: { [key: string]: number } = {};
           if (result['bookmarkOrder']) {
             result['bookmarkOrder'].forEach((item: { id: string; order: number }) => {
@@ -78,8 +79,8 @@ export class BookmarkTilesComponent implements OnInit {
   }
 
   private loadBookmarks() {
-    if (typeof chrome !== 'undefined' && chrome.bookmarks) {
-      chrome.bookmarks.getTree(async (bookmarkTreeNodes) => {
+    if (typeof window !== 'undefined' && (window as any).chrome?.bookmarks) {
+      (window as any).chrome.bookmarks.getTree(async (bookmarkTreeNodes: any) => {
         this.bookmarks = [];
         await this.processBookmarkNodes(bookmarkTreeNodes);
         const orderMap = await this.loadBookmarkOrder();
@@ -177,8 +178,8 @@ export class BookmarkTilesComponent implements OnInit {
   }
 
   resetOrder() {
-    if (typeof chrome !== 'undefined' && chrome.storage) {
-      chrome.storage.sync.remove('bookmarkOrder', () => {
+    if (typeof window !== 'undefined' && (window as any).chrome?.storage) {
+      (window as any).chrome.storage.sync.remove('bookmarkOrder', () => {
         this.loadBookmarks();
       });
     }

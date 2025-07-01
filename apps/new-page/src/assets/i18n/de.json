@@ -9,5 +9,17 @@
   "tiles.calculator": "Rechner",
   "tiles.kanban": "Kanban Board",
   "common.close": "Schließen",
-  "common.delete": "Löschen"
+  "common.delete": "Löschen",
+  "common.go": "Los",
+  "common.edit": "Bearbeiten",
+  "kanban.newTicket": "+ Neues Ticket",
+  "kanban.done": "Fertig",
+  "kanban.addTicket": "Ticket hinzufügen",
+  "kanban.columnTitle": "Spaltentitel",
+  "kanban.deleteColumn": "Spalte löschen",
+  "kanban.deleteTicket": "Ticket löschen",
+  "search.placeholder": "Suchen...",
+  "search.go": "Los",
+  "Ticket Title": "Ticket-Titel",
+  "Title is required": "Titel ist erforderlich"
 }

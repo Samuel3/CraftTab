@@ -3,7 +3,8 @@
     class="language-toggle"
     (click)="toggleDropdown()"
     [title]="'Language: ' + getCurrentLanguageName()">
-    {{ getCurrentLanguageFlag() }}
+    <span class="flag">{{ getCurrentLanguageFlag() }}</span>
+    <span class="name">{{ getCurrentLanguageName() }}</span>
   </button>
   
   <div class="language-dropdown" *ngIf="isDropdownOpen">
