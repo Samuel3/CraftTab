@@ -1,4 +1,4 @@
-Make sure that for each feature different tests do exists.
+Make sure that for each feature different tests do exist.
 
 Make for every finding one seperate comment.
 
