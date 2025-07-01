@@ -15,15 +15,18 @@ export class TranslatePipe implements PipeTransform, OnDestroy {
     private cdr: ChangeDetectorRef
   ) {
     // Subscribe to translation changes to trigger updates
-    this.subscription = this.translationService.translations$.subscribe(() => {
-      this.cdr.markForCheck();
+    this.subscription = this.translationService.translations$.subscribe((translations) => {
+      // Trigger change detection when translations are loaded
+      if (Object.keys(translations).length > 0) {
+        this.cdr.markForCheck();
+      }
     });
   }
 
   transform(key: string, params?: { [key: string]: string }): string {
     if (!key) return '';
     
-    // Always get fresh translation since translations might have loaded
+    // Use the translation service directly
     return this.translationService.instant(key, params);
   }
 

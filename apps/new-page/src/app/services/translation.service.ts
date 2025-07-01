@@ -10,6 +10,7 @@ export class TranslationService {
   private translations: { [key: string]: any } = {};
   private translationsSubject = new BehaviorSubject<{ [key: string]: any }>({});
   public translations$ = this.translationsSubject.asObservable();
+  private translationsLoaded = false;
 
   constructor(
     private http: HttpClient,
@@ -23,11 +24,14 @@ export class TranslationService {
 
   private loadTranslations(language: string): void {
     const translationFile = `assets/i18n/${language}.json`;
+    this.translationsLoaded = false;
     
     this.http.get<{ [key: string]: any }>(translationFile).subscribe({
       next: (translations) => {
         this.translations = translations;
+        this.translationsLoaded = true;
         this.translationsSubject.next(translations);
+        console.log('Translations loaded for', language, ':', translations);
       },
       error: (error) => {
         console.warn(`Failed to load translations for language: ${language}`, error);
@@ -40,6 +44,10 @@ export class TranslationService {
   }
 
   translate(key: string, params?: { [key: string]: string }): string {
+    if (!this.translationsLoaded || !this.translations) {
+      return key; // Return key if translations not loaded yet
+    }
+
     let translation = this.getNestedTranslation(key, this.translations) || key;
     
     // Replace parameters if provided
@@ -72,5 +80,9 @@ export class TranslationService {
     }
     
     return typeof current === 'string' ? current : null;
+  }
+
+  isLoaded(): boolean {
+    return this.translationsLoaded;
   }
 }

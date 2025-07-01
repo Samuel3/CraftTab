@@ -1,8 +1,8 @@
 {
   "run": {
     "command": "nx run-many --target=build --all --configuration development --parallel 5",
-    "startTime": "2025-07-01T09:29:10.023Z",
-    "endTime": "2025-07-01T09:29:22.136Z",
+    "startTime": "2025-07-01T09:33:24.199Z",
+    "endTime": "2025-07-01T09:33:36.264Z",
     "inner": false
   },
   "tasks": [
@@ -11,8 +11,8 @@
       "target": "build",
       "projectName": "popup",
       "hash": "2347966667774048447",
-      "startTime": "2025-07-01T09:29:10.037Z",
-      "endTime": "2025-07-01T09:29:10.065Z",
+      "startTime": "2025-07-01T09:33:24.213Z",
+      "endTime": "2025-07-01T09:33:24.241Z",
       "params": "",
       "cacheStatus": "local-cache-hit",
       "status": 0
@@ -22,8 +22,8 @@
       "target": "build",
       "projectName": "devtools-panel",
       "hash": "15716470099269770981",
-      "startTime": "2025-07-01T09:29:10.037Z",
-      "endTime": "2025-07-01T09:29:10.065Z",
+      "startTime": "2025-07-01T09:33:24.213Z",
+      "endTime": "2025-07-01T09:33:24.241Z",
       "params": "",
       "cacheStatus": "local-cache-hit",
       "status": 0
@@ -33,8 +33,8 @@
       "target": "build",
       "projectName": "options",
       "hash": "3128989986228279572",
-      "startTime": "2025-07-01T09:29:10.037Z",
-      "endTime": "2025-07-01T09:29:10.065Z",
+      "startTime": "2025-07-01T09:33:24.213Z",
+      "endTime": "2025-07-01T09:33:24.241Z",
       "params": "",
       "cacheStatus": "local-cache-hit",
       "status": 0
@@ -44,8 +44,8 @@
       "target": "build",
       "projectName": "scripts-background",
       "hash": "13921836716497773740",
-      "startTime": "2025-07-01T09:29:10.037Z",
-      "endTime": "2025-07-01T09:29:10.065Z",
+      "startTime": "2025-07-01T09:33:24.213Z",
+      "endTime": "2025-07-01T09:33:24.241Z",
       "params": "",
       "cacheStatus": "local-cache-hit",
       "status": 0
@@ -55,8 +55,8 @@
       "target": "build",
       "projectName": "scripts-content",
       "hash": "14083010252310950234",
-      "startTime": "2025-07-01T09:29:10.066Z",
-      "endTime": "2025-07-01T09:29:10.068Z",
+      "startTime": "2025-07-01T09:33:24.242Z",
+      "endTime": "2025-07-01T09:33:24.244Z",
       "params": "",
       "cacheStatus": "local-cache-hit",
       "status": 0
@@ -65,9 +65,9 @@
       "taskId": "new-page:build:development",
       "target": "build",
       "projectName": "new-page",
-      "hash": "3338190597468691218",
-      "startTime": "2025-07-01T09:29:10.037Z",
-      "endTime": "2025-07-01T09:29:22.123Z",
+      "hash": "8765601552714081765",
+      "startTime": "2025-07-01T09:33:24.213Z",
+      "endTime": "2025-07-01T09:33:36.251Z",
       "params": "",
       "cacheStatus": "cache-miss",
       "status": 0
