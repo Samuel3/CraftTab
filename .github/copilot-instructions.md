@@ -6,4 +6,4 @@ Make sure that everything is in English.
 
 Validate that there is not single file component but instead each component has a separate file for the typescript logic, scss and html.
 
-Make sure that no .nx/cach file is checked in.
+Make sure that no .nx/cache file is checked in.
