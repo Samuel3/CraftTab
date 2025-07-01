@@ -1,0 +1,76 @@
+{
+  "run": {
+    "command": "nx run-many --target=build --all --configuration development --parallel 5",
+    "startTime": "2025-07-01T09:11:49.599Z",
+    "endTime": "2025-07-01T09:12:18.415Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "scripts-background:build:production",
+      "target": "build",
+      "projectName": "scripts-background",
+      "hash": "8643356803706304543",
+      "startTime": "2025-07-01T09:11:49.615Z",
+      "endTime": "2025-07-01T09:11:55.586Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    },
+    {
+      "taskId": "scripts-content:build:production",
+      "target": "build",
+      "projectName": "scripts-content",
+      "hash": "9606812912244943731",
+      "startTime": "2025-07-01T09:11:49.615Z",
+      "endTime": "2025-07-01T09:11:56.268Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    },
+    {
+      "taskId": "devtools-panel:build:development",
+      "target": "build",
+      "projectName": "devtools-panel",
+      "hash": "11322967772196625572",
+      "startTime": "2025-07-01T09:11:49.615Z",
+      "endTime": "2025-07-01T09:12:15.005Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    },
+    {
+      "taskId": "popup:build:development",
+      "target": "build",
+      "projectName": "popup",
+      "hash": "18412119209019903169",
+      "startTime": "2025-07-01T09:11:49.614Z",
+      "endTime": "2025-07-01T09:12:15.141Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    },
+    {
+      "taskId": "options:build:development",
+      "target": "build",
+      "projectName": "options",
+      "hash": "16942884822388962660",
+      "startTime": "2025-07-01T09:11:55.588Z",
+      "endTime": "2025-07-01T09:12:17.432Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    },
+    {
+      "taskId": "new-page:build:development",
+      "target": "build",
+      "projectName": "new-page",
+      "hash": "2392759185249220284",
+      "startTime": "2025-07-01T09:11:49.615Z",
+      "endTime": "2025-07-01T09:12:18.407Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    }
+  ]
+}
