@@ -1,9 +1,9 @@
 Make sure that for each feature different tests do exist.
 
-Make for every finding one seperate comment.
+Make for every finding one separate comment.
 
 Make sure that everything is in english.
 
-Validate that there is not single file component but instead each component has a seperate file for the typescript logic, scss and html.
+Validate that there is not single file component but instead each component has a separate file for the typescript logic, scss and html.
 
 Make sure that no .nx/cach file is checked in.
