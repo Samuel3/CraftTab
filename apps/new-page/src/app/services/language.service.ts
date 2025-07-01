@@ -59,7 +59,7 @@ export class LanguageService {
   }
 
   private getStoredLanguage(): string {
-    if (typeof window !== 'undefined' && window.chrome?.storage) {
+    if (typeof window !== 'undefined' && (window as any).chrome?.storage) {
       // For Chrome extension environment, we'll use sync approach for initial load
       // In real implementation, you might want to use async storage
       return this.DEFAULT_LANGUAGE;
