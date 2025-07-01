@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform, OnDestroy } from '@angular/core';
+import { Pipe, PipeTransform, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TranslationService } from '../services/translation.service';
 
@@ -9,23 +9,22 @@ import { TranslationService } from '../services/translation.service';
 })
 export class TranslatePipe implements PipeTransform, OnDestroy {
   private subscription?: Subscription;
-  private lastKey?: string;
-  private lastTranslation?: string;
 
-  constructor(private translationService: TranslationService) {}
+  constructor(
+    private translationService: TranslationService,
+    private cdr: ChangeDetectorRef
+  ) {
+    // Subscribe to translation changes to trigger updates
+    this.subscription = this.translationService.translations$.subscribe(() => {
+      this.cdr.markForCheck();
+    });
+  }
 
   transform(key: string, params?: { [key: string]: string }): string {
     if (!key) return '';
     
-    // If key hasn't changed and we have a cached translation, return it
-    if (this.lastKey === key && this.lastTranslation) {
-      return this.lastTranslation;
-    }
-
-    this.lastKey = key;
-    this.lastTranslation = this.translationService.instant(key, params);
-    
-    return this.lastTranslation;
+    // Always get fresh translation since translations might have loaded
+    return this.translationService.instant(key, params);
   }
 
   ngOnDestroy() {

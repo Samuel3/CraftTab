@@ -5,6 +5,95 @@
   "nxJsonPlugins": [],
   "fileMap": {
     "projectFileMap": {
+      "devtools-panel": [
+        {
+          "file": "apps/devtools-panel/.eslintrc.json",
+          "hash": "8612548403507265237"
+        },
+        {
+          "file": "apps/devtools-panel/jest.config.ts",
+          "hash": "10530398154629914381"
+        },
+        {
+          "file": "apps/devtools-panel/project.json",
+          "hash": "4342509768271841200"
+        },
+        {
+          "file": "apps/devtools-panel/src/app/app.component.html",
+          "hash": "18076093457627333254"
+        },
+        {
+          "file": "apps/devtools-panel/src/app/app.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/devtools-panel/src/app/app.component.spec.ts",
+          "hash": "851325473164562675",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "apps/devtools-panel/src/app/app.component.ts",
+          "hash": "5072338306310338787",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "apps/devtools-panel/src/app/app.config.ts",
+          "hash": "9756254947726201314",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "apps/devtools-panel/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/devtools-panel/src/favicon.ico",
+          "hash": "15031197751600724030"
+        },
+        {
+          "file": "apps/devtools-panel/src/index.html",
+          "hash": "6557228542030939600"
+        },
+        {
+          "file": "apps/devtools-panel/src/main.ts",
+          "hash": "5550857928122769089",
+          "deps": [
+            "npm:@angular/platform-browser"
+          ]
+        },
+        {
+          "file": "apps/devtools-panel/src/styles.scss",
+          "hash": "5195668842064076916"
+        },
+        {
+          "file": "apps/devtools-panel/src/test-setup.ts",
+          "hash": "796093197114546867",
+          "deps": [
+            "npm:jest-preset-angular"
+          ]
+        },
+        {
+          "file": "apps/devtools-panel/tsconfig.app.json",
+          "hash": "5767418268198198536"
+        },
+        {
+          "file": "apps/devtools-panel/tsconfig.editor.json",
+          "hash": "17511610827034788226"
+        },
+        {
+          "file": "apps/devtools-panel/tsconfig.json",
+          "hash": "13680912448810795921"
+        },
+        {
+          "file": "apps/devtools-panel/tsconfig.spec.json",
+          "hash": "2927375835638640771"
+        }
+      ],
       "new-page": [
         {
           "file": "apps/new-page/.eslintrc.json",
@@ -35,7 +124,7 @@
         },
         {
           "file": "apps/new-page/src/app/app.component.ts",
-          "hash": "8056662014401771154",
+          "hash": "16406240063232457267",
           "deps": [
             "npm:@angular/core"
           ]
@@ -67,7 +156,7 @@
         },
         {
           "file": "apps/new-page/src/app/components/bookmark-tile/bookmark-tiles.component.ts",
-          "hash": "6430819213024682763",
+          "hash": "2593001081604778140",
           "deps": [
             "npm:@angular/core",
             "npm:@angular/common",
@@ -200,7 +289,7 @@
         },
         {
           "file": "apps/new-page/src/app/pipes/translate.pipe.ts",
-          "hash": "13571061704754337374",
+          "hash": "2639335393234367063",
           "deps": [
             "npm:@angular/core",
             "npm:rxjs"
@@ -208,7 +297,7 @@
         },
         {
           "file": "apps/new-page/src/app/services/config.service.ts",
-          "hash": "17228065935977851401",
+          "hash": "9666951774884981363",
           "deps": [
             "npm:@angular/core"
           ]
@@ -223,7 +312,7 @@
         },
         {
           "file": "apps/new-page/src/app/services/translation.service.ts",
-          "hash": "13378385503308322099",
+          "hash": "4524662167903967207",
           "deps": [
             "npm:@angular/core",
             "npm:@angular/common",
@@ -286,93 +375,70 @@
           "hash": "2927375835638640771"
         }
       ],
-      "popup": [
+      "scripts-content": [
         {
-          "file": "apps/popup/.eslintrc.json",
-          "hash": "9792508018437608123"
+          "file": "apps/scripts/content/.babelrc",
+          "hash": "11877436663910714680"
         },
         {
-          "file": "apps/popup/jest.config.ts",
-          "hash": "11066888261032711363"
+          "file": "apps/scripts/content/.eslintrc.json",
+          "hash": "9703569748258640057"
         },
         {
-          "file": "apps/popup/project.json",
-          "hash": "9557534415078170020"
+          "file": "apps/scripts/content/project.json",
+          "hash": "1556448288321410211"
         },
         {
-          "file": "apps/popup/src/app/app.component.html",
-          "hash": "12741503780683286362"
+          "file": "apps/scripts/content/src/main.ts",
+          "hash": "13824253580701805569"
         },
         {
-          "file": "apps/popup/src/app/app.component.scss",
-          "hash": "3244421341483603138"
+          "file": "apps/scripts/content/tsconfig.app.json",
+          "hash": "11836078793852913861"
         },
         {
-          "file": "apps/popup/src/app/app.component.spec.ts",
-          "hash": "851325473164562675",
+          "file": "apps/scripts/content/tsconfig.json",
+          "hash": "26641455647081158"
+        },
+        {
+          "file": "apps/scripts/content/webpack.config.js",
+          "hash": "11455500331288184410",
           "deps": [
-            "npm:@angular/core"
+            "npm:@nx/webpack"
           ]
+        }
+      ],
+      "scripts-background": [
+        {
+          "file": "apps/scripts/background/.babelrc",
+          "hash": "11877436663910714680"
         },
         {
-          "file": "apps/popup/src/app/app.component.ts",
-          "hash": "13906627590027528281",
+          "file": "apps/scripts/background/.eslintrc.json",
+          "hash": "9703569748258640057"
+        },
+        {
+          "file": "apps/scripts/background/project.json",
+          "hash": "14547441431458676783"
+        },
+        {
+          "file": "apps/scripts/background/src/main.ts",
+          "hash": "15031675491501316080"
+        },
+        {
+          "file": "apps/scripts/background/tsconfig.app.json",
+          "hash": "11836078793852913861"
+        },
+        {
+          "file": "apps/scripts/background/tsconfig.json",
+          "hash": "26641455647081158"
+        },
+        {
+          "file": "apps/scripts/background/webpack.config.js",
+          "hash": "11455500331288184410",
           "deps": [
-            "npm:@angular/core"
+            "npm:@nx/webpack"
           ]
-        },
-        {
-          "file": "apps/popup/src/app/app.config.ts",
-          "hash": "9756254947726201314",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "apps/popup/src/assets/.gitkeep",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "apps/popup/src/favicon.ico",
-          "hash": "15031197751600724030"
-        },
-        {
-          "file": "apps/popup/src/index.html",
-          "hash": "6366167384746880786"
-        },
-        {
-          "file": "apps/popup/src/main.ts",
-          "hash": "5550857928122769089",
-          "deps": [
-            "npm:@angular/platform-browser"
-          ]
-        },
-        {
-          "file": "apps/popup/src/styles.scss",
-          "hash": "5195668842064076916"
-        },
-        {
-          "file": "apps/popup/src/test-setup.ts",
-          "hash": "796093197114546867",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
-        },
-        {
-          "file": "apps/popup/tsconfig.app.json",
-          "hash": "5767418268198198536"
-        },
-        {
-          "file": "apps/popup/tsconfig.editor.json",
-          "hash": "17511610827034788226"
-        },
-        {
-          "file": "apps/popup/tsconfig.json",
-          "hash": "13680912448810795921"
-        },
-        {
-          "file": "apps/popup/tsconfig.spec.json",
-          "hash": "2927375835638640771"
         }
       ],
       "options": [
@@ -464,159 +530,93 @@
           "hash": "2927375835638640771"
         }
       ],
-      "scripts-content": [
+      "popup": [
         {
-          "file": "apps/scripts/content/.babelrc",
-          "hash": "11877436663910714680"
+          "file": "apps/popup/.eslintrc.json",
+          "hash": "9792508018437608123"
         },
         {
-          "file": "apps/scripts/content/.eslintrc.json",
-          "hash": "9703569748258640057"
+          "file": "apps/popup/jest.config.ts",
+          "hash": "11066888261032711363"
         },
         {
-          "file": "apps/scripts/content/project.json",
-          "hash": "1556448288321410211"
+          "file": "apps/popup/project.json",
+          "hash": "9557534415078170020"
         },
         {
-          "file": "apps/scripts/content/src/main.ts",
-          "hash": "13824253580701805569"
+          "file": "apps/popup/src/app/app.component.html",
+          "hash": "12741503780683286362"
         },
         {
-          "file": "apps/scripts/content/tsconfig.app.json",
-          "hash": "11836078793852913861"
-        },
-        {
-          "file": "apps/scripts/content/tsconfig.json",
-          "hash": "26641455647081158"
-        },
-        {
-          "file": "apps/scripts/content/webpack.config.js",
-          "hash": "11455500331288184410",
-          "deps": [
-            "npm:@nx/webpack"
-          ]
-        }
-      ],
-      "devtools-panel": [
-        {
-          "file": "apps/devtools-panel/.eslintrc.json",
-          "hash": "8612548403507265237"
-        },
-        {
-          "file": "apps/devtools-panel/jest.config.ts",
-          "hash": "10530398154629914381"
-        },
-        {
-          "file": "apps/devtools-panel/project.json",
-          "hash": "4342509768271841200"
-        },
-        {
-          "file": "apps/devtools-panel/src/app/app.component.html",
-          "hash": "18076093457627333254"
-        },
-        {
-          "file": "apps/devtools-panel/src/app/app.component.scss",
+          "file": "apps/popup/src/app/app.component.scss",
           "hash": "3244421341483603138"
         },
         {
-          "file": "apps/devtools-panel/src/app/app.component.spec.ts",
+          "file": "apps/popup/src/app/app.component.spec.ts",
           "hash": "851325473164562675",
           "deps": [
             "npm:@angular/core"
           ]
         },
         {
-          "file": "apps/devtools-panel/src/app/app.component.ts",
-          "hash": "5072338306310338787",
+          "file": "apps/popup/src/app/app.component.ts",
+          "hash": "13906627590027528281",
           "deps": [
             "npm:@angular/core"
           ]
         },
         {
-          "file": "apps/devtools-panel/src/app/app.config.ts",
+          "file": "apps/popup/src/app/app.config.ts",
           "hash": "9756254947726201314",
           "deps": [
             "npm:@angular/core"
           ]
         },
         {
-          "file": "apps/devtools-panel/src/assets/.gitkeep",
+          "file": "apps/popup/src/assets/.gitkeep",
           "hash": "3244421341483603138"
         },
         {
-          "file": "apps/devtools-panel/src/favicon.ico",
+          "file": "apps/popup/src/favicon.ico",
           "hash": "15031197751600724030"
         },
         {
-          "file": "apps/devtools-panel/src/index.html",
-          "hash": "6557228542030939600"
+          "file": "apps/popup/src/index.html",
+          "hash": "6366167384746880786"
         },
         {
-          "file": "apps/devtools-panel/src/main.ts",
+          "file": "apps/popup/src/main.ts",
           "hash": "5550857928122769089",
           "deps": [
             "npm:@angular/platform-browser"
           ]
         },
         {
-          "file": "apps/devtools-panel/src/styles.scss",
+          "file": "apps/popup/src/styles.scss",
           "hash": "5195668842064076916"
         },
         {
-          "file": "apps/devtools-panel/src/test-setup.ts",
+          "file": "apps/popup/src/test-setup.ts",
           "hash": "796093197114546867",
           "deps": [
             "npm:jest-preset-angular"
           ]
         },
         {
-          "file": "apps/devtools-panel/tsconfig.app.json",
+          "file": "apps/popup/tsconfig.app.json",
           "hash": "5767418268198198536"
         },
         {
-          "file": "apps/devtools-panel/tsconfig.editor.json",
+          "file": "apps/popup/tsconfig.editor.json",
           "hash": "17511610827034788226"
         },
         {
-          "file": "apps/devtools-panel/tsconfig.json",
+          "file": "apps/popup/tsconfig.json",
           "hash": "13680912448810795921"
         },
         {
-          "file": "apps/devtools-panel/tsconfig.spec.json",
+          "file": "apps/popup/tsconfig.spec.json",
           "hash": "2927375835638640771"
-        }
-      ],
-      "scripts-background": [
-        {
-          "file": "apps/scripts/background/.babelrc",
-          "hash": "11877436663910714680"
-        },
-        {
-          "file": "apps/scripts/background/.eslintrc.json",
-          "hash": "9703569748258640057"
-        },
-        {
-          "file": "apps/scripts/background/project.json",
-          "hash": "14547441431458676783"
-        },
-        {
-          "file": "apps/scripts/background/src/main.ts",
-          "hash": "15031675491501316080"
-        },
-        {
-          "file": "apps/scripts/background/tsconfig.app.json",
-          "hash": "11836078793852913861"
-        },
-        {
-          "file": "apps/scripts/background/tsconfig.json",
-          "hash": "26641455647081158"
-        },
-        {
-          "file": "apps/scripts/background/webpack.config.js",
-          "hash": "11455500331288184410",
-          "deps": [
-            "npm:@nx/webpack"
-          ]
         }
       ]
     },

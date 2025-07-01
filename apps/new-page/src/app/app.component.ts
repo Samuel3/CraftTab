@@ -17,9 +17,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // @ts-ignore
-    chrome.bookmarks.getTree().then((result) => {
-      console.log('Bookmarks:', result);
-    });
+    if (typeof chrome !== 'undefined' && chrome.bookmarks) {
+      chrome.bookmarks.getTree().then((result) => {
+        console.log('Bookmarks:', result);
+      });
+    }
     console.log('New Page Component Initialized');
   }
 

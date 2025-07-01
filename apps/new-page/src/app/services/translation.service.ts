@@ -22,7 +22,7 @@ export class TranslationService {
   }
 
   private loadTranslations(language: string): void {
-    const translationFile = `/assets/i18n/${language}.json`;
+    const translationFile = `assets/i18n/${language}.json`;
     
     this.http.get<{ [key: string]: any }>(translationFile).subscribe({
       next: (translations) => {

@@ -9,17 +9,29 @@ export class ConfigService {
 
   async saveTilesConfig(tiles: tileConfig[]): Promise<void> {
     return new Promise((resolve) => {
-      chrome.storage.sync.set({ [this.STORAGE_KEY]: tiles }, () => {
+      if (typeof chrome !== 'undefined' && chrome.storage) {
+        chrome.storage.sync.set({ [this.STORAGE_KEY]: tiles }, () => {
+          resolve();
+        });
+      } else {
+        // Fallback to localStorage
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(tiles));
         resolve();
-      });
+      }
     });
   }
 
   async loadTilesConfig(): Promise<tileConfig[] | null> {
     return new Promise((resolve) => {
-      chrome.storage.sync.get([this.STORAGE_KEY], (result) => {
-        resolve(result[this.STORAGE_KEY] || null);
-      });
+      if (typeof chrome !== 'undefined' && chrome.storage) {
+        chrome.storage.sync.get([this.STORAGE_KEY], (result) => {
+          resolve(result[this.STORAGE_KEY] || null);
+        });
+      } else {
+        // Fallback to localStorage
+        const stored = localStorage.getItem(this.STORAGE_KEY);
+        resolve(stored ? JSON.parse(stored) : null);
+      }
     });
   }
 } 
