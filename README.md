@@ -1,4 +1,6 @@
-# CraftTab. Lets. Get. Productive
+# CraftTab. Customize. Access. Get Things Done.
+
+![CraftTab Logo](.github/images/logo.png)
 
 ## 📖 Table of Contents
 
@@ -90,14 +92,4 @@ npm run build:prod
 
 ## Color Style
 
-See https://coolors.co/202c39-283845-b8b08d-f2d492-f29559
-
-Primary: `#202C39`
-
-Secondary: `#283845`
-
-Tertiary: `#F5F5F5`
-
-Quaternary: `#F2D492`
-
-Contrast: `#FF29559`
+The following color scheme is used
