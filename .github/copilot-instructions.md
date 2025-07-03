@@ -8,4 +8,4 @@ Validate that there is not single file component but instead each component has 
 
 Make sure that no .nx/cache file is checked in.
 
-Make sure that each Pull Request is based on the latest commit from master branch.
+Make sure that each Pull Request is based on the latest commit from main branch.
