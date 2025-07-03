@@ -1,8 +1,8 @@
 <div id="container" [class.edit-mode]="editMode">
   <div class="header">
-    <h1>{{ this.name }}</h1>
+    <h1>{{ this.name | translate }}</h1>
     <button class="edit-btn" (click)="editMode = !editMode">
-      {{ editMode ? 'Done' : 'Edit' }}
+      {{ editMode ? ('kanban.done' | translate) : ('common.edit' | translate) }}
     </button>
   </div>
 
@@ -24,10 +24,10 @@
             <div *ngIf="editMode" class="edit-column-header">
               <input [value]="column.title"
                      (change)="updateColumnTitle(column, $event)"
-                     placeholder="Column Title">
+                     [placeholder]="'kanban.columnTitle' | translate">
               <button class="delete-column-btn"
                       (click)="deleteColumn(column)"
-                      aria-label="Delete Column">x</button>
+                      [attr.aria-label]="'kanban.deleteColumn' | translate">x</button>
             </div>
           </div>
           <div class="tickets-container"
@@ -54,7 +54,7 @@
                 />
                 <button class="delete-btn"
                         (click)="deleteTicket(column, ticket)"
-                        aria-label="Delete Ticket">x</button>
+                        [attr.aria-label]="'kanban.deleteTicket' | translate">x</button>
               </div>
             </div>
           </div>
@@ -66,13 +66,13 @@
   <div class="actions">
     <button class="add-ticket-btn"
             (click)="openAddTicketDialog()"
-            *ngIf="!editMode">+ New Ticket</button>
+            *ngIf="!editMode">{{ 'kanban.newTicket' | translate }}</button>
 
     <div class="add-column-form" *ngIf="editMode">
       <input [(ngModel)]="newColumnTitle"
-             placeholder="New Column Title"
+             [placeholder]="'kanban.columnTitle' | translate"
              (keyup.enter)="addColumn()">
-      <button (click)="addColumn()">+ New Column</button>
+      <button (click)="addColumn()">{{ 'kanban.newColumn' | translate }}</button>
     </div>
   </div>
 </div>

@@ -9,6 +9,8 @@ import { CalculatorTilesComponent } from '../calculator-tile/calculator-tiles.co
 import { SearchTilesComponent } from '../search-tile/search-tiles.component';
 import { KanbanTileComponent } from '../kanban-tile/kanban-tile.component';
 import { ConfigService } from '../../services/config.service';
+import { TranslationService } from '../../services/translation.service';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 @Component({
   selector: 'new-page-tiles-container',
@@ -23,6 +25,7 @@ import { ConfigService } from '../../services/config.service';
     KanbanTileComponent,
     NgIf,
     DragDropModule,
+    TranslatePipe,
   ],
 })
 export class TilesContainerComponent implements OnInit, OnDestroy {
@@ -31,22 +34,22 @@ export class TilesContainerComponent implements OnInit, OnDestroy {
   tiles: tileConfig[] = [
     {
       id: '0',
-      name: 'bookmarks',
+      name: 'tiles.bookmarks',
       tileType: TileType.Bookmarks,
     },
     {
       id: '1',
-      name: 'search',
+      name: 'tiles.search',
       tileType: TileType.Search,
     },
     {
       id: '2',
-      name: 'calculator',
+      name: 'tiles.calculator',
       tileType: TileType.Calculator,
     },
     {
       id: '3',
-      name: 'kanban',
+      name: 'tiles.kanban',
       tileType: TileType.Kanban,
     },
   ];
@@ -58,7 +61,10 @@ export class TilesContainerComponent implements OnInit, OnDestroy {
 
   private subscriptions = new Subscription();
 
-  constructor(private configService: ConfigService) {}
+  constructor(
+    private configService: ConfigService,
+    private translationService: TranslationService
+  ) {}
 
   ngOnInit() {
     const loadSub = this.configService.loadTilesConfig().subscribe({
@@ -144,7 +150,7 @@ export class TilesContainerComponent implements OnInit, OnDestroy {
   addTile(type: TileType) {
     const newTile: tileConfig = {
       id: Date.now().toString(),
-      name: this.getTileName(type),
+      name: this.getTileTranslationKey(type),
       tileType: type
     };
 
@@ -157,16 +163,31 @@ export class TilesContainerComponent implements OnInit, OnDestroy {
     this.subscriptions.add(saveSub);
   }
 
+  getTileTranslationKey(type: TileType): string {
+    switch (type) {
+      case TileType.Bookmarks:
+        return 'tiles.bookmarks';
+      case TileType.Search:
+        return 'tiles.search';
+      case TileType.Calculator:
+        return 'tiles.calculator';
+      case TileType.Kanban:
+        return 'tiles.kanban';
+      default:
+        return type;
+    }
+  }
+
   getTileName(type: TileType): string {
     switch (type) {
       case TileType.Bookmarks:
-        return 'Bookmarks';
+        return this.translationService.translate('tiles.bookmarks');
       case TileType.Search:
-        return 'Search';
+        return this.translationService.translate('tiles.search');
       case TileType.Calculator:
-        return 'Calculator';
+        return this.translationService.translate('tiles.calculator');
       case TileType.Kanban:
-        return 'Kanban Board';
+        return this.translationService.translate('tiles.kanban');
       default:
         return type;
     }

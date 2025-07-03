@@ -4,6 +4,9 @@ import { of } from 'rxjs';
 import { TilesContainerComponent } from './tiles-container.component';
 import { TileType } from '../../model/tiles';
 import { ConfigService } from '../../services/config.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TranslationService } from '../../services/translation.service';
+import { LanguageService } from '../../services/language.service';
 
 // Mock chrome API
 const mockChrome = {
@@ -22,6 +25,7 @@ describe('TilesContainerComponent', () => {
   let component: TilesContainerComponent;
   let fixture: ComponentFixture<TilesContainerComponent>;
   let mockConfigService: jest.Mocked<ConfigService>;
+  let mockTranslationService: Partial<TranslationService>;
 
   beforeEach(async () => {
     const configServiceSpy = {
@@ -29,10 +33,24 @@ describe('TilesContainerComponent', () => {
       saveTilesConfig: jest.fn().mockReturnValue(of(undefined))
     };
 
+    mockTranslationService = {
+      translate: jest.fn((key: string) => {
+        const translations: { [key: string]: string } = {
+          'tiles.bookmarks': 'Bookmarks',
+          'tiles.search': 'Search',
+          'tiles.calculator': 'Calculator',
+          'tiles.kanban': 'Kanban Board'
+        };
+        return translations[key] || key;
+      })
+    };
+
     await TestBed.configureTestingModule({
-      imports: [TilesContainerComponent],
+      imports: [TilesContainerComponent, HttpClientTestingModule],
       providers: [
-        { provide: ConfigService, useValue: configServiceSpy }
+        { provide: ConfigService, useValue: configServiceSpy },
+        { provide: TranslationService, useValue: mockTranslationService },
+        LanguageService
       ]
     }).compileComponents();
 
@@ -91,5 +109,23 @@ describe('TilesContainerComponent', () => {
       expect(component.tiles).not.toContain(tileToDelete);
       expect(mockConfigService.saveTilesConfig).toHaveBeenCalledWith(component.tiles);
     }
+  });
+
+  describe("Test tile translation keys", () => {
+    it('should return correct translation key for bookmarks', () => {
+      expect(component.getTileTranslationKey(TileType.Bookmarks)).toBe('tiles.bookmarks');
+    });
+
+    it('should return correct translation key for search', () => {
+      expect(component.getTileTranslationKey(TileType.Search)).toBe('tiles.search');
+    });
+
+    it('should return correct translation key for calculator', () => {
+      expect(component.getTileTranslationKey(TileType.Calculator)).toBe('tiles.calculator');
+    });
+
+    it('should return correct translation key for kanban', () => {
+      expect(component.getTileTranslationKey(TileType.Kanban)).toBe('tiles.kanban');
+    });
   });
 });

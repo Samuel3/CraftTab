@@ -2,12 +2,15 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BookmarkTilesComponent } from './bookmark-tiles.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TranslationService } from '../../services/translation.service';
+import { LanguageService } from '../../services/language.service';
 
 describe('BookmarkTilesComponent', () => {
   let component: BookmarkTilesComponent;
   let fixture: ComponentFixture<BookmarkTilesComponent>;
 
-  // Mock Chrome API
+  // Mock Chrome API  
   const mockChrome = {
     bookmarks: {
       getTree: jest.fn().mockImplementation((callback) => {
@@ -20,15 +23,23 @@ describe('BookmarkTilesComponent', () => {
       })
     },
     storage: {
+      local: {
+        get: jest.fn().mockImplementation((_, callback) => {
+          callback({ crafttab_language: 'en' });
+        }),
+        set: jest.fn().mockImplementation((_, callback) => {
+          if (callback) callback();
+        })
+      },
       sync: {
         get: jest.fn().mockImplementation((_, callback) => {
           callback({ bookmarkOrder: [] });
         }),
         set: jest.fn().mockImplementation((_, callback) => {
-          callback();
+          if (callback) callback();
         }),
         remove: jest.fn().mockImplementation((_, callback) => {
-          callback();
+          if (callback) callback();
         })
       }
     },
@@ -45,8 +56,10 @@ describe('BookmarkTilesComponent', () => {
       imports: [
         BookmarkTilesComponent,
         NoopAnimationsModule,
-        DragDropModule
-      ]
+        DragDropModule,
+        HttpClientTestingModule
+      ],
+      providers: [TranslationService, LanguageService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(BookmarkTilesComponent);

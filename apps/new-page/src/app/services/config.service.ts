@@ -12,9 +12,15 @@ export class ConfigService {
   saveTilesConfig(tiles: tileConfig[]): Observable<void> {
     return from(
       new Promise<void>((resolve) => {
-        chrome.storage.sync.set({ [this.STORAGE_KEY]: tiles }, () => {
+        if (typeof chrome !== 'undefined' && chrome.storage) {
+          chrome.storage.sync.set({ [this.STORAGE_KEY]: tiles }, () => {
+            resolve();
+          });
+        } else {
+          // Fallback to localStorage
+          localStorage.setItem(this.STORAGE_KEY, JSON.stringify(tiles));
           resolve();
-        });
+        }
       })
     );
   }
@@ -22,9 +28,15 @@ export class ConfigService {
   loadTilesConfig(): Observable<tileConfig[] | null> {
     return from(
       new Promise<{ [key: string]: any }>((resolve) => {
-        chrome.storage.sync.get([this.STORAGE_KEY], (result) => {
-          resolve(result);
-        });
+        if (typeof chrome !== 'undefined' && chrome.storage) {
+          chrome.storage.sync.get([this.STORAGE_KEY], (result) => {
+            resolve(result);
+          });
+        } else {
+          // Fallback to localStorage
+          const stored = localStorage.getItem(this.STORAGE_KEY);
+          resolve({ [this.STORAGE_KEY]: stored ? JSON.parse(stored) : null });
+        }
       })
     ).pipe(
       map(result => result[this.STORAGE_KEY] || null)

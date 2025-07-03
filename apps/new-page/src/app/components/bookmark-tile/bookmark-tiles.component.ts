@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Observable, from, Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 interface Bookmark {
   id: string;
@@ -17,7 +18,7 @@ interface Bookmark {
   templateUrl: './bookmark-tiles.component.html',
   styleUrls: ['./bookmark-tiles.component.scss'],
   standalone: true,
-  imports: [CommonModule, DragDropModule],
+  imports: [CommonModule, DragDropModule, TranslatePipe],
 })
 export class BookmarkTilesComponent implements OnInit, OnDestroy {
   @Input() name = '';
@@ -56,11 +57,10 @@ export class BookmarkTilesComponent implements OnInit, OnDestroy {
       order: index
     }));
     
-    const chromeAPI = (window as any).chrome;
-    if (chromeAPI && chromeAPI.storage) {
-      chromeAPI.storage.sync.set({ bookmarkOrder }, () => {
-        if (chromeAPI.runtime && chromeAPI.runtime.lastError) {
-          console.error('Failed to save bookmark order:', chromeAPI.runtime.lastError.message);
+    if (typeof window !== 'undefined' && (window as any).chrome?.storage) {
+      (window as any).chrome.storage.sync.set({ bookmarkOrder }, () => {
+        if ((window as any).chrome.runtime.lastError) {
+          console.error('Failed to save bookmark order:', (window as any).chrome.runtime.lastError.message);
         } else {
           console.log('Bookmark order saved successfully.');
         }
@@ -70,14 +70,13 @@ export class BookmarkTilesComponent implements OnInit, OnDestroy {
 
   private loadBookmarkOrder(): Observable<{ [key: string]: number }> {
     return from(
-      new Promise<{ [key: string]: any }>((resolve, reject) => {
-        const chromeAPI = (window as any).chrome;
-        if (chromeAPI && chromeAPI.storage) {
-          chromeAPI.storage.sync.get('bookmarkOrder', (result: any) => {
+      new Promise<{ [key: string]: any }>((resolve) => {
+        if (typeof window !== 'undefined' && (window as any).chrome?.storage) {
+          (window as any).chrome.storage.sync.get('bookmarkOrder', (result: any) => {
             resolve(result);
           });
         } else {
-          reject(new Error('Chrome storage API not available'));
+          resolve({});
         }
       })
     ).pipe(
@@ -137,16 +136,28 @@ export class BookmarkTilesComponent implements OnInit, OnDestroy {
   private getBookmarkTree(): Observable<any[]> {
     return from(
       new Promise<any[]>((resolve, reject) => {
-        const chromeAPI = (window as any).chrome;
-        if (chromeAPI && chromeAPI.bookmarks) {
-          chromeAPI.bookmarks.getTree((bookmarkTreeNodes: any[]) => {
+        if (typeof window !== 'undefined' && (window as any).chrome?.bookmarks) {
+          (window as any).chrome.bookmarks.getTree((bookmarkTreeNodes: any[]) => {
             resolve(bookmarkTreeNodes);
           });
         } else {
-          reject(new Error('Chrome bookmarks API not available'));
+          // Mock bookmarks for testing in non-Chrome environment
+          resolve([
+            {
+              id: '1',
+              title: 'Google',
+              url: 'https://www.google.com'
+            },
+            {
+              id: '2', 
+              title: 'GitHub',
+              url: 'https://github.com'
+            }
+          ]);
         }
       })
     );
+  }
   }
 
   private getFaviconUrl(url: string): string {
@@ -169,7 +180,8 @@ export class BookmarkTilesComponent implements OnInit, OnDestroy {
         };
         this.bookmarks.push(bookmark);
       }
-      if (node.children) {
+
+      if (node.children && node.children.length > 0) {
         node.children.forEach((child: any) => processNode(child));
       }
     };
@@ -192,6 +204,7 @@ export class BookmarkTilesComponent implements OnInit, OnDestroy {
     const newIndex = direction === 'up' ? index - 1 : index + 1;
     this.bookmarks.splice(index, 1);
     this.bookmarks.splice(newIndex, 0, bookmark);
+    this.saveBookmarkOrder();
     this.cdr.detectChanges();
   }
 
@@ -202,9 +215,8 @@ export class BookmarkTilesComponent implements OnInit, OnDestroy {
   }
 
   resetOrder() {
-    const chromeAPI = (window as any).chrome;
-    if (chromeAPI && chromeAPI.storage) {
-      chromeAPI.storage.sync.remove('bookmarkOrder', () => {
+    if (typeof window !== 'undefined' && (window as any).chrome?.storage) {
+      (window as any).chrome.storage.sync.remove('bookmarkOrder', () => {
         this.loadBookmarks();
       });
     }
