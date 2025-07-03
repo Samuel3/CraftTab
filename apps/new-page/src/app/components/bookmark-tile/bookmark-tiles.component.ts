@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 interface Bookmark {
   id: string;
@@ -15,7 +16,7 @@ interface Bookmark {
   templateUrl: './bookmark-tiles.component.html',
   styleUrls: ['./bookmark-tiles.component.scss'],
   standalone: true,
-  imports: [CommonModule, DragDropModule],
+  imports: [CommonModule, DragDropModule, TranslatePipe],
 })
 export class BookmarkTilesComponent implements OnInit {
   @Input() name = '';
@@ -47,56 +48,82 @@ export class BookmarkTilesComponent implements OnInit {
       id: bookmark.id,
       order: index
     }));
-    chrome.storage.sync.set({ bookmarkOrder }, () => {
-      if (chrome.runtime.lastError) {
-        console.error('Failed to save bookmark order:', chrome.runtime.lastError.message);
-      } else {
-        console.log('Bookmark order saved successfully.');
-      }
-    });
+    
+    if (typeof window !== 'undefined' && (window as any).chrome?.storage) {
+      (window as any).chrome.storage.sync.set({ bookmarkOrder }, () => {
+        if ((window as any).chrome.runtime.lastError) {
+          console.error('Failed to save bookmark order:', (window as any).chrome.runtime.lastError.message);
+        } else {
+          console.log('Bookmark order saved successfully.');
+        }
+      });
+    }
   }
 
-  private loadBookmarkOrder(): Promise<{ [key: string]: number }> {
+  private async loadBookmarkOrder(): Promise<{ [key: string]: number }> {
     return new Promise((resolve) => {
-      chrome.storage.sync.get('bookmarkOrder', (result) => {
-        const orderMap: { [key: string]: number } = {};
-        if (result['bookmarkOrder']) {
-          result['bookmarkOrder'].forEach((item: { id: string; order: number }) => {
-            orderMap[item.id] = item.order;
-          });
-        }
-        resolve(orderMap);
-      });
+      if (typeof window !== 'undefined' && (window as any).chrome?.storage) {
+        (window as any).chrome.storage.sync.get('bookmarkOrder', (result: any) => {
+          const orderMap: { [key: string]: number } = {};
+          if (result['bookmarkOrder']) {
+            result['bookmarkOrder'].forEach((item: { id: string; order: number }) => {
+              orderMap[item.id] = item.order;
+            });
+          }
+          resolve(orderMap);
+        });
+      } else {
+        resolve({});
+      }
     });
   }
 
   private loadBookmarks() {
-    chrome.bookmarks.getTree(async (bookmarkTreeNodes) => {
-      this.bookmarks = [];
-      await this.processBookmarkNodes(bookmarkTreeNodes);
-      const orderMap = await this.loadBookmarkOrder();
-      // Sortiere Bookmarks nach gespeicherter Reihenfolge
-      if (Object.keys(orderMap).length > 0) {
-        // Erstelle ein temporäres Array mit der korrekten Reihenfolge
-        const sortedBookmarks: Bookmark[] = [];
-        const maxOrder = Math.max(...Object.values(orderMap));
-        // Füge Bookmarks in der gespeicherten Reihenfolge hinzu
-        for (let i = 0; i <= maxOrder; i++) {
-          const bookmark = this.bookmarks.find(b => orderMap[b.id] === i);
-          if (bookmark) {
-            sortedBookmarks.push(bookmark);
+    if (typeof window !== 'undefined' && (window as any).chrome?.bookmarks) {
+      (window as any).chrome.bookmarks.getTree(async (bookmarkTreeNodes: any) => {
+        this.bookmarks = [];
+        await this.processBookmarkNodes(bookmarkTreeNodes);
+        const orderMap = await this.loadBookmarkOrder();
+        // Sortiere Bookmarks nach gespeicherter Reihenfolge
+        if (Object.keys(orderMap).length > 0) {
+          // Erstelle ein temporäres Array mit der korrekten Reihenfolge
+          const sortedBookmarks: Bookmark[] = [];
+          const maxOrder = Math.max(...Object.values(orderMap));
+          // Füge Bookmarks in der gespeicherten Reihenfolge hinzu
+          for (let i = 0; i <= maxOrder; i++) {
+            const bookmark = this.bookmarks.find(b => orderMap[b.id] === i);
+            if (bookmark) {
+              sortedBookmarks.push(bookmark);
+            }
           }
+          // Füge verbleibende Bookmarks am Ende hinzu
+          this.bookmarks.forEach(bookmark => {
+            if (!sortedBookmarks.includes(bookmark)) {
+              sortedBookmarks.push(bookmark);
+            }
+          });
+          this.bookmarks = sortedBookmarks;
         }
-        // Füge verbleibende Bookmarks am Ende hinzu
-        this.bookmarks.forEach(bookmark => {
-          if (!sortedBookmarks.includes(bookmark)) {
-            sortedBookmarks.push(bookmark);
-          }
-        });
-        this.bookmarks = sortedBookmarks;
-      }
+        this.cdr.detectChanges();
+      });
+    } else {
+      // Mock bookmarks for testing in non-Chrome environment
+      this.bookmarks = [
+        {
+          id: '1',
+          title: 'Google',
+          url: 'https://www.google.com',
+          favicon: this.getFaviconUrl('https://www.google.com')
+        },
+        {
+          id: '2', 
+          title: 'GitHub',
+          url: 'https://github.com',
+          favicon: this.getFaviconUrl('https://github.com')
+        }
+      ];
       this.cdr.detectChanges();
-    });
+    }
   }
 
   private getFaviconUrl(url: string): string {
@@ -108,7 +135,7 @@ export class BookmarkTilesComponent implements OnInit {
     }
   }
 
-  private async processBookmarkNodes(nodes: chrome.bookmarks.BookmarkTreeNode[]) {
+  private async processBookmarkNodes(nodes: any[]) {
     for (const node of nodes) {
       if (node.url) {
         const bookmark: Bookmark = {
@@ -119,7 +146,8 @@ export class BookmarkTilesComponent implements OnInit {
         };
         this.bookmarks.push(bookmark);
       }
-      if (node.children) {
+
+      if (node.children && node.children.length > 0) {
         await this.processBookmarkNodes(node.children);
       }
     }
@@ -139,6 +167,7 @@ export class BookmarkTilesComponent implements OnInit {
     const newIndex = direction === 'up' ? index - 1 : index + 1;
     this.bookmarks.splice(index, 1);
     this.bookmarks.splice(newIndex, 0, bookmark);
+    this.saveBookmarkOrder();
     this.cdr.detectChanges();
   }
 
@@ -149,8 +178,10 @@ export class BookmarkTilesComponent implements OnInit {
   }
 
   resetOrder() {
-    chrome.storage.sync.remove('bookmarkOrder', () => {
-      this.loadBookmarks();
-    });
+    if (typeof window !== 'undefined' && (window as any).chrome?.storage) {
+      (window as any).chrome.storage.sync.remove('bookmarkOrder', () => {
+        this.loadBookmarks();
+      });
+    }
   }
 }
