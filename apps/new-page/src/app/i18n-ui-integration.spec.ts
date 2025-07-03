@@ -10,7 +10,6 @@ describe('I18n UI Integration Tests', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let translationService: TranslationService;
-  let languageService: LanguageService;
   let httpMock: HttpTestingController;
 
   const englishTranslations = {
@@ -39,7 +38,6 @@ describe('I18n UI Integration Tests', () => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
     translationService = TestBed.inject(TranslationService);
-    languageService = TestBed.inject(LanguageService);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
@@ -48,6 +46,10 @@ describe('I18n UI Integration Tests', () => {
   });
 
   it('should create the app component', () => {
+    // Handle the automatic English request that happens on service construction
+    const req = httpMock.expectOne('assets/i18n/en.json');
+    req.flush(englishTranslations);
+    
     expect(component).toBeTruthy();
   });
 

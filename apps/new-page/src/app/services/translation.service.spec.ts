@@ -45,13 +45,18 @@ describe('TranslationService', () => {
     req.flush({});
   });
 
-  it('should load translations', () => {
+  it('should load translations', (done) => {
     const mockTranslations = { 'app.title': 'My start page' };
+    
+    service.translations$.subscribe(translations => {
+      if (Object.keys(translations).length > 0) {
+        expect(service.isLoaded()).toBe(true);
+        done();
+      }
+    });
     
     const req = httpMock.expectOne('assets/i18n/en.json');
     req.flush(mockTranslations);
-
-    expect(service.isLoaded()).toBe(true);
   });
 
   it('should return key when no translation found', () => {
@@ -77,13 +82,18 @@ describe('TranslationService', () => {
     expect(service.instant('test.key')).toBe(service.translate('test.key'));
   });
 
-  it('should track loaded state', () => {
+  it('should track loaded state', (done) => {
     expect(service.isLoaded()).toBe(false);
+    
+    service.translations$.subscribe(translations => {
+      if (Object.keys(translations).length > 0) {
+        expect(service.isLoaded()).toBe(true);
+        done();
+      }
+    });
     
     const req = httpMock.expectOne('assets/i18n/en.json');
     req.flush({ 'app.title': 'My start page' });
-
-    expect(service.isLoaded()).toBe(true);
   });
 
   it('should emit translations observable', (done) => {
