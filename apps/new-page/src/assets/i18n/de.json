@@ -18,8 +18,9 @@
   "kanban.columnTitle": "Spaltentitel",
   "kanban.deleteColumn": "Spalte löschen",
   "kanban.deleteTicket": "Ticket löschen",
+  "kanban.newColumn": "+ Neue Spalte",
   "search.placeholder": "Suchen...",
   "search.go": "Los",
-  "Ticket Title": "Ticket-Titel",
-  "Title is required": "Titel ist erforderlich"
+  "ticket.title": "Ticket-Titel",
+  "ticket.required": "Titel ist erforderlich"
 }

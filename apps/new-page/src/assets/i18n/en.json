@@ -18,8 +18,9 @@
   "kanban.columnTitle": "Column Title",
   "kanban.deleteColumn": "Delete Column",
   "kanban.deleteTicket": "Delete Ticket",
+  "kanban.newColumn": "+ New Column",
   "search.placeholder": "Search...",
   "search.go": "Go",
-  "Ticket Title": "Ticket Title",
-  "Title is required": "Title is required"
+  "ticket.title": "Ticket Title",
+  "ticket.required": "Title is required"
 }

@@ -35,7 +35,6 @@ export class TranslationService {
       this.translations = translations;
       this.translationsLoaded = true;
       this.translationsSubject.next(translations);
-      console.log('Translations loaded for', language, ':', translations);
     } catch (error) {
       console.warn(`Failed to load translations for language: ${language}`, error);
       // Fallback to English if other language fails
@@ -53,26 +52,11 @@ export class TranslationService {
   }
 
   private getFallbackTranslations(): { [key: string]: any } {
+    // Minimal fallback for essential translations if HTTP loading fails
     return {
       'app.title': 'My start page',
       'app.edit': 'Change',
-      'app.save': 'Save',
-      'tiles.addTile': 'Add tile',
-      'tiles.selectTile': 'Select tile',
-      'tiles.bookmarks': 'Bookmarks',
-      'tiles.search': 'Search',
-      'tiles.calculator': 'Calculator',
-      'tiles.kanban': 'Kanban Board',
-      'common.close': 'Close',
-      'common.delete': 'Delete',
-      'common.go': 'Go',
-      'common.edit': 'Edit',
-      'kanban.newTicket': '+ New Ticket',
-      'kanban.done': 'Done',
-      'kanban.addTicket': 'Add Ticket',
-      'kanban.columnTitle': 'Column Title',
-      'kanban.deleteColumn': 'Delete Column',
-      'kanban.deleteTicket': 'Delete Ticket'
+      'app.save': 'Save'
     };
   }
 
@@ -82,6 +66,7 @@ export class TranslationService {
     }
 
     let translation = this.getNestedTranslation(key, this.translations) || key;
+    
     
     // Replace parameters if provided
     if (params) {
@@ -101,6 +86,12 @@ export class TranslationService {
   }
 
   private getNestedTranslation(key: string, translations: any): string | null {
+    // First try direct lookup for flat keys like 'app.title'
+    if (key in translations) {
+      return translations[key];
+    }
+    
+    // If not found, try nested object lookup
     const keys = key.split('.');
     let current = translations;
     

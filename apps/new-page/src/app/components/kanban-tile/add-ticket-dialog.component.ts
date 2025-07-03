@@ -14,10 +14,10 @@ import { TranslatePipe } from '../../pipes/translate.pipe';
     <mat-dialog-content>
       <mat-form-field class="full-width">
         <input matInput 
-               [placeholder]="'Ticket Title' | translate" 
+               [placeholder]="'ticket.title' | translate" 
                [formControl]="titleControl"
                (keyup.enter)="onSubmit()">
-        <mat-error *ngIf="titleControl.hasError('required')">{{ 'Title is required' | translate }}</mat-error>
+        <mat-error *ngIf="titleControl.hasError('required')">{{ 'ticket.required' | translate }}</mat-error>
       </mat-form-field>
     </mat-dialog-content>
     <mat-dialog-actions class="dialog-actions">

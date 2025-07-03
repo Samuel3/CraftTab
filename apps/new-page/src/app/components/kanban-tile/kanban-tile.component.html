@@ -72,7 +72,7 @@
       <input [(ngModel)]="newColumnTitle"
              [placeholder]="'kanban.columnTitle' | translate"
              (keyup.enter)="addColumn()">
-      <button (click)="addColumn()">+ New Column</button>
+      <button (click)="addColumn()">{{ 'kanban.newColumn' | translate }}</button>
     </div>
   </div>
 </div>

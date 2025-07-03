@@ -33,22 +33,22 @@ export class TilesContainerComponent implements OnInit {
   tiles: tileConfig[] = [
     {
       id: '0',
-      name: 'bookmarks',
+      name: 'tiles.bookmarks',
       tileType: TileType.Bookmarks,
     },
     {
       id: '1',
-      name: 'search',
+      name: 'tiles.search',
       tileType: TileType.Search,
     },
     {
       id: '2',
-      name: 'calculator',
+      name: 'tiles.calculator',
       tileType: TileType.Calculator,
     },
     {
       id: '3',
-      name: 'kanban',
+      name: 'tiles.kanban',
       tileType: TileType.Kanban,
     },
   ];
@@ -126,7 +126,7 @@ export class TilesContainerComponent implements OnInit {
   async addTile(type: TileType) {
     const newTile: tileConfig = {
       id: Date.now().toString(),
-      name: this.getTileName(type),
+      name: this.getTileTranslationKey(type),
       tileType: type
     };
 
@@ -134,6 +134,21 @@ export class TilesContainerComponent implements OnInit {
     this.updateTileRows();
     await this.configService.saveTilesConfig(this.tiles);
     this.closeTileSelection();
+  }
+
+  getTileTranslationKey(type: TileType): string {
+    switch (type) {
+      case TileType.Bookmarks:
+        return 'tiles.bookmarks';
+      case TileType.Search:
+        return 'tiles.search';
+      case TileType.Calculator:
+        return 'tiles.calculator';
+      case TileType.Kanban:
+        return 'tiles.kanban';
+      default:
+        return type;
+    }
   }
 
   getTileName(type: TileType): string {

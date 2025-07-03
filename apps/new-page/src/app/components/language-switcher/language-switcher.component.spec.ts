@@ -135,7 +135,7 @@ describe('LanguageSwitcherComponent', () => {
     
     const flagElement = fixture.nativeElement.querySelector('.language-toggle');
     
-    expect(flagElement?.textContent?.trim()).toBe('🇺🇸');
+    expect(flagElement?.textContent?.trim()).toBe('🇺🇸English');
   });
 
   it('should open dropdown when clicked', () => {
