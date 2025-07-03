@@ -42,6 +42,21 @@ describe('TilesContainerComponent', () => {
           'tiles.kanban': 'Kanban Board'
         };
         return translations[key] || key;
+      }),
+      instant: jest.fn((key: string) => {
+        const translations: { [key: string]: string } = {
+          'tiles.bookmarks': 'Bookmarks',
+          'tiles.search': 'Search',
+          'tiles.calculator': 'Calculator',
+          'tiles.kanban': 'Kanban Board'
+        };
+        return translations[key] || key;
+      }),
+      translations$: of({
+        'tiles.bookmarks': 'Bookmarks',
+        'tiles.search': 'Search',
+        'tiles.calculator': 'Calculator',
+        'tiles.kanban': 'Kanban Board'
       })
     };
 

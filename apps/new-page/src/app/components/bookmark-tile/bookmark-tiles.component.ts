@@ -135,7 +135,7 @@ export class BookmarkTilesComponent implements OnInit, OnDestroy {
 
   private getBookmarkTree(): Observable<any[]> {
     return from(
-      new Promise<any[]>((resolve, reject) => {
+      new Promise<any[]>((resolve) => {
         if (typeof window !== 'undefined' && (window as any).chrome?.bookmarks) {
           (window as any).chrome.bookmarks.getTree((bookmarkTreeNodes: any[]) => {
             resolve(bookmarkTreeNodes);
@@ -157,7 +157,6 @@ export class BookmarkTilesComponent implements OnInit, OnDestroy {
         }
       })
     );
-  }
   }
 
   private getFaviconUrl(url: string): string {
