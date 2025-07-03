@@ -43,6 +43,7 @@ Thumbs.db
 extension/
 
 .angular
+.nx
 
 extension/pages
 extension/scripts

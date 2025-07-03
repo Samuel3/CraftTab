@@ -1,6 +1,7 @@
 import { NgForOf, NgIf } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Subscription } from 'rxjs';
 
 import { tileConfig, TileType } from '../../model/tiles';
 import { BookmarkTilesComponent } from '../bookmark-tile/bookmark-tiles.component';
@@ -27,7 +28,7 @@ import { TranslatePipe } from '../../pipes/translate.pipe';
     TranslatePipe,
   ],
 })
-export class TilesContainerComponent implements OnInit {
+export class TilesContainerComponent implements OnInit, OnDestroy {
   @Input() editMode = false;
 
   tiles: tileConfig[] = [
@@ -58,17 +59,31 @@ export class TilesContainerComponent implements OnInit {
   tileRows: tileConfig[][] = [[]];
   maxTilesPerRow = 3;
 
+  private subscriptions = new Subscription();
+
   constructor(
     private configService: ConfigService,
     private translationService: TranslationService
   ) {}
 
-  async ngOnInit() {
-    const savedConfig = await this.configService.loadTilesConfig();
-    if (savedConfig) {
-      this.tiles = savedConfig;
-    }
-    this.updateTileRows();
+  ngOnInit() {
+    const loadSub = this.configService.loadTilesConfig().subscribe({
+      next: (savedConfig) => {
+        if (savedConfig) {
+          this.tiles = savedConfig;
+        }
+        this.updateTileRows();
+      },
+      error: (error) => {
+        console.error('Failed to load tiles config:', error);
+        this.updateTileRows();
+      }
+    });
+    this.subscriptions.add(loadSub);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   private updateTileRows() {
@@ -88,13 +103,16 @@ export class TilesContainerComponent implements OnInit {
     }
   }
 
-  async onDrop(event: CdkDragDrop<tileConfig[][]>) {
+  onDrop(event: CdkDragDrop<tileConfig[][]>) {
     moveItemInArray(this.tileRows, event.previousIndex, event.currentIndex);
     this.tiles = this.tileRows.flat();
-    await this.configService.saveTilesConfig(this.tiles);
+    const saveSub = this.configService.saveTilesConfig(this.tiles).subscribe({
+      error: (error) => console.error('Failed to save tiles config:', error)
+    });
+    this.subscriptions.add(saveSub);
   }
 
-  async onRowDrop(event: CdkDragDrop<tileConfig[]>) {
+  onRowDrop(event: CdkDragDrop<tileConfig[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -106,13 +124,19 @@ export class TilesContainerComponent implements OnInit {
       );
     }
     this.tiles = this.tileRows.flat();
-    await this.configService.saveTilesConfig(this.tiles);
+    const saveSub = this.configService.saveTilesConfig(this.tiles).subscribe({
+      error: (error) => console.error('Failed to save tiles config:', error)
+    });
+    this.subscriptions.add(saveSub);
   }
 
-  async deleteTile(tile: tileConfig) {
+  deleteTile(tile: tileConfig) {
     this.tiles = this.tiles.filter(t => t.id !== tile.id);
     this.updateTileRows();
-    await this.configService.saveTilesConfig(this.tiles);
+    const saveSub = this.configService.saveTilesConfig(this.tiles).subscribe({
+      error: (error) => console.error('Failed to save tiles config:', error)
+    });
+    this.subscriptions.add(saveSub);
   }
 
   openTileSelection() {
@@ -123,7 +147,7 @@ export class TilesContainerComponent implements OnInit {
     this.showTileSelection = false;
   }
 
-  async addTile(type: TileType) {
+  addTile(type: TileType) {
     const newTile: tileConfig = {
       id: Date.now().toString(),
       name: this.getTileTranslationKey(type),
@@ -132,8 +156,11 @@ export class TilesContainerComponent implements OnInit {
 
     this.tiles.push(newTile);
     this.updateTileRows();
-    await this.configService.saveTilesConfig(this.tiles);
-    this.closeTileSelection();
+    const saveSub = this.configService.saveTilesConfig(this.tiles).subscribe({
+      next: () => this.closeTileSelection(),
+      error: (error) => console.error('Failed to save tiles config:', error)
+    });
+    this.subscriptions.add(saveSub);
   }
 
   getTileTranslationKey(type: TileType): string {

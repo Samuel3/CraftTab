@@ -49,8 +49,8 @@ describe('BookmarkTilesComponent', () => {
   };
 
   beforeEach(async () => {
-    // Setze Chrome Mock global
-    (window as any).chrome = mockChrome;
+    // Set Chrome Mock globally
+    (global as any).chrome = mockChrome;
 
     await TestBed.configureTestingModule({
       imports: [
@@ -67,6 +67,10 @@ describe('BookmarkTilesComponent', () => {
     fixture.detectChanges();
   });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -81,5 +85,11 @@ describe('BookmarkTilesComponent', () => {
     expect(component.isEditing).toBeTruthy();
     component.toggleEditMode();
     expect(component.isEditing).toBeFalsy();
+  });
+
+  it('should unsubscribe on destroy', () => {
+    const unsubscribeSpy = jest.spyOn(component['subscriptions'], 'unsubscribe');
+    component.ngOnDestroy();
+    expect(unsubscribeSpy).toHaveBeenCalled();
   });
 });
