@@ -1,0 +1,21 @@
+{
+  "run": {
+    "command": "nx test new-page --passWithNoTests",
+    "startTime": "2025-07-03T09:38:51.952Z",
+    "endTime": "2025-07-03T09:39:04.079Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "new-page:test",
+      "target": "test",
+      "projectName": "new-page",
+      "hash": "11649782324896711751",
+      "startTime": "2025-07-03T09:38:51.961Z",
+      "endTime": "2025-07-03T09:39:04.078Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    }
+  ]
+}

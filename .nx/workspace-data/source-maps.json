@@ -1,0 +1,1462 @@
+{
+  "apps/devtools-panel": {
+    "root": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "name": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "$schema": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "projectType": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "prefix": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "tags.type:app": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.executor": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.outputs": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.defaultConfiguration": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.outputPath": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.index": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.main": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.polyfills": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.tsConfig": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.inlineStyleLanguage": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.assets": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.styles": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.scripts": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production.budgets": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production.outputHashing": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.buildOptimizer": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.optimization": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.vendorChunk": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.extractLicenses": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.sourceMap": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.namedChunks": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.executor": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.defaultConfiguration": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production.browserTarget": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development.browserTarget": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.extract-i18n": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.extract-i18n.executor": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.extract-i18n.options": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.extract-i18n.options.browserTarget": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.executor": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.outputs": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options.lintFilePatterns": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.executor": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.outputs": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.configurations": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options.jestConfig": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options.passWithNoTests": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.configurations.ci": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.configurations.ci.ci": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.configurations.ci.codeCoverage": [
+      "apps/devtools-panel/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.dependsOn": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ]
+  },
+  "apps/new-page": {
+    "root": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "name": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "$schema": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "projectType": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "prefix": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "tags.type:app": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.executor": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.outputs": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.defaultConfiguration": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.outputPath": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.index": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.main": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.polyfills": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.tsConfig": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.inlineStyleLanguage": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.assets": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.styles": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.scripts": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production.budgets": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production.outputHashing": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.buildOptimizer": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.optimization": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.vendorChunk": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.extractLicenses": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.sourceMap": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.namedChunks": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.executor": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.defaultConfiguration": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production.browserTarget": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development.browserTarget": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.extract-i18n": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.extract-i18n.executor": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.extract-i18n.options": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.extract-i18n.options.browserTarget": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.executor": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.outputs": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options.lintFilePatterns": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.executor": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.outputs": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.configurations": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options.jestConfig": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options.passWithNoTests": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.configurations.ci": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.configurations.ci.ci": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.configurations.ci.codeCoverage": [
+      "apps/new-page/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.dependsOn": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ]
+  },
+  "apps/options": {
+    "root": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "name": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "$schema": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "projectType": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "prefix": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "tags.type:app": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.executor": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.outputs": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.defaultConfiguration": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.outputPath": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.index": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.main": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.polyfills": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.tsConfig": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.inlineStyleLanguage": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.assets": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.styles": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.scripts": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production.budgets": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production.outputHashing": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.buildOptimizer": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.optimization": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.vendorChunk": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.extractLicenses": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.sourceMap": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.namedChunks": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.executor": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.defaultConfiguration": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production.browserTarget": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development.browserTarget": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.extract-i18n": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.extract-i18n.executor": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.extract-i18n.options": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.extract-i18n.options.browserTarget": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.executor": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.outputs": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options.lintFilePatterns": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.executor": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.outputs": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.configurations": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options.jestConfig": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options.passWithNoTests": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.configurations.ci": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.configurations.ci.ci": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.configurations.ci.codeCoverage": [
+      "apps/options/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.dependsOn": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ]
+  },
+  "apps/popup": {
+    "root": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "name": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "$schema": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "projectType": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "prefix": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "tags.type:app": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.executor": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.outputs": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.defaultConfiguration": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.outputPath": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.index": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.main": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.polyfills": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.tsConfig": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.inlineStyleLanguage": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.assets": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.styles": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.scripts": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production.budgets": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production.outputHashing": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.buildOptimizer": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.optimization": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.vendorChunk": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.extractLicenses": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.sourceMap": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.development.namedChunks": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.executor": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.defaultConfiguration": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production.browserTarget": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development.browserTarget": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.extract-i18n": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.extract-i18n.executor": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.extract-i18n.options": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.extract-i18n.options.browserTarget": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.executor": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.outputs": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options.lintFilePatterns": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.executor": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.outputs": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.configurations": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options.jestConfig": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options.passWithNoTests": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.configurations.ci": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.configurations.ci.ci": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.configurations.ci.codeCoverage": [
+      "apps/popup/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.dependsOn": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ]
+  },
+  "apps/scripts/background": {
+    "root": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "name": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "$schema": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "projectType": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "tags.type:script": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.executor": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.outputs": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.defaultConfiguration": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.outputPath": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.compiler": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.index": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.main": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.tsConfig": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.generateIndexHtml": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.webpackConfig": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production.optimization": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production.outputHashing": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production.sourceMap": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production.namedChunks": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production.extractLicenses": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production.vendorChunk": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.executor": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.options": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.options.buildTarget": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production.buildTarget": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.executor": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.outputs": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options.lintFilePatterns": [
+      "apps/scripts/background/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.dependsOn": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ]
+  },
+  "apps/scripts/content": {
+    "root": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "name": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "$schema": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "projectType": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "tags.type:script": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.executor": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.outputs": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.defaultConfiguration": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.outputPath": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.compiler": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.index": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.main": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.tsConfig": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.generateIndexHtml": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.webpackConfig": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production.optimization": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production.outputHashing": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production.sourceMap": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production.namedChunks": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production.extractLicenses": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production.vendorChunk": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.executor": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.options": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.options.buildTarget": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production.buildTarget": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.executor": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.outputs": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options.lintFilePatterns": [
+      "apps/scripts/content/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.dependsOn": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ]
+  }
+}
