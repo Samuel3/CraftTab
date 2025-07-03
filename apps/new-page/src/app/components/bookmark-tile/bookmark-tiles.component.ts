@@ -1,6 +1,8 @@
-import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Observable, from, Subscription } from 'rxjs';
+import { map, mergeMap, switchMap } from 'rxjs/operators';
 
 interface Bookmark {
   id: string;
@@ -17,16 +19,22 @@ interface Bookmark {
   standalone: true,
   imports: [CommonModule, DragDropModule],
 })
-export class BookmarkTilesComponent implements OnInit {
+export class BookmarkTilesComponent implements OnInit, OnDestroy {
   @Input() name = '';
   @Input() editMode = false;
   bookmarks: Bookmark[] = [];
   isEditing = false;
 
+  private subscriptions = new Subscription();
+
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.loadBookmarks();
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   toggleEditMode() {
@@ -56,47 +64,75 @@ export class BookmarkTilesComponent implements OnInit {
     });
   }
 
-  private loadBookmarkOrder(): Promise<{ [key: string]: number }> {
-    return new Promise((resolve) => {
-      chrome.storage.sync.get('bookmarkOrder', (result) => {
+  private loadBookmarkOrder(): Observable<{ [key: string]: number }> {
+    return from(
+      new Promise<{ [key: string]: any }>((resolve) => {
+        chrome.storage.sync.get('bookmarkOrder', (result) => {
+          resolve(result);
+        });
+      })
+    ).pipe(
+      map(result => {
         const orderMap: { [key: string]: number } = {};
         if (result['bookmarkOrder']) {
           result['bookmarkOrder'].forEach((item: { id: string; order: number }) => {
             orderMap[item.id] = item.order;
           });
         }
-        resolve(orderMap);
-      });
-    });
+        return orderMap;
+      })
+    );
   }
 
   private loadBookmarks() {
-    chrome.bookmarks.getTree(async (bookmarkTreeNodes) => {
-      this.bookmarks = [];
-      await this.processBookmarkNodes(bookmarkTreeNodes);
-      const orderMap = await this.loadBookmarkOrder();
-      // Sortiere Bookmarks nach gespeicherter Reihenfolge
-      if (Object.keys(orderMap).length > 0) {
-        // Erstelle ein temporäres Array mit der korrekten Reihenfolge
-        const sortedBookmarks: Bookmark[] = [];
-        const maxOrder = Math.max(...Object.values(orderMap));
-        // Füge Bookmarks in der gespeicherten Reihenfolge hinzu
-        for (let i = 0; i <= maxOrder; i++) {
-          const bookmark = this.bookmarks.find(b => orderMap[b.id] === i);
-          if (bookmark) {
-            sortedBookmarks.push(bookmark);
+    const bookmarksSub = this.getBookmarkTree()
+      .pipe(
+        switchMap((bookmarkTreeNodes) => {
+          this.bookmarks = [];
+          return this.processBookmarkNodes(bookmarkTreeNodes).pipe(
+            switchMap(() => this.loadBookmarkOrder())
+          );
+        })
+      )
+      .subscribe({
+        next: (orderMap) => {
+          // Sort bookmarks according to saved order
+          if (Object.keys(orderMap).length > 0) {
+            const sortedBookmarks: Bookmark[] = [];
+            const maxOrder = Math.max(...Object.values(orderMap));
+            // Add bookmarks in saved order
+            for (let i = 0; i <= maxOrder; i++) {
+              const bookmark = this.bookmarks.find(b => orderMap[b.id] === i);
+              if (bookmark) {
+                sortedBookmarks.push(bookmark);
+              }
+            }
+            // Add remaining bookmarks at the end
+            this.bookmarks.forEach(bookmark => {
+              if (!sortedBookmarks.includes(bookmark)) {
+                sortedBookmarks.push(bookmark);
+              }
+            });
+            this.bookmarks = sortedBookmarks;
           }
+          this.cdr.detectChanges();
+        },
+        error: (error) => {
+          console.error('Failed to load bookmarks:', error);
+          this.cdr.detectChanges();
         }
-        // Füge verbleibende Bookmarks am Ende hinzu
-        this.bookmarks.forEach(bookmark => {
-          if (!sortedBookmarks.includes(bookmark)) {
-            sortedBookmarks.push(bookmark);
-          }
+      });
+    this.subscriptions.add(bookmarksSub);
+  }
+
+  private getBookmarkTree(): Observable<chrome.bookmarks.BookmarkTreeNode[]> {
+    return from(
+      new Promise<chrome.bookmarks.BookmarkTreeNode[]>((resolve) => {
+        chrome.bookmarks.getTree((bookmarkTreeNodes) => {
+          resolve(bookmarkTreeNodes);
         });
-        this.bookmarks = sortedBookmarks;
-      }
-      this.cdr.detectChanges();
-    });
+      })
+    );
   }
 
   private getFaviconUrl(url: string): string {
@@ -108,21 +144,25 @@ export class BookmarkTilesComponent implements OnInit {
     }
   }
 
-  private async processBookmarkNodes(nodes: chrome.bookmarks.BookmarkTreeNode[]) {
-    for (const node of nodes) {
-      if (node.url) {
-        const bookmark: Bookmark = {
-          id: node.id,
-          title: node.title || 'Unbenannt',
-          url: node.url,
-          favicon: this.getFaviconUrl(node.url)
-        };
-        this.bookmarks.push(bookmark);
-      }
-      if (node.children) {
-        await this.processBookmarkNodes(node.children);
-      }
-    }
+  private processBookmarkNodes(nodes: chrome.bookmarks.BookmarkTreeNode[]): Observable<void> {
+    return from(nodes).pipe(
+      mergeMap((node) => {
+        if (node.url) {
+          const bookmark: Bookmark = {
+            id: node.id,
+            title: node.title || 'Unbenannt',
+            url: node.url,
+            favicon: this.getFaviconUrl(node.url)
+          };
+          this.bookmarks.push(bookmark);
+        }
+        if (node.children) {
+          return this.processBookmarkNodes(node.children);
+        }
+        return from([undefined]);
+      }),
+      map(() => void 0)
+    );
   }
 
   moveBookmark(index: number, direction: 'up' | 'down') {
