@@ -46,7 +46,7 @@
     "@nx/web": "21.2.1",
     "@nx/webpack": "21.2.1",
     "@nx/workspace": "21.2.1",
-    "@schematics/angular": "20.0.4",
+    "@schematics/angular": "20.0.5",
     "@trivago/prettier-plugin-sort-imports": "^4.2.0",
     "@types/chrome": "^0.0.246",
     "@types/jest": "29.5.14",
