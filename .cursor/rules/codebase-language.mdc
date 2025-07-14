@@ -1,5 +1,15 @@
 ---
 description:
 globs:
-alwaysApply: false
+alwaysApply: true
 ---
+# Codebase Language Rule
+
+All code, comments, documentation, variable names, function names, commit messages, and all other written content in the codebase must be written exclusively in English.
+
+**Purpose:**
+- Ensures consistency and accessibility for all contributors.
+- Facilitates collaboration in international teams.
+- Makes onboarding and code reviews easier for non-native speakers of other languages.
+
+> **Note:** Code or comments in other languages are not permitted and should be refactored to English as soon as possible.

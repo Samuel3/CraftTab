@@ -1,5 +1,21 @@
 ---
 description:
 globs:
-alwaysApply: false
+alwaysApply: true
 ---
+# Feature Test Coverage Rule
+
+Every feature in the codebase must be covered by automated tests.
+
+**Guidelines:**
+- All new features must include appropriate unit, integration, and/or end-to-end tests.
+- Existing features should be retroactively covered with tests if not already present.
+- Tests must verify both expected behavior and edge cases.
+- Pull requests for new features or changes will only be accepted if sufficient test coverage is provided.
+
+**Purpose:**
+- Ensures code reliability and prevents regressions.
+- Facilitates safe refactoring and future development.
+- Increases confidence in the stability of the codebase.
+
+> **Note:** Features without tests are not considered complete and should not be merged until adequate test coverage is achieved.
