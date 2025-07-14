@@ -1,0 +1,28 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Rebase Rule for Branches
+
+Every branch must always be rebased onto the latest state of the master branch (`master` or `main`) before being merged or further developed. This ensures that all changes from the main development branch are integrated and merge conflicts are detected early.
+
+**Procedure:**
+1. Fetch the latest changes from the remote repository:
+   ```
+   git fetch origin
+   ```
+2. Rebase your current branch onto the latest `master` (or `main`):
+   ```
+   git rebase origin/master
+   # or, if your main branch is called 'main':
+   git rebase origin/main
+   ```
+3. Resolve any conflicts that arise and continue the rebase:
+   ```
+   git rebase --continue
+   ```
+4. Only after a successful rebase may the branch be merged or a pull request be created.
+
+> **Note:** Direct merges from `master`/`main` into feature branches should be avoided. Always use rebase instead.
+
