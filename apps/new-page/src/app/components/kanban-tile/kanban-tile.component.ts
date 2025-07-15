@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AddTicketDialogComponent } from './add-ticket-dialog.component';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 interface Ticket {
   id: number;
@@ -32,7 +33,8 @@ interface Column {
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslatePipe
   ]
 })
 export class KanbanTileComponent implements OnInit {

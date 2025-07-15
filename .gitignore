@@ -38,7 +38,12 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# Build artifacts and cache
+.nx/
+extension/
+
 .angular
+.nx
 
 extension/pages
 extension/scripts

@@ -1,12 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { NgIf } from '@angular/common';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 @Component({
   selector: 'new-page-calculator-tile',
   templateUrl: './calculator-tiles.component.html',
   styleUrls: ['./calculator-tiles.component.scss'],
   standalone: true,
-  imports: [NgIf],
+  imports: [NgIf, TranslatePipe],
 })
 export class CalculatorTilesComponent {
   @Input() name = '';

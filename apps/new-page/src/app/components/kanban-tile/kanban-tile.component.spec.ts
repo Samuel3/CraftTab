@@ -8,6 +8,9 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TranslationService } from '../../services/translation.service';
+import { LanguageService } from '../../services/language.service';
 
 // Dummy-Komponente für Dialog
 import { Component } from '@angular/core';
@@ -46,7 +49,8 @@ describe('KanbanTileComponent', () => {
         MatDialogModule,
         MatButtonModule,
         MatInputModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        HttpClientTestingModule
       ],
       providers: [
         { provide: MatDialog, useValue: dialogSpy },
@@ -54,6 +58,8 @@ describe('KanbanTileComponent', () => {
           provide: MatDialogRef,
           useValue: {}
         },
+        TranslationService,
+        LanguageService
       ]
     }).compileComponents();
   });

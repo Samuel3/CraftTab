@@ -1,6 +1,7 @@
 import { NgForOf, NgIf } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Subscription } from 'rxjs';
 
 import { tileConfig, TileType } from '../../model/tiles';
 import { BookmarkTilesComponent } from '../bookmark-tile/bookmark-tiles.component';
@@ -8,6 +9,8 @@ import { CalculatorTilesComponent } from '../calculator-tile/calculator-tiles.co
 import { SearchTilesComponent } from '../search-tile/search-tiles.component';
 import { KanbanTileComponent } from '../kanban-tile/kanban-tile.component';
 import { ConfigService } from '../../services/config.service';
+import { TranslationService } from '../../services/translation.service';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 @Component({
   selector: 'new-page-tiles-container',
@@ -22,30 +25,31 @@ import { ConfigService } from '../../services/config.service';
     KanbanTileComponent,
     NgIf,
     DragDropModule,
+    TranslatePipe,
   ],
 })
-export class TilesContainerComponent implements OnInit {
+export class TilesContainerComponent implements OnInit, OnDestroy {
   @Input() editMode = false;
 
   tiles: tileConfig[] = [
     {
       id: '0',
-      name: 'bookmarks',
+      name: 'tiles.bookmarks',
       tileType: TileType.Bookmarks,
     },
     {
       id: '1',
-      name: 'search',
+      name: 'tiles.search',
       tileType: TileType.Search,
     },
     {
       id: '2',
-      name: 'calculator',
+      name: 'tiles.calculator',
       tileType: TileType.Calculator,
     },
     {
       id: '3',
-      name: 'kanban',
+      name: 'tiles.kanban',
       tileType: TileType.Kanban,
     },
   ];
@@ -55,14 +59,31 @@ export class TilesContainerComponent implements OnInit {
   tileRows: tileConfig[][] = [[]];
   maxTilesPerRow = 3;
 
-  constructor(private configService: ConfigService) {}
+  private subscriptions = new Subscription();
 
-  async ngOnInit() {
-    const savedConfig = await this.configService.loadTilesConfig();
-    if (savedConfig) {
-      this.tiles = savedConfig;
-    }
-    this.updateTileRows();
+  constructor(
+    private configService: ConfigService,
+    private translationService: TranslationService
+  ) {}
+
+  ngOnInit() {
+    const loadSub = this.configService.loadTilesConfig().subscribe({
+      next: (savedConfig) => {
+        if (savedConfig) {
+          this.tiles = savedConfig;
+        }
+        this.updateTileRows();
+      },
+      error: (error) => {
+        console.error('Failed to load tiles config:', error);
+        this.updateTileRows();
+      }
+    });
+    this.subscriptions.add(loadSub);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   private updateTileRows() {
@@ -82,13 +103,16 @@ export class TilesContainerComponent implements OnInit {
     }
   }
 
-  async onDrop(event: CdkDragDrop<tileConfig[][]>) {
+  onDrop(event: CdkDragDrop<tileConfig[][]>) {
     moveItemInArray(this.tileRows, event.previousIndex, event.currentIndex);
     this.tiles = this.tileRows.flat();
-    await this.configService.saveTilesConfig(this.tiles);
+    const saveSub = this.configService.saveTilesConfig(this.tiles).subscribe({
+      error: (error) => console.error('Failed to save tiles config:', error)
+    });
+    this.subscriptions.add(saveSub);
   }
 
-  async onRowDrop(event: CdkDragDrop<tileConfig[]>) {
+  onRowDrop(event: CdkDragDrop<tileConfig[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -100,13 +124,19 @@ export class TilesContainerComponent implements OnInit {
       );
     }
     this.tiles = this.tileRows.flat();
-    await this.configService.saveTilesConfig(this.tiles);
+    const saveSub = this.configService.saveTilesConfig(this.tiles).subscribe({
+      error: (error) => console.error('Failed to save tiles config:', error)
+    });
+    this.subscriptions.add(saveSub);
   }
 
-  async deleteTile(tile: tileConfig) {
+  deleteTile(tile: tileConfig) {
     this.tiles = this.tiles.filter(t => t.id !== tile.id);
     this.updateTileRows();
-    await this.configService.saveTilesConfig(this.tiles);
+    const saveSub = this.configService.saveTilesConfig(this.tiles).subscribe({
+      error: (error) => console.error('Failed to save tiles config:', error)
+    });
+    this.subscriptions.add(saveSub);
   }
 
   openTileSelection() {
@@ -117,29 +147,47 @@ export class TilesContainerComponent implements OnInit {
     this.showTileSelection = false;
   }
 
-  async addTile(type: TileType) {
+  addTile(type: TileType) {
     const newTile: tileConfig = {
       id: Date.now().toString(),
-      name: this.getTileName(type),
+      name: this.getTileTranslationKey(type),
       tileType: type
     };
 
     this.tiles.push(newTile);
     this.updateTileRows();
-    await this.configService.saveTilesConfig(this.tiles);
-    this.closeTileSelection();
+    const saveSub = this.configService.saveTilesConfig(this.tiles).subscribe({
+      next: () => this.closeTileSelection(),
+      error: (error) => console.error('Failed to save tiles config:', error)
+    });
+    this.subscriptions.add(saveSub);
+  }
+
+  getTileTranslationKey(type: TileType): string {
+    switch (type) {
+      case TileType.Bookmarks:
+        return 'tiles.bookmarks';
+      case TileType.Search:
+        return 'tiles.search';
+      case TileType.Calculator:
+        return 'tiles.calculator';
+      case TileType.Kanban:
+        return 'tiles.kanban';
+      default:
+        return type;
+    }
   }
 
   getTileName(type: TileType): string {
     switch (type) {
       case TileType.Bookmarks:
-        return 'Bookmarks';
+        return this.translationService.translate('tiles.bookmarks');
       case TileType.Search:
-        return 'Search';
+        return this.translationService.translate('tiles.search');
       case TileType.Calculator:
-        return 'Calculator';
+        return this.translationService.translate('tiles.calculator');
       case TileType.Kanban:
-        return 'Kanban Board';
+        return this.translationService.translate('tiles.kanban');
       default:
         return type;
     }
