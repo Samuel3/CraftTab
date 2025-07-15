@@ -42,3 +42,5 @@ Thumbs.db
 
 extension/pages
 extension/scripts
+
+.nx/
