@@ -1,4 +1,5 @@
-@import '../../../styles/variables';
+@use "sass:color";
+@use '../../../styles/variables';
 
 #container {
   border: 2px solid transparent;
@@ -71,30 +72,30 @@ button {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   &:hover {
-    background: $base-accent-strong;
+    background: variables.$base-accent-strong;
   }
 
   &.operator {
-    background: $base-accent-light;
+    background: variables.$base-accent-light;
     color: #fff;
   }
 
   &.equals {
-    background: $base-accent-strong;
+    background: variables.$base-accent-strong;
     color: white;
     grid-row: span 2;
 
     &:hover {
-      background: $base-color-strong;
+      background: variables.$base-color-strong;
     }
   }
 
   &.clear {
-    background: $accent-color;
+    background: variables.$accent-color;
     color: white;
 
     &:hover {
-      background: darken($accent-color, 15%);
+      background: color.adjust(variables.$accent-color, $lightness: -15%);
     }
   }
 

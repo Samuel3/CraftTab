@@ -1,4 +1,4 @@
-@import '../../../styles/variables';
+@use '../../../styles/variables';
 
 .full-width {
   width: 100%;
@@ -34,13 +34,13 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
-  background: $base-accent-strong;
+  background: variables.$base-accent-strong;
   color: white;
   min-width: 80px;
   transition: background-color 0.2s ease;
 
   &:hover:not(:disabled) {
-    background: $base-color-strong;
+    background: variables.$base-color-strong;
   }
 
   &:disabled {
