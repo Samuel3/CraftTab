@@ -1,4 +1,4 @@
-@import '../../../styles/variables';
+@use '../../../styles/variables';
 
 #container {
   padding: 20px;
@@ -15,11 +15,11 @@
 
     .edit-btn {
       @extend %button-base;
-      background: $base-color-light;
+      background: variables.$base-color-light;
       color: white;
 
       &:hover {
-        background: $base-color-strong;
+        background: variables.$base-color-strong;
       }
     }
   }
@@ -36,21 +36,20 @@
   align-items: center;
   justify-content: center;
   min-width: 80px;
-  background: $accent-color;
+  background: variables.$accent-color;
   color: white;
 }
 
-// Anpassung für spezielle Buttons
 .header .edit-btn,
 .actions .add-ticket-btn,
 .column-header .edit-column-header .delete-column-btn,
 .ticket-content .delete-btn,
 .actions .add-column-form button {
-  background: $accent-color;
+  background: variables.$accent-color;
   color: white;
 
   &:hover {
-    background: darken($accent-color, 10%);
+    background: variables.$base-color-strong;
   }
 }
 
@@ -182,7 +181,7 @@
     .delete-btn {
       @extend %button-base;
       background: none;
-      color: $accent-color;
+      color: variables.$accent-color;
       font-size: 18px;
       padding: 0 4px;
       min-width: auto;
@@ -202,11 +201,11 @@
 
   .add-ticket-btn {
     @extend %button-base;
-    background: $base-accent-strong;
+    background: variables.$base-accent-strong;
     color: white;
 
     &:hover {
-      background: $base-color-strong;
+      background: variables.$base-color-strong;
     }
   }
 
@@ -223,11 +222,11 @@
 
     button {
       @extend %button-base;
-      background: $base-color-light;
+      background: variables.$base-color-light;
       color: white;
 
       &:hover {
-        background: $base-color-strong;
+        background: variables.$base-color-strong;
       }
     }
   }
