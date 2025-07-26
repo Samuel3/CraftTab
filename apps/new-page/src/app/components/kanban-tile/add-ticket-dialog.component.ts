@@ -8,13 +8,13 @@ import { CommonModule } from '@angular/common';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 
 @Component({
-  selector: 'app-add-ticket-dialog',
+  selector: 'new-page-ticket-dialog',
   template: `
     <h2 mat-dialog-title>{{ 'kanban.addTicket' | translate }}</h2>
     <mat-dialog-content>
       <mat-form-field class="full-width">
-        <input matInput 
-               [placeholder]="'ticket.title' | translate" 
+        <input matInput
+               [placeholder]="'ticket.title' | translate"
                [formControl]="titleControl"
                (keyup.enter)="onSubmit()">
         <mat-error *ngIf="titleControl.hasError('required')">{{ 'ticket.required' | translate }}</mat-error>
@@ -22,8 +22,8 @@ import { TranslatePipe } from '../../pipes/translate.pipe';
     </mat-dialog-content>
     <mat-dialog-actions class="dialog-actions">
       <button class="cancel-btn" (click)="onCancel()">{{ 'common.close' | translate }}</button>
-      <button class="submit-btn" 
-              [disabled]="!titleControl.valid" 
+      <button class="submit-btn"
+              [disabled]="!titleControl.valid"
               (click)="onSubmit()">{{ 'kanban.addTicket' | translate }}</button>
     </mat-dialog-actions>
   `,
