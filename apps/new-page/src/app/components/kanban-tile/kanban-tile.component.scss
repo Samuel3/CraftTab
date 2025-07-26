@@ -1,3 +1,5 @@
+@use '../../../styles/variables';
+
 #container {
   padding: 20px;
   background: #f5f5f5;
@@ -13,11 +15,11 @@
 
     .edit-btn {
       @extend %button-base;
-      background: #2196f3;
+      background: variables.$base-color-light;
       color: white;
 
       &:hover {
-        background: #1976d2;
+        background: variables.$base-color-strong;
       }
     }
   }
@@ -34,6 +36,21 @@
   align-items: center;
   justify-content: center;
   min-width: 80px;
+  background: variables.$accent-color;
+  color: white;
+}
+
+.header .edit-btn,
+.actions .add-ticket-btn,
+.column-header .edit-column-header .delete-column-btn,
+.ticket-content .delete-btn,
+.actions .add-column-form button {
+  background: variables.$accent-color;
+  color: white;
+
+  &:hover {
+    background: variables.$base-color-strong;
+  }
 }
 
 .kanban-board {
@@ -164,7 +181,7 @@
     .delete-btn {
       @extend %button-base;
       background: none;
-      color: #f44336;
+      color: variables.$accent-color;
       font-size: 18px;
       padding: 0 4px;
       min-width: auto;
@@ -184,11 +201,11 @@
 
   .add-ticket-btn {
     @extend %button-base;
-    background: #4caf50;
+    background: variables.$base-accent-strong;
     color: white;
 
     &:hover {
-      background: #388e3c;
+      background: variables.$base-color-strong;
     }
   }
 
@@ -205,11 +222,11 @@
 
     button {
       @extend %button-base;
-      background: #2196f3;
+      background: variables.$base-color-light;
       color: white;
 
       &:hover {
-        background: #1976d2;
+        background: variables.$base-color-strong;
       }
     }
   }

@@ -8,75 +8,9 @@ import { CommonModule } from '@angular/common';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 
 @Component({
-  selector: 'app-add-ticket-dialog',
-  template: `
-    <h2 mat-dialog-title>{{ 'kanban.addTicket' | translate }}</h2>
-    <mat-dialog-content>
-      <mat-form-field class="full-width">
-        <input matInput 
-               [placeholder]="'ticket.title' | translate" 
-               [formControl]="titleControl"
-               (keyup.enter)="onSubmit()">
-        <mat-error *ngIf="titleControl.hasError('required')">{{ 'ticket.required' | translate }}</mat-error>
-      </mat-form-field>
-    </mat-dialog-content>
-    <mat-dialog-actions class="dialog-actions">
-      <button class="cancel-btn" (click)="onCancel()">{{ 'common.close' | translate }}</button>
-      <button class="submit-btn" 
-              [disabled]="!titleControl.valid" 
-              (click)="onSubmit()">{{ 'kanban.addTicket' | translate }}</button>
-    </mat-dialog-actions>
-  `,
-  styles: [`
-    .full-width {
-      width: 100%;
-    }
-
-    .dialog-actions {
-      padding: 16px 0 0;
-      margin: 0;
-      gap: 8px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .cancel-btn {
-      padding: 8px 16px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 14px;
-      background: #f5f5f5;
-      color: #333;
-      min-width: 80px;
-      transition: background-color 0.2s ease;
-
-      &:hover {
-        background: #e0e0e0;
-      }
-    }
-
-    .submit-btn {
-      padding: 8px 16px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 14px;
-      background: #4caf50;
-      color: white;
-      min-width: 80px;
-      transition: background-color 0.2s ease;
-
-      &:hover:not(:disabled) {
-        background: #388e3c;
-      }
-
-      &:disabled {
-        background: #cccccc;
-        cursor: not-allowed;
-      }
-    }
-  `],
+  selector: 'new-page-ticket-dialog',
+  templateUrl: './add-ticket-dialog.component.html',
+  styleUrls: ['./add-ticket-dialog.component.scss'],
   standalone: true,
   imports: [
     CommonModule,

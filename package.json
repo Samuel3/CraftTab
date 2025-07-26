@@ -2,8 +2,6 @@
   "name": "chrome-extension-starter",
   "version": "0.0.0",
   "scripts": {
-    "cz": "git-cz",
-    "prepare": "husky install",
     "affected:lint": "nx affected:lint",
     "start:dev": "nx run-many --target=build --all --configuration development --watch --parallel 5",
     "start:prod": "nx run-many --target=build --all --configuration production --watch --parallel 5",
@@ -58,7 +56,6 @@
     "eslint-config-prettier": "10.1.5",
     "eslint-plugin-unused-imports": "^4.1.4",
     "git-cz": "^4.9.0",
-    "husky": "^9.1.7",
     "jest": "29.7.0",
     "jest-environment-jsdom": "29.7.0",
     "jest-preset-angular": "14.6.0",

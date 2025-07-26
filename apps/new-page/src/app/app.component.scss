@@ -1,3 +1,5 @@
+@use '../styles/variables';
+
 #container {
   display: flex;
   flex-direction: column;
@@ -10,7 +12,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, variables.$base-color-strong 0%, variables.$base-accent-light 100%);
   color: white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -28,18 +30,18 @@ button {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: none;
   border-radius: 6px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: variables.$accent-color;
   color: white;
   cursor: pointer;
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.5);
+    background-color: variables.$base-color-strong;
+    border-color: variables.$accent-color;
     transform: translateY(-1px);
-    
+
     i {
       transform: rotate(45deg);
     }

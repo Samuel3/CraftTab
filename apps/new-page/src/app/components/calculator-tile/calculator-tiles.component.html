@@ -1,5 +1,5 @@
 <div id="container" [class.edit-mode]="editMode">
-  <h1>{{ this.name | translate }}</h1>
+  <h2>{{ this.name | translate }}</h2>
   <div class="calculator" *ngIf="!editMode">
     <div class="display">{{ displayValue }}</div>
     <div class="buttons">
@@ -7,17 +7,17 @@
       <button (click)="onOperatorClick('/')" class="operator">÷</button>
       <button (click)="onOperatorClick('*')" class="operator">×</button>
       <button (click)="onOperatorClick('-')" class="operator">-</button>
-      
+
       <button (click)="onDigitClick('7')">7</button>
       <button (click)="onDigitClick('8')">8</button>
       <button (click)="onDigitClick('9')">9</button>
       <button (click)="onOperatorClick('+')" class="operator">+</button>
-      
+
       <button (click)="onDigitClick('4')">4</button>
       <button (click)="onDigitClick('5')">5</button>
       <button (click)="onDigitClick('6')">6</button>
       <button (click)="onEqualClick()" class="equals">=</button>
-      
+
       <button (click)="onDigitClick('1')">1</button>
       <button (click)="onDigitClick('2')">2</button>
       <button (click)="onDigitClick('3')">3</button>

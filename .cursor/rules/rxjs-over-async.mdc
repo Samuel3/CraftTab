@@ -1,0 +1,20 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# RxJS over Async/Await Rule
+
+In this codebase, always use RxJS Observables for asynchronous operations instead of async/await, Promises, or other asynchronous patterns.
+
+**Guidelines:**
+- All asynchronous data flows, API calls, and event streams must be implemented using RxJS Observables.
+- Avoid using `async`/`await` and direct Promises in code, services, and components.
+- Use RxJS operators and best practices for handling asynchronous logic, error handling, and data transformation.
+
+**Purpose:**
+- Ensures consistency in handling asynchronous operations.
+- Leverages the full power of RxJS for reactive programming and composability.
+- Simplifies code reviews and onboarding for teams familiar with RxJS.
+
+> **Note:** Existing or new code using `async`/`await` or Promises should be refactored to use Observables wherever possible.

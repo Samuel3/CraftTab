@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { TilesContainerComponent } from './components/tiles-container/tiles-container.component';
 import { LanguageSwitcherComponent } from './components/language-switcher/language-switcher.component';
 import { TranslatePipe } from './pipes/translate.pipe';
@@ -13,17 +13,15 @@ import { TranslationService } from './services/translation.service';
 })
 export class AppComponent implements OnInit {
   editMode = false;
-  
+
   @ViewChild(LanguageSwitcherComponent) languageSwitcher!: LanguageSwitcherComponent;
 
-  constructor(
-    private translationService: TranslationService
-  ) {}
+  translationService = inject(TranslationService);
 
   async ngOnInit() {
     // Initialize translation service and wait for translations to load
     await this.translationService.waitForTranslations();
-    
+
     // @ts-ignore
     if (typeof window !== 'undefined' && (window as any).chrome?.bookmarks) {
       (window as any).chrome.bookmarks.getTree().then((result: any) => {
@@ -35,7 +33,7 @@ export class AppComponent implements OnInit {
 
   toggleEditMode() {
     this.editMode = !this.editMode;
-    
+
     // Show/hide language switcher based on edit mode
     if (this.languageSwitcher) {
       this.languageSwitcher.setVisible(this.editMode);

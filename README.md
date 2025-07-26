@@ -1,4 +1,6 @@
-# CraftTab. Lets. Get. Productive
+# CraftTab. Customize. Access. Get Things Done.
+
+![CraftTab Logo](.github/images/logo.png)
 
 ## 📖 Table of Contents
 

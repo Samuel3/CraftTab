@@ -47,3 +47,5 @@ extension/
 
 extension/pages
 extension/scripts
+
+.nx/

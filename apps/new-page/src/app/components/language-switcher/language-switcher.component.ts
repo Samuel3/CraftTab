@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NgForOf, NgIf } from '@angular/common';
 import { LanguageService, Language } from '../../services/language.service';
 
 @Component({
-  selector: 'app-language-switcher',
+  selector: 'new-page-app-language-switcher',
   standalone: true,
   imports: [NgForOf, NgIf],
   templateUrl: './language-switcher.component.html',
@@ -14,13 +14,12 @@ export class LanguageSwitcherComponent implements OnInit {
   isDropdownOpen = false;
   currentLanguage = 'en';
   availableLanguages: Language[] = [];
-
-  constructor(private languageService: LanguageService) {}
+  languageService = inject(LanguageService)
 
   ngOnInit() {
     this.availableLanguages = this.languageService.getAvailableLanguages();
     this.currentLanguage = this.languageService.getCurrentLanguage();
-    
+
     this.languageService.currentLanguage$.subscribe(lang => {
       this.currentLanguage = lang;
     });

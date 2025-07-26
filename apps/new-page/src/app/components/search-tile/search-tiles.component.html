@@ -1,5 +1,5 @@
 <div id="container" [class.edit-mode]="editMode">
-  <h1>{{ this.name | translate }}</h1>
+  <h2>{{ this.name | translate }}</h2>
   <ng-container *ngIf="!editMode">
     <div class="search-container">
       <input id="searchBox" type="text" [placeholder]="'search.placeholder' | translate" [(ngModel)]="searchQuery" (change)="valueUpdated()"
