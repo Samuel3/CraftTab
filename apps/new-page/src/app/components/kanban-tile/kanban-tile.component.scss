@@ -15,11 +15,11 @@
 
     .edit-btn {
       @extend %button-base;
-      background: #2196f3;
+      background: $base-color-light;
       color: white;
 
       &:hover {
-        background: #1976d2;
+        background: $base-color-strong;
       }
     }
   }
@@ -223,11 +223,11 @@
 
     button {
       @extend %button-base;
-      background: #2196f3;
+      background: $base-color-light;
       color: white;
 
       &:hover {
-        background: #1976d2;
+        background: $base-color-strong;
       }
     }
   }

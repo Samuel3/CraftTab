@@ -57,7 +57,7 @@ export class KanbanTileComponent implements OnInit {
 
   // Editier-Logik für Tickets
   editingTicket: Ticket | null = null;
-  editedTicketTitle: string = '';
+  editedTicketTitle = '';
 
   constructor(private dialog: MatDialog) {}
 
