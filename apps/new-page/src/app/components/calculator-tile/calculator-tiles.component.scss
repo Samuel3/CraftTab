@@ -1,3 +1,5 @@
+@import '../../../styles/variables';
+
 #container {
   border: 2px solid transparent;
   padding: 1rem;
@@ -69,21 +71,21 @@ button {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   &:hover {
-    background: #e0e0e0;
+    background: darken($accent-color, 10%);
   }
 
   &.operator {
-    background: #f8f9fa;
-    color: #007bff;
+    background: lighten($accent-color, 10%);
+    color: #fff;
   }
 
   &.equals {
-    background: #007bff;
+    background: $accent-color;
     color: white;
     grid-row: span 2;
 
     &:hover {
-      background: #0056b3;
+      background: darken($accent-color, 15%);
     }
   }
 

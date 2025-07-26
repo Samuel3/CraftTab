@@ -92,4 +92,14 @@ npm run build:prod
 
 ## Color Style
 
-The following color scheme is used
+See https://coolors.co/202c39-283845-b8b08d-f2d492-f29559
+
+Primary: `#202C39`
+
+Secondary: `#283845`
+
+Tertiary: `#F5F5F5`
+
+Quaternary: `#F2D492`
+
+Contrast: `#FF29559`
