@@ -78,6 +78,9 @@ button {
   &.operator {
     background: variables.$base-accent-light;
     color: #fff;
+    &:hover {
+      background: variables.$base-color-light;
+    }
   }
 
   &.equals {

@@ -1,6 +1,7 @@
 @use "sass:color";
 @use '../../../styles/variables';
 
+
 #container {
   border: 2px solid transparent;
   padding: 1rem;
@@ -55,17 +56,17 @@
 .edit-button:hover,
 .reset-button:hover,
 .remove-button:hover {
-  background-color: color.adjust(variables.$accent-color, $lightness: -10%);
+  background-color: variables.$base-color-strong;
 }
 
 .remove-button {
-  color: #e74c3c;
+  color: variables.$accent-color;
   background: #fff0f0;
   border: none;
 }
 
 .remove-button:hover {
-  background: #e74c3c;
+  background: variables.$base-color-strong;
   color: #fff;
 }
 
