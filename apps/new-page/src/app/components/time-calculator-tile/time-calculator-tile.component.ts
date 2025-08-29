@@ -24,6 +24,7 @@ export class TimeCalculatorTileComponent implements OnInit, OnDestroy {
 
   private timeSlotsSubject = new BehaviorSubject<TimeSlot[]>([]);
   private destroy$ = new Subject<void>();
+  private nextSlotId = 1;
 
   timeSlots$: Observable<TimeSlot[]> = this.timeSlotsSubject.asObservable();
   totalDuration$: Observable<number>;
@@ -87,7 +88,7 @@ export class TimeCalculatorTileComponent implements OnInit, OnDestroy {
   private addNewTimeSlot(): void {
     const currentSlots = this.timeSlotsSubject.value;
     const newSlot: TimeSlot = {
-      id: Date.now(),
+      id: this.nextSlotId++,
       startTime: '',
       endTime: '',
       duration: 0
@@ -97,6 +98,7 @@ export class TimeCalculatorTileComponent implements OnInit, OnDestroy {
 
   clearAllEntries(): void {
     this.timeSlotsSubject.next([]);
+    this.nextSlotId = 1; // Reset the ID counter
     this.addNewTimeSlot();
   }
 
