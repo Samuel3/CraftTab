@@ -8,5 +8,6 @@ export enum TileType {
   Bookmarks = 'bookmarks',
   Calculator = 'calculator',
   Search = 'search',
-  Kanban = 'kanban'
+  Kanban = 'kanban',
+  TimeCalculator = 'time-calculator'
 }

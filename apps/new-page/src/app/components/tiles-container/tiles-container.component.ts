@@ -8,6 +8,7 @@ import { BookmarkTilesComponent } from '../bookmark-tile/bookmark-tiles.componen
 import { CalculatorTilesComponent } from '../calculator-tile/calculator-tiles.component';
 import { SearchTilesComponent } from '../search-tile/search-tiles.component';
 import { KanbanTileComponent } from '../kanban-tile/kanban-tile.component';
+import { TimeCalculatorTileComponent } from '../time-calculator-tile/time-calculator-tile.component';
 import { ConfigService } from '../../services/config.service';
 import { TranslationService } from '../../services/translation.service';
 import { TranslatePipe } from '../../pipes/translate.pipe';
@@ -23,6 +24,7 @@ import { TranslatePipe } from '../../pipes/translate.pipe';
     BookmarkTilesComponent,
     CalculatorTilesComponent,
     KanbanTileComponent,
+    TimeCalculatorTileComponent,
     NgIf,
     DragDropModule,
     TranslatePipe,
@@ -173,6 +175,8 @@ export class TilesContainerComponent implements OnInit, OnDestroy {
         return 'tiles.calculator';
       case TileType.Kanban:
         return 'tiles.kanban';
+      case TileType.TimeCalculator:
+        return 'tiles.timeCalculator';
       default:
         return type;
     }
@@ -188,6 +192,8 @@ export class TilesContainerComponent implements OnInit, OnDestroy {
         return this.translationService.translate('tiles.calculator');
       case TileType.Kanban:
         return this.translationService.translate('tiles.kanban');
+      case TileType.TimeCalculator:
+        return this.translationService.translate('tiles.timeCalculator');
       default:
         return type;
     }
@@ -203,6 +209,8 @@ export class TilesContainerComponent implements OnInit, OnDestroy {
         return 'fas fa-calculator';
       case TileType.Kanban:
         return 'fas fa-columns';
+      case TileType.TimeCalculator:
+        return 'fas fa-clock';
       default:
         return 'fas fa-square';
     }

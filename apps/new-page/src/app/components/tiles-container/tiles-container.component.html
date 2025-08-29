@@ -10,6 +10,7 @@
           <new-page-search-tile *ngIf="tile.tileType === TileType.Search" [name]="tile.name" [editMode]="editMode"></new-page-search-tile>
           <new-page-calculator-tile *ngIf="tile.tileType === TileType.Calculator" [name]="tile.name" [editMode]="editMode"></new-page-calculator-tile>
           <new-page-kanban-tile *ngIf="tile.tileType === TileType.Kanban" [name]="tile.name" [editMode]="editMode"></new-page-kanban-tile>
+          <new-page-time-calculator-tile *ngIf="tile.tileType === TileType.TimeCalculator" [name]="tile.name" [editMode]="editMode"></new-page-time-calculator-tile>
         </div>
       </div>
     </div>

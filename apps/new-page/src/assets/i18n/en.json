@@ -8,6 +8,7 @@
   "tiles.search": "Search",
   "tiles.calculator": "Calculator",
   "tiles.kanban": "Kanban Board",
+  "tiles.timeCalculator": "Time Calculator",
   "common.close": "Close",
   "common.delete": "Delete",
   "common.go": "Go",
@@ -22,5 +23,11 @@
   "search.placeholder": "Search...",
   "search.go": "Go",
   "ticket.title": "Ticket Title",
-  "ticket.required": "Title is required"
+  "ticket.required": "Title is required",
+  "timeCalculator.startTime": "Start Time",
+  "timeCalculator.endTime": "End Time",
+  "timeCalculator.duration": "Duration",
+  "timeCalculator.total": "Total",
+  "timeCalculator.warningOver10Hours": "Warning: Total time exceeds 10 hours",
+  "timeCalculator.clearAll": "Clear All"
 }

@@ -1,0 +1,59 @@
+<div id="container" [class.edit-mode]="editMode">
+  <h2>{{ this.name | translate }}</h2>
+  
+  <div class="time-calculator" *ngIf="!editMode">
+    <div class="time-slots">
+      <div *ngFor="let slot of timeSlots$ | async; trackBy: trackBySlotId" class="time-slot-row">
+        <div class="time-inputs">
+          <div class="input-group">
+            <label>{{ 'timeCalculator.startTime' | translate }}</label>
+            <input 
+              type="time" 
+              [value]="slot.startTime"
+              (input)="onStartTimeChange(slot.id, $event)"
+              class="time-input"
+            />
+          </div>
+          
+          <div class="input-group">
+            <label>{{ 'timeCalculator.endTime' | translate }}</label>
+            <input 
+              type="time" 
+              [value]="slot.endTime"
+              (input)="onEndTimeChange(slot.id, $event)"
+              class="time-input"
+            />
+          </div>
+          
+          <div class="duration-display">
+            <span class="duration-label">{{ 'timeCalculator.duration' | translate }}:</span>
+            <span class="duration-value">{{ formatDuration(slot.duration) }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="total-section">
+      <div class="total-display">
+        <span class="total-label">{{ 'timeCalculator.total' | translate }}:</span>
+        <span class="total-value">{{ formatTotalHours((totalHours$ | async) || 0) }}</span>
+      </div>
+      
+      <div *ngIf="showWarning$ | async" class="warning-message">
+        <i class="fas fa-exclamation-triangle"></i>
+        {{ 'timeCalculator.warningOver10Hours' | translate }}
+      </div>
+    </div>
+    
+    <div class="actions">
+      <button 
+        class="clear-button"
+        (click)="clearAllEntries()"
+        [attr.aria-label]="'timeCalculator.clearAll' | translate"
+      >
+        <i class="fas fa-trash"></i>
+        {{ 'timeCalculator.clearAll' | translate }}
+      </button>
+    </div>
+  </div>
+</div>
