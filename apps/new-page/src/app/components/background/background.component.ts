@@ -42,33 +42,29 @@ export class BackgroundComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private setupCanvas(): void {
     const canvas = this.canvasRef.nativeElement;
-    const container = canvas.parentElement;
     
-    if (container) {
-      canvas.width = container.clientWidth;
-      canvas.height = container.clientHeight;
-      
-      // Initial render with current seed
-      const currentSeed = this.backgroundService.getCurrentSeed();
-      this.renderBackground(currentSeed);
-    }
+    // Since canvas has position: fixed, use viewport dimensions
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    // Initial render with current seed
+    const currentSeed = this.backgroundService.getCurrentSeed();
+    this.renderBackground(currentSeed);
   }
 
   private setupResizeObserver(): void {
     const canvas = this.canvasRef.nativeElement;
-    const container = canvas.parentElement;
     
-    if (container && 'ResizeObserver' in window) {
-      this.resizeObserver = new ResizeObserver(() => {
-        canvas.width = container.clientWidth;
-        canvas.height = container.clientHeight;
-        
-        const currentSeed = this.backgroundService.getCurrentSeed();
-        this.renderBackground(currentSeed);
-      });
+    this.resizeObserver = new ResizeObserver(() => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
       
-      this.resizeObserver.observe(container);
-    }
+      const currentSeed = this.backgroundService.getCurrentSeed();
+      this.renderBackground(currentSeed);
+    });
+    
+    // Observe the document body for viewport changes
+    this.resizeObserver.observe(document.body);
   }
 
   private renderBackground(seed: string): void {
