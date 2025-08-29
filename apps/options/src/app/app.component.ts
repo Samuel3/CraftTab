@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { BackgroundSettingsComponent } from './components/background-settings/background-settings.component';
 
 @Component({
   standalone: true,
@@ -6,5 +7,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [BackgroundSettingsComponent]
 })
 export class AppComponent {}

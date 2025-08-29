@@ -1,0 +1,76 @@
+<div class="background-settings">
+  <h2>Background Settings</h2>
+  
+  <div class="setting-group">
+    <label for="current-seed">Current Seed:</label>
+    <div class="seed-input-container">
+      <input 
+        id="current-seed"
+        type="text" 
+        [(ngModel)]="editingSeed"
+        [readonly]="!isEditing"
+        [class.editing]="isEditing"
+        (keydown)="onKeyPress($event)"
+        placeholder="Enter seed value"
+      />
+      <div class="seed-actions">
+        <button 
+          *ngIf="!isEditing" 
+          (click)="startEditing()" 
+          class="btn btn-secondary"
+          title="Edit seed"
+        >
+          Edit
+        </button>
+        <div *ngIf="isEditing" class="edit-actions">
+          <button 
+            (click)="confirmSeed()" 
+            class="btn btn-primary"
+            title="Confirm changes (Enter)"
+          >
+            Confirm
+          </button>
+          <button 
+            (click)="cancelEditing()" 
+            class="btn btn-secondary"
+            title="Cancel changes (Esc)"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+    <small class="hint">The seed determines the background pattern. Same seed always produces the same background.</small>
+  </div>
+
+  <div class="setting-group">
+    <button 
+      (click)="generateNewSeed()" 
+      class="btn btn-accent"
+      title="Generate a new random seed"
+    >
+      Generate New Seed
+    </button>
+  </div>
+
+  <div class="setting-group">
+    <button 
+      (click)="savePermanently()" 
+      class="btn btn-primary"
+      title="Save current settings permanently"
+    >
+      Save Settings
+    </button>
+  </div>
+
+  <div class="status-message" [class.visible]="saveStatus">
+    {{ saveStatus }}
+  </div>
+
+  <div class="background-info">
+    <h3>About Background</h3>
+    <p>The background consists of connected triangles with pale colors from the project palette. 
+       Horizontal and vertical gradients are applied for a smooth visual effect.</p>
+    <p>Each seed generates a unique pattern that will always look the same across different sessions.</p>
+  </div>
+</div>
