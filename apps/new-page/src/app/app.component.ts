@@ -1,4 +1,5 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { TilesContainerComponent } from './components/tiles-container/tiles-container.component';
 import { LanguageSwitcherComponent } from './components/language-switcher/language-switcher.component';
 import { BackgroundComponent } from './components/background/background.component';
@@ -9,7 +10,7 @@ import { TranslationService } from './services/translation.service';
   selector: 'new-page-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [TilesContainerComponent, LanguageSwitcherComponent, BackgroundComponent, TranslatePipe],
+  imports: [CommonModule, TilesContainerComponent, LanguageSwitcherComponent, BackgroundComponent, TranslatePipe],
   standalone: true,
 })
 export class AppComponent implements OnInit {

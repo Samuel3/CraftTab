@@ -29,6 +29,24 @@ label {
   color: #202C39;
 }
 
+.active-seed-display {
+  padding: 1rem;
+  background: #f8f9fa;
+  border: 2px solid #F29559;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.seed-value {
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #202C39;
+  background: rgba(242, 149, 89, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+}
+
 .seed-input-container {
   display: flex;
   gap: 1rem;

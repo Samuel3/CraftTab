@@ -2,7 +2,15 @@
   <h2>Background Settings</h2>
   
   <div class="setting-group">
-    <label for="current-seed">Current Seed:</label>
+    <label for="active-seed">Currently Active Seed:</label>
+    <div class="active-seed-display">
+      <code class="seed-value">{{ currentSeed }}</code>
+    </div>
+    <small class="hint">This seed determines the current background pattern.</small>
+  </div>
+  
+  <div class="setting-group">
+    <label for="current-seed">Edit Seed:</label>
     <div class="seed-input-container">
       <input 
         id="current-seed"
