@@ -39,7 +39,8 @@ describe('TilesContainerComponent', () => {
           'tiles.bookmarks': 'Bookmarks',
           'tiles.search': 'Search',
           'tiles.calculator': 'Calculator',
-          'tiles.kanban': 'Kanban Board'
+          'tiles.kanban': 'Kanban Board',
+          'tiles.timeCalculator': 'Time Calculator'
         };
         return translations[key] || key;
       }),
@@ -48,7 +49,8 @@ describe('TilesContainerComponent', () => {
           'tiles.bookmarks': 'Bookmarks',
           'tiles.search': 'Search',
           'tiles.calculator': 'Calculator',
-          'tiles.kanban': 'Kanban Board'
+          'tiles.kanban': 'Kanban Board',
+          'tiles.timeCalculator': 'Time Calculator'
         };
         return translations[key] || key;
       }),
@@ -56,7 +58,8 @@ describe('TilesContainerComponent', () => {
         'tiles.bookmarks': 'Bookmarks',
         'tiles.search': 'Search',
         'tiles.calculator': 'Calculator',
-        'tiles.kanban': 'Kanban Board'
+        'tiles.kanban': 'Kanban Board',
+        'tiles.timeCalculator': 'Time Calculator'
       })
     };
 
@@ -94,6 +97,7 @@ describe('TilesContainerComponent', () => {
     [TileType.Search, 'Search'],
     [TileType.Calculator, 'Calculator'],
     [TileType.Kanban, 'Kanban Board'],
+    [TileType.TimeCalculator, 'Time Calculator'],
   ];
 
   describe("Test tile names", () => {
@@ -141,6 +145,10 @@ describe('TilesContainerComponent', () => {
 
     it('should return correct translation key for kanban', () => {
       expect(component.getTileTranslationKey(TileType.Kanban)).toBe('tiles.kanban');
+    });
+
+    it('should return correct translation key for time calculator', () => {
+      expect(component.getTileTranslationKey(TileType.TimeCalculator)).toBe('tiles.timeCalculator');
     });
   });
 });
