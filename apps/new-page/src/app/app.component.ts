@@ -40,4 +40,14 @@ export class AppComponent implements OnInit {
       this.languageSwitcher.setVisible(this.editMode);
     }
   }
+
+  openBackgroundSettings() {
+    // Open the extension's options page
+    if (typeof (window as any).chrome !== 'undefined' && (window as any).chrome.runtime) {
+      (window as any).chrome.runtime.openOptionsPage();
+    } else {
+      // Fallback: open options page in new tab
+      window.open('/pages/options/index.html', '_blank');
+    }
+  }
 }

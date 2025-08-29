@@ -5,6 +5,10 @@
     <h1>{{ 'app.title' | translate }}</h1>
     <div class="header-controls">
       <new-page-app-language-switcher></new-page-app-language-switcher>
+      <button (click)="openBackgroundSettings()" style="width: 120px; height: 40px; margin-left: 10px;" title="Background Settings">
+        <i class="fas fa-paint-brush"></i>
+        Background
+      </button>
       <button (click)="toggleEditMode()" style="width: 100px; height: 40px; margin-left: 10px;">
         <i [class]="editMode ? 'fas fa-save' : 'fas fa-cog'"></i>
         {{ editMode ? ('app.save' | translate) : ('app.edit' | translate) }}
