@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BackgroundService } from '../../services/background.service';
+import { TranslationService } from '../../services/translation.service';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -9,7 +11,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './background-settings.component.html',
   styleUrls: ['./background-settings.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, TranslatePipe]
 })
 export class BackgroundSettingsComponent implements OnInit, OnDestroy {
   currentSeed = '';
@@ -19,9 +21,20 @@ export class BackgroundSettingsComponent implements OnInit, OnDestroy {
   
   private subscription = new Subscription();
 
-  constructor(private backgroundService: BackgroundService) {}
+  constructor(
+    private backgroundService: BackgroundService,
+    private translationService: TranslationService
+  ) {}
 
   ngOnInit(): void {
+    // Load the current config first
+    this.backgroundService.loadBackgroundConfig().subscribe(config => {
+      if (config) {
+        this.currentSeed = config.seed;
+        this.editingSeed = config.seed;
+      }
+    });
+
     this.subscription.add(
       this.backgroundService.backgroundConfig$.subscribe(config => {
         if (config) {
@@ -54,11 +67,11 @@ export class BackgroundSettingsComponent implements OnInit, OnDestroy {
         next: () => {
           this.currentSeed = this.editingSeed.trim();
           this.isEditing = false;
-          this.saveStatus = 'Seed updated successfully!';
+          this.saveStatus = this.translationService.translate('background.seedUpdated');
           setTimeout(() => this.saveStatus = '', 3000);
         },
         error: () => {
-          this.saveStatus = 'Error updating seed';
+          this.saveStatus = this.translationService.translate('background.errorUpdating');
           setTimeout(() => this.saveStatus = '', 3000);
         }
       });
@@ -70,11 +83,11 @@ export class BackgroundSettingsComponent implements OnInit, OnDestroy {
       next: (newSeed) => {
         this.currentSeed = newSeed;
         this.editingSeed = newSeed;
-        this.saveStatus = 'New seed generated!';
+        this.saveStatus = this.translationService.translate('background.seedGenerated');
         setTimeout(() => this.saveStatus = '', 3000);
       },
       error: () => {
-        this.saveStatus = 'Error generating new seed';
+        this.saveStatus = this.translationService.translate('background.errorGenerating');
         setTimeout(() => this.saveStatus = '', 3000);
       }
     });
@@ -82,7 +95,7 @@ export class BackgroundSettingsComponent implements OnInit, OnDestroy {
 
   savePermanently(): void {
     // Since we're already saving on each change, this just shows a confirmation
-    this.saveStatus = 'Settings saved permanently!';
+    this.saveStatus = this.translationService.translate('background.settingsSaved');
     setTimeout(() => this.saveStatus = '', 3000);
   }
 

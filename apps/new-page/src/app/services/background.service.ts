@@ -125,103 +125,153 @@ export class BackgroundService {
       'rgba(242, 212, 146, 0.15)'   // $base-accent-light pale
     ];
 
-    // Generate points along the edges of the canvas
+    // Generate points for more even distribution
     const points: { x: number; y: number }[] = [];
     
-    // Number of points per edge (adjustable for density)
-    const pointsPerEdge = Math.max(8, Math.floor(Math.min(width, height) / 120));
+    // Calculate grid size based on viewport dimensions for more even distribution
+    const gridCellSize = Math.max(120, Math.min(width, height) / 8);
+    const gridCols = Math.ceil(width / gridCellSize);
+    const gridRows = Math.ceil(height / gridCellSize);
+    
+    // Add grid-based points with slight randomization for natural look
+    for (let row = 0; row <= gridRows; row++) {
+      for (let col = 0; col <= gridCols; col++) {
+        const baseX = (col / gridCols) * width;
+        const baseY = (row / gridRows) * height;
+        
+        // Add randomization within cell bounds
+        const offsetX = (random() - 0.5) * gridCellSize * 0.3;
+        const offsetY = (random() - 0.5) * gridCellSize * 0.3;
+        
+        points.push({
+          x: Math.max(0, Math.min(width, baseX + offsetX)),
+          y: Math.max(0, Math.min(height, baseY + offsetY))
+        });
+      }
+    }
+    
+    // Add additional edge points for better coverage
+    const edgePointsPerSide = Math.max(4, Math.floor(Math.min(width, height) / 200));
     
     // Top edge
-    for (let i = 0; i <= pointsPerEdge; i++) {
+    for (let i = 1; i < edgePointsPerSide; i++) {
       points.push({
-        x: (i / pointsPerEdge) * width + (random() - 0.5) * (width / pointsPerEdge) * 0.3,
-        y: 0 + random() * 20
+        x: (i / edgePointsPerSide) * width + (random() - 0.5) * 40,
+        y: random() * 20
       });
     }
     
     // Right edge
-    for (let i = 1; i <= pointsPerEdge; i++) {
+    for (let i = 1; i < edgePointsPerSide; i++) {
       points.push({
         x: width - random() * 20,
-        y: (i / pointsPerEdge) * height + (random() - 0.5) * (height / pointsPerEdge) * 0.3
+        y: (i / edgePointsPerSide) * height + (random() - 0.5) * 40
       });
     }
     
     // Bottom edge
-    for (let i = pointsPerEdge - 1; i >= 0; i--) {
+    for (let i = 1; i < edgePointsPerSide; i++) {
       points.push({
-        x: (i / pointsPerEdge) * width + (random() - 0.5) * (width / pointsPerEdge) * 0.3,
+        x: (i / edgePointsPerSide) * width + (random() - 0.5) * 40,
         y: height - random() * 20
       });
     }
     
     // Left edge
-    for (let i = pointsPerEdge - 1; i >= 1; i--) {
+    for (let i = 1; i < edgePointsPerSide; i++) {
       points.push({
-        x: 0 + random() * 20,
-        y: (i / pointsPerEdge) * height + (random() - 0.5) * (height / pointsPerEdge) * 0.3
+        x: random() * 20,
+        y: (i / edgePointsPerSide) * height + (random() - 0.5) * 40
       });
     }
     
-    // Add some interior points for more interesting triangulation
-    const interiorPointsCount = Math.floor(pointsPerEdge / 2);
-    for (let i = 0; i < interiorPointsCount; i++) {
-      points.push({
-        x: width * 0.2 + random() * width * 0.6,
-        y: height * 0.2 + random() * height * 0.6
-      });
-    }
+    // Ensure corner points are included
+    points.push(
+      { x: 0, y: 0 },
+      { x: width, y: 0 },
+      { x: width, y: height },
+      { x: 0, y: height }
+    );
     
-    // Create triangles using a simple fan triangulation from center
+    // Create triangles using Delaunay-like triangulation for better coverage
+    // This creates a more uniform distribution than the previous method
+    
+    // Sort points by distance from center for radial pattern
     const centerX = width / 2;
     const centerY = height / 2;
     
-    // Sort points by angle from center to create a more natural triangulation
     const sortedPoints = points.slice().sort((a, b) => {
-      const angleA = Math.atan2(a.y - centerY, a.x - centerX);
-      const angleB = Math.atan2(b.y - centerY, b.x - centerX);
-      return angleA - angleB;
+      const distA = Math.sqrt((a.x - centerX) ** 2 + (a.y - centerY) ** 2);
+      const distB = Math.sqrt((b.x - centerX) ** 2 + (b.y - centerY) ** 2);
+      return distA - distB;
     });
     
-    // Create triangles by connecting consecutive edge points to create a web-like pattern
-    for (let i = 0; i < sortedPoints.length; i++) {
+    // Create triangles by connecting nearby points for better coverage
+    for (let i = 0; i < sortedPoints.length - 2; i++) {
       const p1 = sortedPoints[i];
-      const p2 = sortedPoints[(i + 1) % sortedPoints.length];
-      const p3 = sortedPoints[(i + 2) % sortedPoints.length];
+      if (!p1) continue;
       
-      // Ensure all points exist
-      if (!p1 || !p2 || !p3) continue;
+      // Find the two nearest points to p1
+      const distances: { point: { x: number; y: number }; distance: number; index: number }[] = [];
       
-      // Skip triangles that would be too small or degenerate
-      const area = Math.abs((p1.x * (p2.y - p3.y) + p2.x * (p3.y - p1.y) + p3.x * (p1.y - p2.y)) / 2);
-      if (area > 1000) { // Minimum area threshold
-        const colorIndex = Math.floor(random() * paletteColors.length);
-        const selectedColor = paletteColors[colorIndex] || paletteColors[0]!;
-        
-        triangles.push({
-          points: [p1, p2, p3],
-          color: selectedColor
-        });
+      for (let j = i + 1; j < sortedPoints.length; j++) {
+        const p = sortedPoints[j];
+        if (!p) continue;
+        const distance = Math.sqrt((p1.x - p.x) ** 2 + (p1.y - p.y) ** 2);
+        distances.push({ point: p, distance, index: j });
+      }
+      
+      // Sort by distance and take closest points
+      distances.sort((a, b) => a.distance - b.distance);
+      
+      // Create triangles with several nearby points
+      for (let k = 0; k < Math.min(3, distances.length - 1); k++) {
+        for (let l = k + 1; l < Math.min(4, distances.length); l++) {
+          const distanceEntry1 = distances[k];
+          const distanceEntry2 = distances[l];
+          if (!distanceEntry1 || !distanceEntry2) continue;
+          
+          const p2 = distanceEntry1.point;
+          const p3 = distanceEntry2.point;
+          if (!p2 || !p3) continue;
+          
+          // Check if triangle is valid (not degenerate)
+          const area = Math.abs((p1.x * (p2.y - p3.y) + p2.x * (p3.y - p1.y) + p3.x * (p1.y - p2.y)) / 2);
+          
+          // Only add triangles with reasonable size and coverage
+          if (area > 500 && area < 50000) {
+            const colorIndex = Math.floor(random() * paletteColors.length);
+            const selectedColor = paletteColors[colorIndex] || paletteColors[0]!;
+            
+            triangles.push({
+              points: [p1, p2, p3],
+              color: selectedColor
+            });
+          }
+        }
       }
     }
     
-    // Add some additional triangles by connecting non-consecutive points for better coverage
-    for (let i = 0; i < sortedPoints.length; i += 2) {
-      if (i + 3 < sortedPoints.length) {
-        const p1 = sortedPoints[i];
-        const p2 = sortedPoints[i + 2];
-        const p3 = sortedPoints[i + 3];
+    // Add additional triangles for better coverage by connecting edge points to center
+    const centerPoint = { x: centerX, y: centerY };
+    const edgePoints = points.filter(p => 
+      p.x <= 20 || p.x >= width - 20 || p.y <= 20 || p.y >= height - 20
+    );
+    
+    for (let i = 0; i < edgePoints.length; i += 2) {
+      if (i + 1 < edgePoints.length) {
+        const p1 = edgePoints[i];
+        const p2 = edgePoints[i + 1];
         
-        // Ensure all points exist
-        if (!p1 || !p2 || !p3) continue;
+        if (!p1 || !p2) continue;
         
-        const area = Math.abs((p1.x * (p2.y - p3.y) + p2.x * (p3.y - p1.y) + p3.x * (p1.y - p2.y)) / 2);
-        if (area > 800) {
+        const area = Math.abs((p1.x * (p2.y - centerY) + p2.x * (centerY - p1.y) + centerX * (p1.y - p2.y)) / 2);
+        if (area > 1000) {
           const colorIndex = Math.floor(random() * paletteColors.length);
           const selectedColor = paletteColors[colorIndex] || paletteColors[0]!;
           
           triangles.push({
-            points: [p1, p2, p3],
+            points: [p1, p2, centerPoint],
             color: selectedColor
           });
         }

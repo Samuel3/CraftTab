@@ -7,7 +7,7 @@
       <new-page-app-language-switcher></new-page-app-language-switcher>
       <button *ngIf="editMode" (click)="openBackgroundSettings()" style="width: 120px; height: 40px; margin-left: 10px;" title="Background Settings">
         <i class="fas fa-paint-brush"></i>
-        Background
+        {{ 'background.settings' | translate }}
       </button>
       <button (click)="toggleEditMode()" style="width: 100px; height: 40px; margin-left: 10px;">
         <i [class]="editMode ? 'fas fa-save' : 'fas fa-cog'"></i>

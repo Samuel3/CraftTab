@@ -1,16 +1,16 @@
 <div class="background-settings">
-  <h2>Background Settings</h2>
+  <h2>{{ 'background.settings' | translate }}</h2>
   
   <div class="setting-group">
-    <label for="active-seed">Currently Active Seed:</label>
+    <label for="active-seed">{{ 'background.currentSeed' | translate }}</label>
     <div class="active-seed-display">
       <code class="seed-value">{{ currentSeed }}</code>
     </div>
-    <small class="hint">This seed determines the current background pattern.</small>
+    <small class="hint">{{ 'background.seedDescription' | translate }}</small>
   </div>
   
   <div class="setting-group">
-    <label for="current-seed">Edit Seed:</label>
+    <label for="current-seed">{{ 'background.editSeed' | translate }}</label>
     <div class="seed-input-container">
       <input 
         id="current-seed"
@@ -19,45 +19,45 @@
         [readonly]="!isEditing"
         [class.editing]="isEditing"
         (keydown)="onKeyPress($event)"
-        placeholder="Enter seed value"
+        [placeholder]="'placeholder.enterSeed' | translate"
       />
       <div class="seed-actions">
         <button 
           *ngIf="!isEditing" 
           (click)="startEditing()" 
           class="btn btn-secondary"
-          title="Edit seed"
+          [title]="'tooltip.editSeed' | translate"
         >
-          Edit
+          {{ 'background.edit' | translate }}
         </button>
         <div *ngIf="isEditing" class="edit-actions">
           <button 
             (click)="confirmSeed()" 
             class="btn btn-primary"
-            title="Confirm changes (Enter)"
+            [title]="'tooltip.confirmChanges' | translate"
           >
-            Confirm
+            {{ 'background.confirm' | translate }}
           </button>
           <button 
             (click)="cancelEditing()" 
             class="btn btn-secondary"
-            title="Cancel changes (Esc)"
+            [title]="'tooltip.cancelChanges' | translate"
           >
-            Cancel
+            {{ 'background.cancel' | translate }}
           </button>
         </div>
       </div>
     </div>
-    <small class="hint">The seed determines the background pattern. Same seed always produces the same background.</small>
+    <small class="hint">{{ 'background.seedEditDescription' | translate }}</small>
   </div>
 
   <div class="setting-group">
     <button 
       (click)="generateNewSeed()" 
       class="btn btn-accent"
-      title="Generate a new random seed"
+      [title]="'tooltip.generateNew' | translate"
     >
-      Generate New Seed
+      {{ 'background.generateNew' | translate }}
     </button>
   </div>
 
@@ -65,9 +65,9 @@
     <button 
       (click)="savePermanently()" 
       class="btn btn-primary"
-      title="Save current settings permanently"
+      [title]="'tooltip.saveSettings' | translate"
     >
-      Save Settings
+      {{ 'background.saveSettings' | translate }}
     </button>
   </div>
 
@@ -76,9 +76,8 @@
   </div>
 
   <div class="background-info">
-    <h3>About Background</h3>
-    <p>The background consists of connected triangles with pale colors from the project palette. 
-       Horizontal and vertical gradients are applied for a smooth visual effect.</p>
-    <p>Each seed generates a unique pattern that will always look the same across different sessions.</p>
+    <h3>{{ 'background.aboutTitle' | translate }}</h3>
+    <p>{{ 'background.aboutDescription' | translate }}</p>
+    <p>{{ 'background.aboutSeed' | translate }}</p>
   </div>
 </div>
