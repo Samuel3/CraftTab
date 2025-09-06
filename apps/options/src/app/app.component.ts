@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BackgroundSettingsComponent } from './components/background-settings/background-settings.component';
+import { BackgroundComponent } from './components/background/background.component';
 import { TranslatePipe } from './pipes/translate.pipe';
 import { TranslationService } from './services/translation.service';
 
@@ -10,7 +11,7 @@ import { TranslationService } from './services/translation.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, BackgroundSettingsComponent, TranslatePipe]
+  imports: [CommonModule, BackgroundSettingsComponent, BackgroundComponent, TranslatePipe]
 })
 export class AppComponent implements OnInit {
   translationsLoaded = false;

@@ -17,10 +17,26 @@ export class TranslationService {
     private http: HttpClient,
     private languageService: LanguageService
   ) {
+    // Initialize after language service is ready
+    this.initializeTranslationService();
+  }
+
+  private async initializeTranslationService(): Promise<void> {
+    // Wait for language service to initialize properly
+    await new Promise(resolve => setTimeout(resolve, 100));
+    
     // Subscribe to language changes and load translations
     this.languageService.currentLanguage$.subscribe(lang => {
-      this.loadTranslations(lang);
+      if (lang) {
+        this.loadTranslations(lang);
+      }
     });
+
+    // Also load the current language immediately
+    const currentLang = await this.languageService.getStoredLanguageAsync();
+    if (currentLang) {
+      this.loadTranslations(currentLang);
+    }
   }
 
   private async loadTranslations(language: string): Promise<void> {
