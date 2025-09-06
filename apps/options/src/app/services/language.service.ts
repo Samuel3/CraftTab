@@ -24,7 +24,11 @@ export class LanguageService {
 
   constructor() {
     // Set initial language without calling setLanguage to avoid side effects during construction
-    const storedLang = this.getStoredLanguage();
+    this.initializeLanguage();
+  }
+  
+  private async initializeLanguage(): Promise<void> {
+    const storedLang = await this.getStoredLanguageAsync();
     this.currentLanguageSubject.next(storedLang);
   }
 

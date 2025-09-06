@@ -3,6 +3,19 @@
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
 }
 
+.loading-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  
+  .loading-text {
+    font-size: 1.2rem;
+    color: #6c757d;
+  }
+}
+
 header {
   background: linear-gradient(135deg, #202C39 0%, #F2D492 100%);
   color: white;

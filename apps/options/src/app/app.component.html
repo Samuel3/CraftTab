@@ -1,4 +1,4 @@
-<div class="options-container">
+<div class="options-container" *ngIf="translationsLoaded">
   <header>
     <div class="header-content">
       <h1>{{ 'app.title' | translate }}</h1>
@@ -14,4 +14,8 @@
   <main>
     <options-background-settings></options-background-settings>
   </main>
+</div>
+
+<div class="loading-container" *ngIf="!translationsLoaded">
+  <div class="loading-text">Loading...</div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BackgroundService } from '../../services/background.service';
@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './background-settings.component.html',
   styleUrls: ['./background-settings.component.scss'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, FormsModule, TranslatePipe]
 })
 export class BackgroundSettingsComponent implements OnInit, OnDestroy {
@@ -23,16 +24,21 @@ export class BackgroundSettingsComponent implements OnInit, OnDestroy {
 
   constructor(
     private backgroundService: BackgroundService,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private cdr: ChangeDetectorRef
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    // Wait for translation service to load
+    await this.translationService.waitForTranslations();
+    
     // First, subscribe to the background config observable
     this.subscription.add(
       this.backgroundService.backgroundConfig$.subscribe(config => {
         if (config) {
           this.currentSeed = config.seed;
           this.editingSeed = config.seed;
+          this.cdr.markForCheck();
         }
       })
     );
@@ -50,7 +56,16 @@ export class BackgroundSettingsComponent implements OnInit, OnDestroy {
           this.editingSeed = currentSeed;
         }
       }
+      this.cdr.markForCheck();
     });
+    
+    // As a fallback, ensure we always show some seed
+    if (!this.currentSeed) {
+      const fallbackSeed = this.backgroundService.getCurrentSeed();
+      this.currentSeed = fallbackSeed;
+      this.editingSeed = fallbackSeed;
+      this.cdr.markForCheck();
+    }
   }
 
   ngOnDestroy(): void {
@@ -61,12 +76,14 @@ export class BackgroundSettingsComponent implements OnInit, OnDestroy {
     this.isEditing = true;
     this.editingSeed = this.currentSeed;
     this.saveStatus = '';
+    this.cdr.markForCheck();
   }
 
   cancelEditing(): void {
     this.isEditing = false;
     this.editingSeed = this.currentSeed;
     this.saveStatus = '';
+    this.cdr.markForCheck();
   }
 
   confirmSeed(): void {
@@ -76,11 +93,19 @@ export class BackgroundSettingsComponent implements OnInit, OnDestroy {
           this.currentSeed = this.editingSeed.trim();
           this.isEditing = false;
           this.saveStatus = this.translationService.translate('background.seedUpdated');
-          setTimeout(() => this.saveStatus = '', 3000);
+          this.cdr.markForCheck();
+          setTimeout(() => {
+            this.saveStatus = '';
+            this.cdr.markForCheck();
+          }, 3000);
         },
         error: () => {
           this.saveStatus = this.translationService.translate('background.errorUpdating');
-          setTimeout(() => this.saveStatus = '', 3000);
+          this.cdr.markForCheck();
+          setTimeout(() => {
+            this.saveStatus = '';
+            this.cdr.markForCheck();
+          }, 3000);
         }
       });
     }
@@ -92,11 +117,19 @@ export class BackgroundSettingsComponent implements OnInit, OnDestroy {
         this.currentSeed = newSeed;
         this.editingSeed = newSeed;
         this.saveStatus = this.translationService.translate('background.seedGenerated');
-        setTimeout(() => this.saveStatus = '', 3000);
+        this.cdr.markForCheck();
+        setTimeout(() => {
+          this.saveStatus = '';
+          this.cdr.markForCheck();
+        }, 3000);
       },
       error: () => {
         this.saveStatus = this.translationService.translate('background.errorGenerating');
-        setTimeout(() => this.saveStatus = '', 3000);
+        this.cdr.markForCheck();
+        setTimeout(() => {
+          this.saveStatus = '';
+          this.cdr.markForCheck();
+        }, 3000);
       }
     });
   }
@@ -104,7 +137,11 @@ export class BackgroundSettingsComponent implements OnInit, OnDestroy {
   savePermanently(): void {
     // Since we're already saving on each change, this just shows a confirmation
     this.saveStatus = this.translationService.translate('background.settingsSaved');
-    setTimeout(() => this.saveStatus = '', 3000);
+    this.cdr.markForCheck();
+    setTimeout(() => {
+      this.saveStatus = '';
+      this.cdr.markForCheck();
+    }, 3000);
   }
 
   onKeyPress(event: KeyboardEvent): void {
