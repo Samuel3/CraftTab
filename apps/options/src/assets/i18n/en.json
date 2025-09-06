@@ -23,5 +23,7 @@
   "tooltip.confirmChanges": "Confirm changes (Enter)",
   "tooltip.cancelChanges": "Cancel changes (Esc)",
   "tooltip.generateNew": "Generate a new random seed",
-  "tooltip.saveSettings": "Save current settings permanently"
+  "tooltip.saveSettings": "Save current settings permanently",
+  "navigation.backToMain": "Back to CraftTab",
+  "tooltip.backToMain": "Return to the main CraftTab page"
 }

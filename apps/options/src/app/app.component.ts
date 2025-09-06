@@ -10,4 +10,17 @@ import { TranslatePipe } from './pipes/translate.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [BackgroundSettingsComponent, TranslatePipe]
 })
-export class AppComponent {}
+export class AppComponent {
+  goBackToMain(): void {
+    // Check if we're in a Chrome extension context
+    if (typeof (window as any).chrome !== 'undefined' && (window as any).chrome.tabs) {
+      // Create a new tab with the new-page app
+      (window as any).chrome.tabs.create({
+        url: (window as any).chrome.runtime.getURL('new-page/index.html')
+      });
+    } else {
+      // Fallback for development environment - try to open in same tab
+      window.location.href = '../new-page/index.html';
+    }
+  }
+}

@@ -125,23 +125,23 @@ export class BackgroundService {
       'rgba(242, 212, 146, 0.15)'   // $base-accent-light pale
     ];
 
-    // Generate points for more even distribution
+    // Generate points using a non-overlapping grid approach
     const points: { x: number; y: number }[] = [];
     
-    // Calculate grid size based on viewport dimensions for more even distribution
-    const gridCellSize = Math.max(120, Math.min(width, height) / 8);
+    // Calculate grid size for even distribution without overlaps
+    const gridCellSize = Math.max(150, Math.min(width, height) / 6);
     const gridCols = Math.ceil(width / gridCellSize);
     const gridRows = Math.ceil(height / gridCellSize);
     
-    // Add grid-based points with slight randomization for natural look
+    // Add grid-based points with controlled randomization
     for (let row = 0; row <= gridRows; row++) {
       for (let col = 0; col <= gridCols; col++) {
         const baseX = (col / gridCols) * width;
         const baseY = (row / gridRows) * height;
         
-        // Add randomization within cell bounds
-        const offsetX = (random() - 0.5) * gridCellSize * 0.3;
-        const offsetY = (random() - 0.5) * gridCellSize * 0.3;
+        // Smaller randomization to prevent overlaps
+        const offsetX = (random() - 0.5) * gridCellSize * 0.2;
+        const offsetY = (random() - 0.5) * gridCellSize * 0.2;
         
         points.push({
           x: Math.max(0, Math.min(width, baseX + offsetX)),
@@ -150,42 +150,7 @@ export class BackgroundService {
       }
     }
     
-    // Add additional edge points for better coverage
-    const edgePointsPerSide = Math.max(4, Math.floor(Math.min(width, height) / 200));
-    
-    // Top edge
-    for (let i = 1; i < edgePointsPerSide; i++) {
-      points.push({
-        x: (i / edgePointsPerSide) * width + (random() - 0.5) * 40,
-        y: random() * 20
-      });
-    }
-    
-    // Right edge
-    for (let i = 1; i < edgePointsPerSide; i++) {
-      points.push({
-        x: width - random() * 20,
-        y: (i / edgePointsPerSide) * height + (random() - 0.5) * 40
-      });
-    }
-    
-    // Bottom edge
-    for (let i = 1; i < edgePointsPerSide; i++) {
-      points.push({
-        x: (i / edgePointsPerSide) * width + (random() - 0.5) * 40,
-        y: height - random() * 20
-      });
-    }
-    
-    // Left edge
-    for (let i = 1; i < edgePointsPerSide; i++) {
-      points.push({
-        x: random() * 20,
-        y: (i / edgePointsPerSide) * height + (random() - 0.5) * 40
-      });
-    }
-    
-    // Ensure corner points are included
+    // Add corner points to ensure full coverage
     points.push(
       { x: 0, y: 0 },
       { x: width, y: 0 },
@@ -193,88 +158,115 @@ export class BackgroundService {
       { x: 0, y: height }
     );
     
-    // Create triangles using Delaunay-like triangulation for better coverage
-    // This creates a more uniform distribution than the previous method
-    
-    // Sort points by distance from center for radial pattern
-    const centerX = width / 2;
-    const centerY = height / 2;
-    
-    const sortedPoints = points.slice().sort((a, b) => {
-      const distA = Math.sqrt((a.x - centerX) ** 2 + (a.y - centerY) ** 2);
-      const distB = Math.sqrt((b.x - centerX) ** 2 + (b.y - centerY) ** 2);
-      return distA - distB;
+    // Remove duplicate points to prevent degenerate triangles
+    const uniquePoints = points.filter((point, index, array) => {
+      return array.findIndex(p => 
+        Math.abs(p.x - point.x) < 5 && Math.abs(p.y - point.y) < 5
+      ) === index;
     });
     
-    // Create triangles by connecting nearby points for better coverage
+    // Create non-overlapping triangles using a systematic approach
+    const usedPoints = new Set<number>();
+    
+    // Sort points by x coordinate, then by y for systematic triangulation
+    const sortedPoints = uniquePoints.slice().sort((a, b) => {
+      if (Math.abs(a.x - b.x) < 1) {
+        return a.y - b.y;
+      }
+      return a.x - b.x;
+    });
+    
+    // Create triangles in a systematic pattern to avoid overlaps
     for (let i = 0; i < sortedPoints.length - 2; i++) {
+      if (usedPoints.has(i)) continue;
+      
       const p1 = sortedPoints[i];
       if (!p1) continue;
       
-      // Find the two nearest points to p1
-      const distances: { point: { x: number; y: number }; distance: number; index: number }[] = [];
+      // Find two nearby points that haven't been used in recent triangles
+      const candidates: { point: { x: number; y: number }; distance: number; index: number }[] = [];
       
       for (let j = i + 1; j < sortedPoints.length; j++) {
+        if (usedPoints.has(j)) continue;
+        
         const p = sortedPoints[j];
         if (!p) continue;
+        
         const distance = Math.sqrt((p1.x - p.x) ** 2 + (p1.y - p.y) ** 2);
-        distances.push({ point: p, distance, index: j });
+        
+        // Only consider points within reasonable distance
+        if (distance > 50 && distance < gridCellSize * 2) {
+          candidates.push({ point: p, distance, index: j });
+        }
       }
       
-      // Sort by distance and take closest points
-      distances.sort((a, b) => a.distance - b.distance);
+      // Sort by distance and try to create one good triangle
+      candidates.sort((a, b) => a.distance - b.distance);
       
-      // Create triangles with several nearby points
-      for (let k = 0; k < Math.min(3, distances.length - 1); k++) {
-        for (let l = k + 1; l < Math.min(4, distances.length); l++) {
-          const distanceEntry1 = distances[k];
-          const distanceEntry2 = distances[l];
-          if (!distanceEntry1 || !distanceEntry2) continue;
+      for (let k = 0; k < Math.min(2, candidates.length - 1); k++) {
+        for (let l = k + 1; l < Math.min(3, candidates.length); l++) {
+          const candidate1 = candidates[k];
+          const candidate2 = candidates[l];
+          if (!candidate1 || !candidate2) continue;
           
-          const p2 = distanceEntry1.point;
-          const p3 = distanceEntry2.point;
+          const p2 = candidate1.point;
+          const p3 = candidate2.point;
           if (!p2 || !p3) continue;
           
-          // Check if triangle is valid (not degenerate)
+          // Check if triangle is valid and not too thin
           const area = Math.abs((p1.x * (p2.y - p3.y) + p2.x * (p3.y - p1.y) + p3.x * (p1.y - p2.y)) / 2);
           
-          // Only add triangles with reasonable size and coverage
-          if (area > 500 && area < 50000) {
-            const colorIndex = Math.floor(random() * paletteColors.length);
-            const selectedColor = paletteColors[colorIndex] || paletteColors[0]!;
+          // Calculate aspect ratio to avoid thin triangles
+          const d1 = Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2);
+          const d2 = Math.sqrt((p2.x - p3.x) ** 2 + (p2.y - p3.y) ** 2);
+          const d3 = Math.sqrt((p3.x - p1.x) ** 2 + (p3.y - p1.y) ** 2);
+          
+          const maxSide = Math.max(d1, d2, d3);
+          const minSide = Math.min(d1, d2, d3);
+          const aspectRatio = maxSide / minSide;
+          
+          // Only add triangles with good area and aspect ratio
+          if (area > 1000 && area < 80000 && aspectRatio < 4) {
+            // Check if this triangle would overlap with existing ones
+            const centerX = (p1.x + p2.x + p3.x) / 3;
+            const centerY = (p1.y + p2.y + p3.y) / 3;
             
-            triangles.push({
-              points: [p1, p2, p3],
-              color: selectedColor
-            });
+            let hasOverlap = false;
+            for (const existingTriangle of triangles) {
+              const [ep1, ep2, ep3] = existingTriangle.points;
+              if (!ep1 || !ep2 || !ep3) continue;
+              
+              const existingCenterX = (ep1.x + ep2.x + ep3.x) / 3;
+              const existingCenterY = (ep1.y + ep2.y + ep3.y) / 3;
+              const distance = Math.sqrt((centerX - existingCenterX) ** 2 + (centerY - existingCenterY) ** 2);
+              
+              // If centers are too close, consider it an overlap
+              if (distance < gridCellSize * 0.7) {
+                hasOverlap = true;
+                break;
+              }
+            }
+            
+            if (!hasOverlap) {
+              const colorIndex = Math.floor(random() * paletteColors.length);
+              const selectedColor = paletteColors[colorIndex] || paletteColors[0]!;
+              
+              triangles.push({
+                points: [p1, p2, p3],
+                color: selectedColor
+              });
+              
+              // Mark points as used to reduce further overlaps
+              usedPoints.add(i);
+              usedPoints.add(candidate1.index);
+              usedPoints.add(candidate2.index);
+              
+              // Only create one triangle per iteration to avoid overlaps
+              break;
+            }
           }
         }
-      }
-    }
-    
-    // Add additional triangles for better coverage by connecting edge points to center
-    const centerPoint = { x: centerX, y: centerY };
-    const edgePoints = points.filter(p => 
-      p.x <= 20 || p.x >= width - 20 || p.y <= 20 || p.y >= height - 20
-    );
-    
-    for (let i = 0; i < edgePoints.length; i += 2) {
-      if (i + 1 < edgePoints.length) {
-        const p1 = edgePoints[i];
-        const p2 = edgePoints[i + 1];
-        
-        if (!p1 || !p2) continue;
-        
-        const area = Math.abs((p1.x * (p2.y - centerY) + p2.x * (centerY - p1.y) + centerX * (p1.y - p2.y)) / 2);
-        if (area > 1000) {
-          const colorIndex = Math.floor(random() * paletteColors.length);
-          const selectedColor = paletteColors[colorIndex] || paletteColors[0]!;
-          
-          triangles.push({
-            points: [p1, p2, centerPoint],
-            color: selectedColor
-          });
-        }
+        if (usedPoints.has(i)) break; // Break outer loop if triangle was created
       }
     }
 

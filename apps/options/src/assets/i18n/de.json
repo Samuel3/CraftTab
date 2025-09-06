@@ -23,5 +23,7 @@
   "tooltip.confirmChanges": "Änderungen bestätigen (Enter)",
   "tooltip.cancelChanges": "Änderungen abbrechen (Esc)",
   "tooltip.generateNew": "Einen neuen zufälligen Seed generieren",
-  "tooltip.saveSettings": "Aktuelle Einstellungen dauerhaft speichern"
+  "tooltip.saveSettings": "Aktuelle Einstellungen dauerhaft speichern",
+  "navigation.backToMain": "Zurück zu CraftTab",
+  "tooltip.backToMain": "Zur Haupt-CraftTab-Seite zurückkehren"
 }

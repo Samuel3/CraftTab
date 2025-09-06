@@ -27,14 +27,7 @@ export class BackgroundSettingsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // Load the current config first
-    this.backgroundService.loadBackgroundConfig().subscribe(config => {
-      if (config) {
-        this.currentSeed = config.seed;
-        this.editingSeed = config.seed;
-      }
-    });
-
+    // First, subscribe to the background config observable
     this.subscription.add(
       this.backgroundService.backgroundConfig$.subscribe(config => {
         if (config) {
@@ -43,6 +36,21 @@ export class BackgroundSettingsComponent implements OnInit, OnDestroy {
         }
       })
     );
+
+    // Then explicitly load the current config to ensure it's displayed
+    this.backgroundService.loadBackgroundConfig().subscribe(config => {
+      if (config) {
+        this.currentSeed = config.seed;
+        this.editingSeed = config.seed;
+      } else {
+        // If no config exists, get the current seed from the service
+        const currentSeed = this.backgroundService.getCurrentSeed();
+        if (currentSeed) {
+          this.currentSeed = currentSeed;
+          this.editingSeed = currentSeed;
+        }
+      }
+    });
   }
 
   ngOnDestroy(): void {

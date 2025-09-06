@@ -1,6 +1,15 @@
 <div class="options-container">
   <header>
-    <h1>{{ 'app.title' | translate }}</h1>
+    <div class="header-content">
+      <h1>{{ 'app.title' | translate }}</h1>
+      <button 
+        class="back-button"
+        (click)="goBackToMain()"
+        [title]="'tooltip.backToMain' | translate"
+      >
+        {{ 'navigation.backToMain' | translate }}
+      </button>
+    </div>
   </header>
   <main>
     <options-background-settings></options-background-settings>
