@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
     if (typeof (window as any).chrome !== 'undefined' && (window as any).chrome.tabs) {
       // Create a new tab with the new-page app
       (window as any).chrome.tabs.create({
-        url: (window as any).chrome.runtime.getURL('new-page/index.html')
+        url: (window as any).chrome.runtime.getURL('pages/new-page/index.html')
       });
     } else {
       // Fallback for development environment - try to open in same tab

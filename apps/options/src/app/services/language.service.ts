@@ -23,7 +23,7 @@ export class LanguageService {
   public currentLanguage$ = this.currentLanguageSubject.asObservable();
 
   constructor() {
-    // Set initial language without calling setLanguage to avoid side effects during construction
+    // Initialize language asynchronously to properly load from Chrome storage
     this.initializeLanguage();
   }
   
