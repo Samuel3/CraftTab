@@ -116,13 +116,13 @@ export class BackgroundService {
     const random = this.seedRandom(seed);
     const triangles: Triangle[] = [];
     
-    // Base colors from the existing palette, made paler
+    // Base colors from the existing palette, made more visible
     const paletteColors = [
-      'rgba(242, 149, 89, 0.15)',   // $accent-color pale
-      'rgba(32, 44, 57, 0.1)',      // $base-color-strong pale
-      'rgba(40, 56, 69, 0.1)',      // $base-color-light pale
-      'rgba(184, 176, 141, 0.15)',  // $base-accent-strong pale
-      'rgba(242, 212, 146, 0.15)'   // $base-accent-light pale
+      'rgba(242, 149, 89, 0.4)',   // $accent-color more visible
+      'rgba(32, 44, 57, 0.25)',      // $base-color-strong more visible
+      'rgba(40, 56, 69, 0.25)',      // $base-color-light more visible
+      'rgba(184, 176, 141, 0.4)',  // $base-accent-strong more visible
+      'rgba(242, 212, 146, 0.4)'   // $base-accent-light more visible
     ];
 
     // Generate points using a non-overlapping grid approach

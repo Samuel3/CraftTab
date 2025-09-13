@@ -80,12 +80,12 @@ export class BackgroundComponent implements OnInit, OnDestroy, AfterViewInit {
 
     // Create gradients
     const horizontalGradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
-    horizontalGradient.addColorStop(0, 'rgba(32, 44, 57, 0.1)');
-    horizontalGradient.addColorStop(1, 'rgba(242, 212, 146, 0.1)');
+    horizontalGradient.addColorStop(0, 'rgba(32, 44, 57, 0.3)');
+    horizontalGradient.addColorStop(1, 'rgba(242, 212, 146, 0.3)');
 
     const verticalGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-    verticalGradient.addColorStop(0, 'rgba(184, 176, 141, 0.1)');
-    verticalGradient.addColorStop(1, 'rgba(242, 149, 89, 0.1)');
+    verticalGradient.addColorStop(0, 'rgba(184, 176, 141, 0.3)');
+    verticalGradient.addColorStop(1, 'rgba(242, 149, 89, 0.3)');
 
     // Apply base gradients
     ctx.fillStyle = horizontalGradient;
