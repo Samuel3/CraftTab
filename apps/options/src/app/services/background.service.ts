@@ -36,15 +36,25 @@ export class BackgroundService {
 
   saveBackgroundConfig(config: BackgroundConfig): Observable<void> {
     return from(
-      new Promise<void>((resolve) => {
+      new Promise<void>((resolve, reject) => {
         if (typeof (window as any).chrome !== 'undefined' && (window as any).chrome.storage) {
           (window as any).chrome.storage.sync.set({ [this.STORAGE_KEY]: config }, () => {
-            resolve();
+            if ((window as any).chrome.runtime.lastError) {
+              console.warn('Chrome storage error:', (window as any).chrome.runtime.lastError);
+              reject(new Error((window as any).chrome.runtime.lastError.message));
+            } else {
+              resolve();
+            }
           });
         } else {
           // Fallback to localStorage
-          localStorage.setItem(this.STORAGE_KEY, JSON.stringify(config));
-          resolve();
+          try {
+            localStorage.setItem(this.STORAGE_KEY, JSON.stringify(config));
+            resolve();
+          } catch (error) {
+            console.warn('localStorage error:', error);
+            reject(error);
+          }
         }
       })
     );
@@ -52,15 +62,25 @@ export class BackgroundService {
 
   loadBackgroundConfig(): Observable<BackgroundConfig | null> {
     return from(
-      new Promise<{ [key: string]: any }>((resolve) => {
+      new Promise<{ [key: string]: any }>((resolve, reject) => {
         if (typeof (window as any).chrome !== 'undefined' && (window as any).chrome.storage) {
           (window as any).chrome.storage.sync.get([this.STORAGE_KEY], (result: any) => {
-            resolve(result);
+            if ((window as any).chrome.runtime.lastError) {
+              console.warn('Chrome storage error:', (window as any).chrome.runtime.lastError);
+              reject(new Error((window as any).chrome.runtime.lastError.message));
+            } else {
+              resolve(result);
+            }
           });
         } else {
           // Fallback to localStorage
-          const stored = localStorage.getItem(this.STORAGE_KEY);
-          resolve({ [this.STORAGE_KEY]: stored ? JSON.parse(stored) : null });
+          try {
+            const stored = localStorage.getItem(this.STORAGE_KEY);
+            resolve({ [this.STORAGE_KEY]: stored ? JSON.parse(stored) : null });
+          } catch (error) {
+            console.warn('localStorage error:', error);
+            resolve({ [this.STORAGE_KEY]: null });
+          }
         }
       })
     ).pipe(
