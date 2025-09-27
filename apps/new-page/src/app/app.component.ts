@@ -1,6 +1,8 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { TilesContainerComponent } from './components/tiles-container/tiles-container.component';
 import { LanguageSwitcherComponent } from './components/language-switcher/language-switcher.component';
+import { BackgroundComponent } from './components/background/background.component';
 import { TranslatePipe } from './pipes/translate.pipe';
 import { TranslationService } from './services/translation.service';
 
@@ -8,7 +10,7 @@ import { TranslationService } from './services/translation.service';
   selector: 'new-page-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [TilesContainerComponent, LanguageSwitcherComponent, TranslatePipe],
+  imports: [CommonModule, TilesContainerComponent, LanguageSwitcherComponent, BackgroundComponent, TranslatePipe],
   standalone: true,
 })
 export class AppComponent implements OnInit {
@@ -37,6 +39,16 @@ export class AppComponent implements OnInit {
     // Show/hide language switcher based on edit mode
     if (this.languageSwitcher) {
       this.languageSwitcher.setVisible(this.editMode);
+    }
+  }
+
+  openBackgroundSettings() {
+    // Open the extension's options page
+    if (typeof (window as any).chrome !== 'undefined' && (window as any).chrome.runtime) {
+      (window as any).chrome.runtime.openOptionsPage();
+    } else {
+      // Fallback: open options page in new tab
+      window.open('/pages/options/index.html', '_blank');
     }
   }
 }

@@ -1,1 +1,22 @@
-<h1>chrome-extension-starter - options</h1>
+<div class="options-container" *ngIf="translationsLoaded">
+  <options-background></options-background>
+  <header>
+    <div class="header-content">
+      <h1>{{ 'app.title' | translate }}</h1>
+      <button 
+        class="back-button"
+        (click)="goBackToMain()"
+        [title]="'tooltip.backToMain' | translate"
+      >
+        {{ 'navigation.backToMain' | translate }}
+      </button>
+    </div>
+  </header>
+  <main>
+    <options-background-settings></options-background-settings>
+  </main>
+</div>
+
+<div class="loading-container" *ngIf="!translationsLoaded">
+  <div class="loading-text">Loading...</div>
+</div>

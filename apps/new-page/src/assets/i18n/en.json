@@ -29,5 +29,6 @@
   "timeCalculator.duration": "Duration",
   "timeCalculator.total": "Total",
   "timeCalculator.warningOver10Hours": "Warning: Total time exceeds 10 hours",
-  "timeCalculator.clearAll": "Clear All"
+  "timeCalculator.clearAll": "Clear All",
+  "background.settings": "Background"
 }

@@ -1,0 +1,61 @@
+.options-container {
+  min-height: 100vh;
+  // Remove background so the canvas background is visible
+}
+
+.loading-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // Remove background so the canvas background is visible
+  
+  .loading-text {
+    font-size: 1.2rem;
+    color: #6c757d;
+  }
+}
+
+header {
+  background: linear-gradient(135deg, #202C39 0%, #F2D492 100%);
+  color: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 300;
+    }
+    
+    .back-button {
+      background: #F29559;
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background: #202C39;
+        transform: translateY(-1px);
+      }
+      
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+}
+
+main {
+  padding: 2rem 1rem;
+}

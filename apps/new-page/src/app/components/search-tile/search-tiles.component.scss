@@ -4,10 +4,13 @@
   border: 2px solid transparent;
   padding: 1rem;
   transition: border-color 0.3s ease;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   &.edit-mode {
     border-color: #ccc;
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: #f9f9f9;
   }
 }
 
