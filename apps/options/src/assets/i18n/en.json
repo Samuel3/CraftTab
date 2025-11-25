@@ -25,5 +25,18 @@
   "tooltip.generateNew": "Generate a new random seed",
   "tooltip.saveSettings": "Save current settings permanently",
   "navigation.backToMain": "Back to CraftTab",
-  "tooltip.backToMain": "Return to the main CraftTab page"
+  "tooltip.backToMain": "Return to the main CraftTab page",
+  "about.title": "About CraftTab",
+  "about.appInfo": "Application Information",
+  "about.version": "Version",
+  "about.author": "Author",
+  "about.license": "License",
+  "about.repository": "Repository",
+  "about.openGithub": "Open GitHub repository in a new tab",
+  "about.viewOnGithub": "View on GitHub",
+  "about.usedLibraries": "Used Libraries",
+  "about.libraries.angular.description": "A platform for building mobile and desktop web applications",
+  "about.libraries.material.description": "Material Design components for Angular",
+  "about.libraries.rxjs.description": "Reactive Extensions Library for JavaScript",
+  "about.libraries.nx.description": "Smart, fast and extensible build system"
 }

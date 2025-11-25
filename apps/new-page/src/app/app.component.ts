@@ -51,4 +51,15 @@ export class AppComponent implements OnInit {
       window.open('/pages/options/index.html', '_blank');
     }
   }
+
+  openAboutPage() {
+    // Open the extension's options page with about tab
+    if (typeof (window as any).chrome !== 'undefined' && (window as any).chrome.runtime) {
+      const optionsUrl = (window as any).chrome.runtime.getURL('pages/options/index.html?tab=about');
+      (window as any).chrome.tabs.create({ url: optionsUrl });
+    } else {
+      // Fallback: open options page with about tab in new tab
+      window.open('/pages/options/index.html?tab=about', '_blank');
+    }
+  }
 }

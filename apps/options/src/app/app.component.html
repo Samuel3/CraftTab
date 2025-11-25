@@ -3,17 +3,36 @@
   <header>
     <div class="header-content">
       <h1>{{ 'app.title' | translate }}</h1>
-      <button 
-        class="back-button"
-        (click)="goBackToMain()"
-        [title]="'tooltip.backToMain' | translate"
-      >
-        {{ 'navigation.backToMain' | translate }}
-      </button>
+      <div class="header-actions">
+        <div class="tab-navigation">
+          <button 
+            class="tab-button"
+            [class.active]="currentTab === 'settings'"
+            (click)="switchTab('settings')"
+          >
+            {{ 'background.settings' | translate }}
+          </button>
+          <button 
+            class="tab-button"
+            [class.active]="currentTab === 'about'"
+            (click)="switchTab('about')"
+          >
+            {{ 'about.title' | translate }}
+          </button>
+        </div>
+        <button 
+          class="back-button"
+          (click)="goBackToMain()"
+          [title]="'tooltip.backToMain' | translate"
+        >
+          {{ 'navigation.backToMain' | translate }}
+        </button>
+      </div>
     </div>
   </header>
   <main>
-    <options-background-settings></options-background-settings>
+    <options-background-settings *ngIf="currentTab === 'settings'"></options-background-settings>
+    <options-about *ngIf="currentTab === 'about'"></options-about>
   </main>
 </div>
 

@@ -31,6 +31,6 @@
     "newtab": "pages/new-page/index.html"
   },
   "options_page": "pages/options/index.html",
-  "permissions": ["tabs", "activeTab", "scripting", "bookmarks", "search", "storage"],
+  "permissions": ["tabs", "activeTab", "scripting", "bookmarks", "search", "storage", "contextMenus"],
   "host_permissions": ["<all_urls>"]
 }
