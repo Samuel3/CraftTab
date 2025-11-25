@@ -25,5 +25,18 @@
   "tooltip.generateNew": "Einen neuen zufälligen Seed generieren",
   "tooltip.saveSettings": "Aktuelle Einstellungen dauerhaft speichern",
   "navigation.backToMain": "Zurück zu CraftTab",
-  "tooltip.backToMain": "Zur Haupt-CraftTab-Seite zurückkehren"
+  "tooltip.backToMain": "Zur Haupt-CraftTab-Seite zurückkehren",
+  "about.title": "Über CraftTab",
+  "about.appInfo": "Anwendungsinformationen",
+  "about.version": "Version",
+  "about.author": "Autor",
+  "about.license": "Lizenz",
+  "about.repository": "Repository",
+  "about.openGithub": "GitHub-Repository in neuem Tab öffnen",
+  "about.viewOnGithub": "Auf GitHub anzeigen",
+  "about.usedLibraries": "Verwendete Bibliotheken",
+  "about.libraries.angular.description": "Eine Plattform zum Erstellen von mobilen und Desktop-Webanwendungen",
+  "about.libraries.material.description": "Material Design Komponenten für Angular",
+  "about.libraries.rxjs.description": "Reactive Extensions Bibliothek für JavaScript",
+  "about.libraries.nx.description": "Intelligentes, schnelles und erweiterbares Build-System"
 }

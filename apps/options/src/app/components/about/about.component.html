@@ -1,0 +1,52 @@
+<div class="about-container">
+  <h2>{{ 'about.title' | translate }}</h2>
+  
+  <div class="info-section">
+    <h3>{{ 'about.appInfo' | translate }}</h3>
+    <div class="info-item">
+      <span class="label">{{ 'about.version' | translate }}:</span>
+      <span class="value">{{ version }}</span>
+    </div>
+    <div class="info-item">
+      <span class="label">{{ 'about.author' | translate }}:</span>
+      <span class="value">{{ author }}</span>
+    </div>
+    <div class="info-item">
+      <span class="label">{{ 'about.license' | translate }}:</span>
+      <span class="value">{{ license }}</span>
+    </div>
+  </div>
+  
+  <div class="info-section">
+    <h3>{{ 'about.repository' | translate }}</h3>
+    <div class="github-link">
+      <button 
+        class="btn btn-github" 
+        (click)="openExternalLink(githubUrl)"
+        [title]="'about.openGithub' | translate"
+      >
+        <i class="fab fa-github"></i>
+        {{ 'about.viewOnGithub' | translate }}
+      </button>
+    </div>
+  </div>
+  
+  <div class="info-section">
+    <h3>{{ 'about.usedLibraries' | translate }}</h3>
+    <div class="libraries-grid">
+      <div 
+        *ngFor="let lib of libraries" 
+        class="library-card"
+        (click)="openExternalLink(lib.url)"
+        role="button"
+        tabindex="0"
+      >
+        <div class="library-header">
+          <span class="library-name">{{ lib.name }}</span>
+          <span class="library-version">v{{ lib.version }}</span>
+        </div>
+        <p class="library-description">{{ lib.description | translate }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -20,13 +20,19 @@ export class AppComponent implements OnInit {
 
   translationService = inject(TranslationService);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private get chromeApi(): any {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const win = window as any;
+    return typeof win.chrome !== 'undefined' ? win.chrome : undefined;
+  }
+
   async ngOnInit() {
     // Initialize translation service and wait for translations to load
     await this.translationService.waitForTranslations();
 
-    // @ts-ignore
-    if (typeof window !== 'undefined' && (window as any).chrome?.bookmarks) {
-      (window as any).chrome.bookmarks.getTree().then((result: any) => {
+    if (this.chromeApi?.bookmarks) {
+      this.chromeApi.bookmarks.getTree().then((result: unknown) => {
         console.log('Bookmarks:', result);
       });
     }
@@ -44,11 +50,22 @@ export class AppComponent implements OnInit {
 
   openBackgroundSettings() {
     // Open the extension's options page
-    if (typeof (window as any).chrome !== 'undefined' && (window as any).chrome.runtime) {
-      (window as any).chrome.runtime.openOptionsPage();
+    if (this.chromeApi?.runtime) {
+      this.chromeApi.runtime.openOptionsPage();
     } else {
       // Fallback: open options page in new tab
       window.open('/pages/options/index.html', '_blank');
+    }
+  }
+
+  openAboutPage() {
+    // Open the extension's options page with about tab
+    if (this.chromeApi?.runtime && this.chromeApi?.tabs) {
+      const optionsUrl = this.chromeApi.runtime.getURL('pages/options/index.html?tab=about');
+      this.chromeApi.tabs.create({ url: optionsUrl });
+    } else {
+      // Fallback: open options page with about tab in new tab
+      window.open('/pages/options/index.html?tab=about', '_blank');
     }
   }
 }

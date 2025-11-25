@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BackgroundSettingsComponent } from './background-settings.component';
 import { BackgroundService } from '../../services/background.service';
+import { TranslationService } from '../../services/translation.service';
 import { BehaviorSubject, of } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 
@@ -8,6 +9,7 @@ describe('BackgroundSettingsComponent', () => {
   let component: BackgroundSettingsComponent;
   let fixture: ComponentFixture<BackgroundSettingsComponent>;
   let mockBackgroundService: any;
+  let mockTranslationService: any;
   let mockBackgroundConfig$: BehaviorSubject<any>;
 
   beforeEach(async () => {
@@ -17,13 +19,22 @@ describe('BackgroundSettingsComponent', () => {
       backgroundConfig$: mockBackgroundConfig$,
       updateSeed: () => of(void 0),
       generateNewSeed: () => of('new-seed-456'),
-      getCurrentSeed: () => 'test-seed-123'
+      getCurrentSeed: () => 'test-seed-123',
+      loadBackgroundConfig: () => of({ seed: 'test-seed-123' })
+    };
+
+    mockTranslationService = {
+      waitForTranslations: () => Promise.resolve(),
+      translate: (key: string) => key,
+      instant: (key: string) => key,
+      translations$: { subscribe: () => ({ unsubscribe: () => {} }) }
     };
 
     await TestBed.configureTestingModule({
       imports: [BackgroundSettingsComponent, FormsModule],
       providers: [
-        { provide: BackgroundService, useValue: mockBackgroundService }
+        { provide: BackgroundService, useValue: mockBackgroundService },
+        { provide: TranslationService, useValue: mockTranslationService }
       ]
     }).compileComponents();
 
@@ -56,17 +67,20 @@ describe('BackgroundSettingsComponent', () => {
   });
 
   it('should handle keyboard events correctly', () => {
-    spyOn(component, 'confirmSeed');
-    spyOn(component, 'cancelEditing');
+    const confirmSeedSpy = jest.spyOn(component, 'confirmSeed');
+    const cancelEditingSpy = jest.spyOn(component, 'cancelEditing');
     
     const enterEvent = new KeyboardEvent('keydown', { key: 'Enter' });
     const escapeEvent = new KeyboardEvent('keydown', { key: 'Escape' });
     
     component.onKeyPress(enterEvent);
-    expect(component.confirmSeed).toHaveBeenCalled();
+    expect(confirmSeedSpy).toHaveBeenCalled();
     
     component.onKeyPress(escapeEvent);
-    expect(component.cancelEditing).toHaveBeenCalled();
+    expect(cancelEditingSpy).toHaveBeenCalled();
+
+    confirmSeedSpy.mockRestore();
+    cancelEditingSpy.mockRestore();
   });
 
   it('should show save status messages', () => {
