@@ -6,9 +6,6 @@ import { AboutComponent } from './components/about/about.component';
 import { TranslatePipe } from './pipes/translate.pipe';
 import { TranslationService } from './services/translation.service';
 
-// Access Chrome API with proper typing
-declare const chrome: typeof globalThis.chrome | undefined;
-
 @Component({
   standalone: true,
   selector: 'options-root',
@@ -26,8 +23,11 @@ export class AppComponent implements OnInit {
     private cdr: ChangeDetectorRef
   ) {}
 
-  private get chromeApi(): typeof chrome | undefined {
-    return typeof chrome !== 'undefined' ? chrome : undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private get chromeApi(): any {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const win = window as any;
+    return typeof win.chrome !== 'undefined' ? win.chrome : undefined;
   }
 
   async ngOnInit(): Promise<void> {
