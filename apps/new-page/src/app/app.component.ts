@@ -6,6 +6,9 @@ import { BackgroundComponent } from './components/background/background.componen
 import { TranslatePipe } from './pipes/translate.pipe';
 import { TranslationService } from './services/translation.service';
 
+// Access Chrome API with proper typing
+declare const chrome: typeof globalThis.chrome | undefined;
+
 @Component({
   selector: 'new-page-root',
   templateUrl: './app.component.html',
@@ -20,13 +23,16 @@ export class AppComponent implements OnInit {
 
   translationService = inject(TranslationService);
 
+  private get chromeApi(): typeof chrome | undefined {
+    return typeof chrome !== 'undefined' ? chrome : undefined;
+  }
+
   async ngOnInit() {
     // Initialize translation service and wait for translations to load
     await this.translationService.waitForTranslations();
 
-    // @ts-ignore
-    if (typeof window !== 'undefined' && (window as any).chrome?.bookmarks) {
-      (window as any).chrome.bookmarks.getTree().then((result: any) => {
+    if (this.chromeApi?.bookmarks) {
+      this.chromeApi.bookmarks.getTree().then((result) => {
         console.log('Bookmarks:', result);
       });
     }
@@ -44,8 +50,8 @@ export class AppComponent implements OnInit {
 
   openBackgroundSettings() {
     // Open the extension's options page
-    if (typeof (window as any).chrome !== 'undefined' && (window as any).chrome.runtime) {
-      (window as any).chrome.runtime.openOptionsPage();
+    if (this.chromeApi?.runtime) {
+      this.chromeApi.runtime.openOptionsPage();
     } else {
       // Fallback: open options page in new tab
       window.open('/pages/options/index.html', '_blank');
@@ -54,9 +60,9 @@ export class AppComponent implements OnInit {
 
   openAboutPage() {
     // Open the extension's options page with about tab
-    if (typeof (window as any).chrome !== 'undefined' && (window as any).chrome.runtime) {
-      const optionsUrl = (window as any).chrome.runtime.getURL('pages/options/index.html?tab=about');
-      (window as any).chrome.tabs.create({ url: optionsUrl });
+    if (this.chromeApi?.runtime && this.chromeApi?.tabs) {
+      const optionsUrl = this.chromeApi.runtime.getURL('pages/options/index.html?tab=about');
+      this.chromeApi.tabs.create({ url: optionsUrl });
     } else {
       // Fallback: open options page with about tab in new tab
       window.open('/pages/options/index.html?tab=about', '_blank');

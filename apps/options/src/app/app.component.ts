@@ -6,6 +6,9 @@ import { AboutComponent } from './components/about/about.component';
 import { TranslatePipe } from './pipes/translate.pipe';
 import { TranslationService } from './services/translation.service';
 
+// Access Chrome API with proper typing
+declare const chrome: typeof globalThis.chrome | undefined;
+
 @Component({
   standalone: true,
   selector: 'options-root',
@@ -23,6 +26,10 @@ export class AppComponent implements OnInit {
     private cdr: ChangeDetectorRef
   ) {}
 
+  private get chromeApi(): typeof chrome | undefined {
+    return typeof chrome !== 'undefined' ? chrome : undefined;
+  }
+
   async ngOnInit(): Promise<void> {
     // Check if we should open the about page directly
     const urlParams = new URLSearchParams(window.location.search);
@@ -38,10 +45,10 @@ export class AppComponent implements OnInit {
 
   goBackToMain(): void {
     // Check if we're in a Chrome extension context
-    if (typeof (window as any).chrome !== 'undefined' && (window as any).chrome.tabs) {
+    if (this.chromeApi?.tabs && this.chromeApi?.runtime) {
       // Create a new tab with the new-page app
-      (window as any).chrome.tabs.create({
-        url: (window as any).chrome.runtime.getURL('pages/new-page/index.html')
+      this.chromeApi.tabs.create({
+        url: this.chromeApi.runtime.getURL('pages/new-page/index.html')
       });
     } else {
       // Fallback for development environment - try to open in same tab
